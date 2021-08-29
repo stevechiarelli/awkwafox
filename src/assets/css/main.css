@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --primary: #5c6b8c;
+    --primary-light: #BDCEF2;
+    --primary-dark: #424c64;
+    --primary-watermark: #EFF1F5;
+    --secondary: #D3C09A;
+    --text-light: #EEEEEE;
+    --text-dark: #666666;
+    --background1: #F4F7F7;
+    --background2: #5c6b8c;
+    --background3: #1A1A1A;
+    --background4: #333333;
+    --background5: #FFFFFF;
+    --background6: #1F3857;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--background1);
+    color: var(--text-dark);
+    font-family: "Poppins", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-light);
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.disabled {
+    color: #bbb !important;
+    cursor: initial;
+}
+
+.btn-primary {
+    background: transparent;
+    padding: 1.1em 2.2em 1.1em 2.2em;
+    color: var(--primary);
+    font-size: .8em;
+    font-weight: 700;
+    display: inline-block;
+    border: 3px solid var(--primary);
+    border-radius: 5px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--background1);
+}
+
+.btn-disabled {
+    color: #bbb !important;
+    border: 3px solid #bbb;
+    cursor: initial;
+}
+
+.container {
+    padding: 0 1.5em;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.loading {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading img {
+    margin: auto;
+    display: block;
+    width: 100px;
+}
+
+@media only screen and (min-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+
+    .container {
+        padding: 0 3em;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    body {
+        font-size: 19px;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .container {
+        padding: 0;
+    }
+}
