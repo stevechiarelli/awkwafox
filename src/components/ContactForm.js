@@ -1,40 +1,48 @@
 import React, { useState } from "react";
+import { navigate } from 'gatsby-link';
 import Loading from "./Loading";
 import styled from "styled-components";
 import contactHero from "../assets/images/contact.jpg";
 
 const ContactForm = (props) => {
     const [loading, setLoading] = useState(false);
+    const [state, setState] = useState({});
 
-    const handleSubmit = (event) => {
-        if (formValidation(event) === true) {
-            setLoading(true);
-
-            setTimeout(() => {
-                document.getElementById("contact-form").submit();
-                setLoading(false);
-            }, 3000);
-        }
+    const handleChange = (event) => {
+        setState({ ...state, [event.target.name]: event.target.value });
     }
 
-    const formValidation = (event) => {
-        let form = document.getElementById("contact-form");
-
-        for (var i=0; i < form.elements.length; i++){
-            if (form.elements[i].value === '' && form.elements[i].hasAttribute('required')) {
-                return false;
-            }
-        }
-
+    const handleSubmit = (event) => {
         event.preventDefault();
-        return true;
+        setLoading(true);
+        const form = event.target;
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: encode({
+                'form-name': form.getAttribute('name'),
+                ...state,
+            }),
+        })
+        .then(() => {
+            setTimeout(() => {
+                navigate(form.getAttribute('action'));
+                setLoading(false);
+            }, 3000);
+        })
+        .catch((error) => alert(error));
     }
 
     return (
         <Wrapper>
             <div className="container">
-                <form id="contact-form" name="contact" method="POST" data-netlify="true">
+                <form id="contact-form" name="contact" method="POST" action="/success/" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={handleSubmit}>
                     <div className="fields">
+                        {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
+                        <input type="hidden" name="form-name" value="contact" />
+                        <div hidden>
+                            <label>Don’t fill this out: <input name="bot-field" /></label>
+                        </div>
                         <div className="form-left">
                             <h3>{props.data.heading}</h3>
                             <p>{props.data.content}</p>
@@ -48,6 +56,7 @@ const ContactForm = (props) => {
                                     type="text" 
                                     name="first_name" 
                                     placeholder="first name here..."
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -57,6 +66,7 @@ const ContactForm = (props) => {
                                     type="text" 
                                     name="last_name" 
                                     placeholder="last name here..."
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -65,7 +75,8 @@ const ContactForm = (props) => {
                                 <input 
                                     type="text" 
                                     name="email" 
-                                    placeholder="email here..." 
+                                    placeholder="email here..."
+                                    onChange={handleChange} 
                                     required
                                 />
                             </div>
@@ -76,7 +87,8 @@ const ContactForm = (props) => {
                                 <input 
                                     type="text" 
                                     name="subject" 
-                                    placeholder="subject here..." 
+                                    placeholder="subject here..."
+                                    onChange={handleChange} 
                                     required
                                 />
                             </div>
@@ -84,6 +96,7 @@ const ContactForm = (props) => {
                                 <label htmlFor="message">message</label><br />
                                 <textarea 
                                     name="message"
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -97,6 +110,12 @@ const ContactForm = (props) => {
             </div>
         </Wrapper>
     );
+}
+
+function encode(data) {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&')
 }
 
 const Wrapper = styled.section`
