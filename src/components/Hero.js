@@ -73,13 +73,14 @@ const Wrapper = styled.section`
         }
 
         h1 {
+            font-size: 2em;
             width: 90%;
         }
         
         p {
             margin-top: 0.7em;
-            font-size: 0.8em;
-            font-weight: 500;
+            font-size: 0.9em;
+            font-weight: 600;
             color: var(--text-light);
             width: 80%;
         }

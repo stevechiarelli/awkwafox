@@ -92,16 +92,12 @@ const Wrapper = styled.section`
             border-radius: 0.25rem;
         }
 
-        li:nth-of-type(1) {
-            animation-delay: 0.5s;
+        li:nth-of-type(1), li:nth-of-type(3) {
+            animation-delay: 0.75s;
         }
 
         li:nth-of-type(2) {
             animation-delay: 1s;
-        }
-
-        li:nth-of-type(3) {
-            animation-delay: 0.75s;
         }
 
         .dot {

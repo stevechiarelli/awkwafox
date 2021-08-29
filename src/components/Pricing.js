@@ -59,7 +59,7 @@ const Wrapper = styled.section`
 
     .pricing {
         text-align: center;
-        margin: 2em;
+        margin: 2em 1em;
         padding: 2em;
         background: #eee;
 

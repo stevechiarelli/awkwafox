@@ -187,14 +187,14 @@ const Wrapper = styled.section`
 
         img {
             max-width: 600px;
-            margin-top: 2em;
+            margin: 1em auto 0 auto;
         }
     }
 
     .modal-info {  
         h4 {
             color: var(--text-dark);
-            margin-top: 0.5em;
+            margin-top: 1em;
         }
 
         p {

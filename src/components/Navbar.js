@@ -90,6 +90,7 @@ const Wrapper = styled.div`
     .nav-btn-light, .nav-btn-dark {
         cursor: pointer;
         outline: none;
+        padding-right: 0;
     }
 
     .navbar.sticky {

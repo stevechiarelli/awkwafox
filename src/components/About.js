@@ -21,7 +21,7 @@ const About = (props) => {
                     })}
                 </div>
             </div>
-            <GatsbyImage image={image} alt={props.data[0].alt} /*imgStyle={{objectFit: `contain`}}*/ />
+            <GatsbyImage image={image} alt={props.data[0].alt} className="image" imgStyle={{objectFit: `cover`}} />
         </Wrapper>
     );
 }
@@ -67,7 +67,7 @@ const Wrapper = styled.section`
     }
 
     @media only screen and (min-width: 768px) { 
-        margin: 8em 0 5em 0;
+        margin: 8em 0 0 0;
     }
 
     @media only screen and (min-width: 992px) {
@@ -87,7 +87,7 @@ const Wrapper = styled.section`
             margin-top: ${props => props.category === "design" ? "3em" : "7em"};
         }
     
-        img {
+        .image {
             margin-top: 100px;
             grid-area: image;
         }
