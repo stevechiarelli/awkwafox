@@ -1,4 +1,5 @@
 import React from "react";
+import { navigate } from 'gatsby-link';
 import Loading from "../Loading";
 import styled from "styled-components";
 import Package from "./Package";
@@ -135,19 +136,23 @@ class Registration extends React.Component {
 
     handleSubmit = (event) => {        
         event.preventDefault();
-        
-        if (this.formValidation() === true) {
-            this.setState({
-                loading: true
-            });
-
+        this.setState({ loading: true });
+        const form = event.target;
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: encode({
+                'form-name': form.getAttribute('name'),
+                ...this.state,
+            }),
+        })
+        .then(() => {
             setTimeout(() => {
-                document.getElementById("registration-form").submit();
-                this.setState({
-                    loading: false
-                });
+                navigate(form.getAttribute('action'));
+                this.setState({ loading: false });
             }, 3000);
-        }
+        })
+        .catch((error) => alert(error));
     }
 
     formValidation() {
@@ -226,7 +231,13 @@ class Registration extends React.Component {
         
         return (
             <Wrapper>
-                <form id="registration-form" name="registration" method="POST" action="/success" data-netlify="true" onSubmit={this.handleSubmit}>
+                <form id="registration-form" name="registration" method="POST" action="/success/" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+
+                    {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
+                    <input type="hidden" name="form-name" value="registration" />
+                    <div hidden>
+                        <label>Don’t fill this out: <input name="bot-field" /></label>
+                    </div>
 
                     {/* Page 1 */}
                     <div style={this.state.page === 1 ? {display: "block"} : {display: "none"}}>
@@ -295,6 +306,12 @@ class Registration extends React.Component {
         );
 
     }
+}
+
+function encode(data) {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
 }
 
 const Wrapper = styled.section`
