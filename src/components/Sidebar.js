@@ -60,7 +60,7 @@ const Wrapper = styled.section`
 
     .close-btn {
         position: absolute;
-        right: 4.75%;
+        right: 4%;
         top: 2.75%;
         font-size: 2.5rem;
         background: transparent;
@@ -90,10 +90,6 @@ const Wrapper = styled.section`
             font-size: 0.6em;
             transition: all 0.3s linear;
             border-radius: 0.25rem;
-        }
-
-        li:nth-of-type(1), li:nth-of-type(3) {
-            animation-delay: 0.75s;
         }
 
         li:nth-of-type(2) {

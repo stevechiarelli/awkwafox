@@ -33,7 +33,7 @@ const ContactForm = (props) => {
     return (
         <Wrapper>
             <div className="container">
-                <form id="contact-form" name="contact" method="POST" action="/success" data-netlify="true">
+                <form id="contact-form" name="contact" method="POST" action="/success" data-netlify="true" onSubmit={handleSubmit}>
                     <div className="fields">
                         <div className="form-left">
                             <h3>{props.data.heading}</h3>
@@ -88,7 +88,7 @@ const ContactForm = (props) => {
                                 />
                             </div>
 
-                            <button onClick={handleSubmit} className="btn-primary">submit</button>
+                            <button type="submit" className="btn-primary">submit</button>
                         </div>
                     </div>
                 </form>

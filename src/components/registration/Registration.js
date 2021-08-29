@@ -133,7 +133,7 @@ class Registration extends React.Component {
         event.preventDefault();
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = (event) => {        
         event.preventDefault();
         
         if (this.formValidation() === true) {
@@ -226,7 +226,7 @@ class Registration extends React.Component {
         
         return (
             <Wrapper>
-                <form id="registration-form" name="registration" method="POST" action="/success" data-netlify="true">
+                <form id="registration-form" name="registration" method="POST" action="/success" data-netlify="true" onSubmit={this.handleSubmit}>
 
                     {/* Page 1 */}
                     <div style={this.state.page === 1 ? {display: "block"} : {display: "none"}}>
@@ -280,7 +280,7 @@ class Registration extends React.Component {
                         <button 
                             className="btn-primary" 
                             value="submit"
-                            onClick={this.handleSubmit} 
+                            type="submit"
                             style={this.state.page === 4 ? {display: "block"} : {display: "none"}}>
                             Submit
                         </button>
