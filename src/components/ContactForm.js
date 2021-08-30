@@ -96,6 +96,7 @@ const ContactForm = (props) => {
                                 <label htmlFor="message">message</label><br />
                                 <textarea 
                                     name="message"
+                                    id="message"
                                     onChange={handleChange}
                                     required
                                 />

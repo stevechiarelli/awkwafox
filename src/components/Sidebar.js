@@ -60,7 +60,7 @@ const Wrapper = styled.section`
 
     .close-btn {
         position: absolute;
-        right: 3.5%;
+        right: 2.5%;
         top: 1.5%;
         font-size: 2.5rem;
         background: transparent;

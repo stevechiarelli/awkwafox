@@ -62,7 +62,7 @@ const Work = (props) => {
                                         <div className="overlay"></div>
                                         <GatsbyImage image={image} alt={item.alt} />
                                     </div>
-                                    {item.featured === true ? <h5>{item.title} | <span>featured project</span></h5> : <h5>{item.title}</h5>}
+                                    {item.featured === true ? <h3>{item.title} | <span>featured project</span></h3> : <h3>{item.title}</h3>}
                                 </div>
                             );
                         })}
@@ -115,8 +115,9 @@ const Wrapper = styled.section`
             position: relative;
             overflow: hidden;
 
-            h5 {
+            h3 {
                 color: var(--primary);
+                font-size: 0.8em;
             }
 
             span {

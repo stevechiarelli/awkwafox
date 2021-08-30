@@ -97,16 +97,16 @@ const Wrapper = styled.section`
         text-align: center;
 
         h2 {
-            color: ${props => props.category === "livestream" ? "#535E79" : "#EEEEEE"};
+            color: ${props => props.category === "livestream" ? "#424c64" : "#EEEEEE"};
         }
 
         p {
-            color: ${props => props.category === "livestream" ? "#535E79" : "#EEEEEE"};
+            color: ${props => props.category === "livestream" ? "#424c64" : "#EEEEEE"};
         }
 
         .btn-primary {
-            color: ${props => props.category === "livestream" ? "#535E79" : "#EEEEEE"};
-            border: 3px solid ${props => props.category === "livestream" ? "#535E79" : "#EEEEEE"};
+            color: ${props => props.category === "livestream" ? "#424c64" : "#EEEEEE"};
+            border: 3px solid ${props => props.category === "livestream" ? "#424c64" : "#EEEEEE"};
             margin: 0.2em 0.5em 1em 0.5em;
         }
 
@@ -115,7 +115,7 @@ const Wrapper = styled.section`
         }
 
         .link {
-            color: ${props => props.category === "livestream" ? "#535E79" : "#EEEEEE"};
+            color: ${props => props.category === "livestream" ? "#424c64" : "#EEEEEE"};
             font-size: 1em;
             font-style: italic;
             text-decoration: underline;
