@@ -298,7 +298,6 @@ class Registration extends React.Component {
                     </div>
 
                     <input type="hidden" name="total" value={this.state.total} />
-                    <input type="hidden" name="type" value={this.props.type} />
                 </form>
 
                 {this.state.loading === true ? <Loading /> : null}

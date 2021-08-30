@@ -1,6 +1,6 @@
 module.exports = {
     siteMetadata: {
-        siteUrl: "https://awkwafox.netlify.app",
+        siteUrl: "https://www.awkwafox.com",
         title: "Awkwa Fox",
         description: "Awkwa Fox is a creative design and video production company based in Fort Myers, Florida specializing in wedding videography. We also offer event live stream and web design services.",
         author: "Steve Chiarelli"
