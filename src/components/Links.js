@@ -99,6 +99,11 @@ const Nav = styled.nav`
                 opacity: 1;
             }
         }
+
+        .active a {
+            color: var(--primary-light);
+            cursor: default;
+        }
     }
 
     .nav-links {
