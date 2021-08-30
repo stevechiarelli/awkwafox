@@ -16,7 +16,7 @@ const Sidebar = ({ page, isOpen, toggleSidebar }) => {
                 <div className="side-container">
                     <Links page={page} styleClass={`${isOpen ? "sidebar-links" : ""}`} />
                     <ul className={`${isOpen ? "sidebar-info" : ""}`}>
-                        <li><label>{info.phone}</label></li>
+                        <li>{info.phone}</li>
                         <li className="dot"></li>
                         <li>{info.email}</li>
                     </ul>
