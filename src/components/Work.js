@@ -114,6 +114,7 @@ const Wrapper = styled.section`
         .item {
             position: relative;
             overflow: hidden;
+            margin-bottom: 1.6em;
 
             h3 {
                 color: var(--primary);
