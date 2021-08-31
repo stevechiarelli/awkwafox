@@ -1,3 +1,7 @@
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`
+});
+
 module.exports = {
     siteMetadata: {
         siteUrl: "https://www.awkwafox.com",
@@ -20,6 +24,12 @@ module.exports = {
                 collectionTypes: [`faqs`, `projects`, `services`, `customers`],
                 singleTypes: [`home`, `videography`, `live-stream`, `web-design`, `contact`],
             },
-        }
+        },
+        {
+            resolve: `gatsby-plugin-google-analytics`,
+            options: {
+                trackingId: process.env.GA_TRACKING_ID
+            },
+        },
     ],
 };
