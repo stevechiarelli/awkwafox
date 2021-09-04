@@ -12,14 +12,14 @@ const Package = (props) => {
                             <option 
                                 key={item.id} 
                                 value={item.name + "," + item.price}>
-                                {item.description} ({item.price === "0" && item.subcategory === "other" ? "$TBD" : (Number(item.price)).toLocaleString('en-US', {style: 'currency', currency: 'USD'})})
+                                {item.description} ({item.price === 0 && item.subcategory === "other" ? "$TBD" : (Number(item.price)).toLocaleString('en-US', {style: 'currency', currency: 'USD'})})
                             </option>
                         );
                     })}                                
                 </select>
             </div>
             <div className="service">
-                <div style={props.data.category !== "" && props.data.category !== "other" ? {display: "block"} : {display: "none"}}>
+                <div style={props.data.category === "" || props.data.category.includes("other") ? {display: "none"} : {display: "block"}}>
                     <h3>Here's what's included</h3>
                     <ul dangerouslySetInnerHTML={{ __html: props.details[0] === undefined ? "" : props.details[0].details }}></ul>
                     <div className="form-group">
@@ -44,7 +44,7 @@ const Package = (props) => {
                         <small>*Additional fees my apply for requests and will not be reflected in the total price.</small>
                     </div>
                 </div>
-                <div style={props.data.category === "other" ? {display: "block"} : {display: "none"}}>
+                <div style={props.data.category.includes("other") ? {display: "block"} : {display: "none"}}>
                     <div className="form-group">
                         <label htmlFor="requests">Tell us about your event</label><br />
                         <textarea 
@@ -55,7 +55,7 @@ const Package = (props) => {
                     </div>
                 </div>
                 <p className="highlight" style={props.data.category !== "" ? {display: "block"} : {display: "none"}}>
-                    {props.data.total === 0 && props.data.category === "other" ? "$TBD" : (props.data.total).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}
+                    {props.data.total === 0 && props.data.category.includes("other") ? "$TBD" : (props.data.total).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}
                 </p>
             </div>
         </>

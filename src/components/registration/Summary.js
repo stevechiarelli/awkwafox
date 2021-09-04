@@ -24,7 +24,7 @@ const Summary = (props) => {
                         return (
                             <tr key={item.id}>
                                 <td>{item.description}</td>
-                                <td>{item.price === "0" && item.subcategory === "other" ? "$TBD" : (Number(item.price)).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
+                                <td>{item.price === 0 && item.subcategory === "other" ? "$TBD" : (Number(item.price)).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
                             </tr>
                         );
                     })}
@@ -39,7 +39,7 @@ const Summary = (props) => {
                     })}
                     <tr>
                         <td>total</td>
-                        <td>{props.data.total === 0 && props.data.category === "other" ? "$TBD" : (props.data.total).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
+                        <td>{props.data.total === 0 && props.data.category.includes("other") ? "$TBD" : (props.data.total).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
                     </tr>
                 </tbody>
             </table>
