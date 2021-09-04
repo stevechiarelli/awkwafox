@@ -15,7 +15,6 @@ module.exports = {
         `gatsby-plugin-sharp`,
         `gatsby-transformer-sharp`,
         `gatsby-plugin-react-helmet`,
-        `gatsby-plugin-sitemap`,
         {
             resolve: `gatsby-source-strapi`,
             options: {
@@ -29,6 +28,12 @@ module.exports = {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
                 trackingId: process.env.GA_TRACKING_ID
+            },
+        },
+        {
+            resolve: `gatsby-plugin-sitemap`,
+            options: {
+              exclude: ['/success'],
             },
         },
     ],
