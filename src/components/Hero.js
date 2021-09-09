@@ -56,7 +56,7 @@ const Wrapper = styled.section`
     height: 100vh;
 
     .hero-container {
-        padding-top: 11em;
+        padding-top: 10em;
         opacity: 0;
         width: 100%;
         animation-name: headline;
@@ -115,11 +115,11 @@ const Wrapper = styled.section`
     @keyframes headline {
         from {
             opacity: 0;
-            padding-top: 9em;
+            padding-top: 8em;
         }
         to {
             opacity: 1;
-            padding-top: 11em;
+            padding-top: 10em;
         }
     }
 
@@ -203,7 +203,7 @@ const Wrapper = styled.section`
 
     @media only screen and (min-width: 1600px) {
         .hero-container {
-            padding-top: 18em;
+            padding-top: 16em;
 
             h1 {
                 font-size: 3em;
@@ -214,18 +214,18 @@ const Wrapper = styled.section`
             }
 
             h1, p {
-                width: 50%;
+                width: 45%;
             }
         }
 
         @keyframes headline {
             from {
                 opacity: 0;
-                padding-top: 18em;
+                padding-top: 16em;
             }
             to {
                 opacity: 1;
-                padding-top: 20em;
+                padding-top: 18em;
             }
         }
     }

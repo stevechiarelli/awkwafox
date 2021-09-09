@@ -29,10 +29,6 @@ const Cta = (props) => {
             setData(services);
         }
 
-        if (props.category === "videography") {
-            event.preventDefault();
-        }
-
         setModal(true);
     }
 
@@ -52,7 +48,12 @@ const Cta = (props) => {
                 <h2>{props.data.heading}</h2>
                 <p>{props.data.content}<button className="link" id="faq" aria-label="faq" onClick={handleClick}>{props.data.link}</button></p>
                 {props.data.button.map(item => {
-                    return <Link to={item.buttonURL} key={item.id} className="btn-primary" onClick={handleClick}>{item.buttonText}</Link>
+                    if (item.buttonURL === "#" || item.buttonURL === "") {
+                        return <button key={item.id} className="btn-primary" onClick={handleClick}>{item.buttonText}</button>
+                    }
+                    else {
+                        return <Link to={item.buttonURL} key={item.id} className="btn-primary">{item.buttonText}</Link>
+                    }
                 })}
             </div>
             <ModalWrapper>
