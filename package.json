@@ -25,6 +25,7 @@
     "gatsby-plugin-sitemap": "^4.8.0",
     "gatsby-plugin-styled-components": "^4.10.0",
     "gatsby-source-filesystem": "^3.10.0",
+    "gatsby-source-google-calendar": "^1.1.1",
     "gatsby-source-strapi": "^1.0.2",
     "gatsby-transformer-sharp": "^3.10.0",
     "react": "^17.0.1",

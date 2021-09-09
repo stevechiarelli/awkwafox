@@ -9,10 +9,10 @@ const Event = (props) => {
     let details;
 
     const data = useStaticQuery(query);
-    scheduled = data.customers.nodes.filter(item => item.scheduled === true);
+    scheduled = data.calendar.edges[0].node.childrenCalendarEvent;
     
     scheduled.map(item => {
-        const date = new Date(item.date);
+        const date = new Date(item.start.date);
         const offset = new Date(date.getTime() + Math.abs(date.getTimezoneOffset()*60000));
         const dd = offset.getDate();
         const mm = offset.getMonth();
@@ -89,13 +89,15 @@ const Event = (props) => {
 
 const query = graphql`
   {
-    customers:allStrapiCustomers {
-      nodes {
-        id
-        category
-        location
-        date
-        scheduled
+    calendar:allCalendar {
+      edges {
+        node {
+          childrenCalendarEvent {
+            start {
+              date
+            }
+          }
+        }
       }
     }
   }

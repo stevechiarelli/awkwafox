@@ -36,5 +36,13 @@ module.exports = {
                 excludes: ['/success'],
             },
         },
+        {
+            resolve: `gatsby-source-google-calendar`,
+            options: {
+                calendarIds: [
+                    'steve@awkwafox.com',
+                ],
+            },
+        },
     ],
 };
