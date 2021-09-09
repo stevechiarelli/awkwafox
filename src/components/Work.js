@@ -200,6 +200,10 @@ const Wrapper = styled.section`
             flex-basis: 500px;
         }
     }
+
+    @media only screen and (min-width: 1600px) {
+        margin: 6em 0 4em 0;
+    }
 `
 
 export default Work;

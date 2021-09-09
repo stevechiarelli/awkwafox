@@ -62,12 +62,12 @@ const Wrapper = styled.section`
         
         ul {
             list-style-type: none;
-            margin: 2em 0;
+            margin: 1em 0;
         }
         
         ul li {
             color: var(--primary-light);
-            margin: .5em 0;
+            margin: .2em 0;
         }
 
         p:last-child {
@@ -96,6 +96,16 @@ const Wrapper = styled.section`
             background-position: center;
             height: 600px;
             width: 100%;
+            padding-top: 3%;
+
+            h3 {
+                font-size: 1.7em;
+            }
+
+            ul li {
+                font-size: 1em;
+                margin: .5em 0;
+            }
 
             h3, p, ul {
                 text-align: ${props => props.category === "livestream" ? "right" : "left"};
@@ -112,6 +122,20 @@ const Wrapper = styled.section`
 
         img, .image {
             display: none;
+        }
+    }
+
+    @media only screen and (min-width: 1600px) {
+        h3 {
+            font-size: 2em;
+        }
+
+        p {
+            font-size: 1.1em
+        }
+
+        ul li {
+            font-size: 1.3em;
         }
     }
 `

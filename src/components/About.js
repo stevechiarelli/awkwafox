@@ -29,6 +29,7 @@ const About = (props) => {
 const Wrapper = styled.section`
     position: relative;
     margin: 6em 0 0 0;
+    width: 100%;
 
     h2 {
         color: ${props => props.category === "live stream" ? "#D3C09A" : "#5c6b8c"};
@@ -48,7 +49,7 @@ const Wrapper = styled.section`
         background-repeat: no-repeat;
         position: absolute;
         right: -20px;
-        top: 0px;
+        top: 0;
         width: 50px;
         height: 700px;
         z-index: -1;
@@ -103,7 +104,7 @@ const Wrapper = styled.section`
     }
 
     @media only screen and (min-width: 1200px) {
-            &::before {
+        &::before {
             content: '';
             background: url(${dots});
             background-repeat: no-repeat;
@@ -113,6 +114,15 @@ const Wrapper = styled.section`
             width: 110px;
             height: 800px;
             z-index: -1;
+        }
+    }
+
+    @media only screen and (min-width: 1600px) {
+        margin: 3em auto 6em auto;
+
+        &::before {
+            right: -32%;
+            top: 0;
         }
     }
 `

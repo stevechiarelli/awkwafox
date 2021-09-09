@@ -201,6 +201,35 @@ const Wrapper = styled.section`
         }
     }
 
+    @media only screen and (min-width: 1600px) {
+        .hero-container {
+            padding-top: 18em;
+
+            h1 {
+                font-size: 3em;
+            }
+
+            p {
+                font-size: 1.1em;
+            }
+
+            h1, p {
+                width: 50%;
+            }
+        }
+
+        @keyframes headline {
+            from {
+                opacity: 0;
+                padding-top: 18em;
+            }
+            to {
+                opacity: 1;
+                padding-top: 20em;
+            }
+        }
+    }
+
     @media (orientation: landscape) and (max-width: 1112px) {
         .hero-container {
             h1, p {

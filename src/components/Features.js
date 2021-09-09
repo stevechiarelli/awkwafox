@@ -113,6 +113,12 @@ const Wrapper = styled.section`
             z-index: -1;
         }
     }
+
+    @media only screen and (min-width: 1600px) {
+        ul li h3 {
+            font-size: 1.5em;
+        }
+    }
 `
 
 export default Features;

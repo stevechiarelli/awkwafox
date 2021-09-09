@@ -55,7 +55,8 @@ const Event = (props) => {
     return (
         <>
             <div className="form-group" >
-                <label style={props.data.required} htmlFor="date">*Select the date of your event using the calendar below. Only available dates can be selected.</label><br /><br />
+                <label style={props.data.required} htmlFor="date">*Select the date of your event using the calendar below. 
+                Only available days can be selected. Disabled days are unavailable.</label><br /><br />
                 <div className="calendar hidden center">
                     <DayPicker 
                         selectedDays={props.data.date}
@@ -75,7 +76,7 @@ const Event = (props) => {
                     />
                 </div>
                 <input type="text" name="date" value={props.data.date ? props.data.date.toISOString().substring(0, 10) : ""} onChange={props.handleChange} readOnly/>
-                <p><small>{props.data.date ? props.data.date.toLocaleDateString() + " is available!" : ""}</small></p>
+                <p>{props.data.date ? props.data.date.toLocaleDateString() + " is available!" : ""}</p>
             </div>
             <div className="form-group">
                 <label style={props.data.required} htmlFor="location">*Location <small>(City or Venue Name)</small></label><br />
