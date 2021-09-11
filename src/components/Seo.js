@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
-const Seo = ({ title, description }) => {
+const Seo = ({ title, description, schema }) => {
     const { site } = useStaticQuery(query);
     const { siteTitle, siteDesc } = site.siteMetadata;
 
@@ -10,7 +10,7 @@ const Seo = ({ title, description }) => {
         <Helmet htmlAttributes={{ lang:"en" }} title={title || siteTitle}>
             <meta name="description" content={description || siteDesc} />
             <meta name="format-detection" content="telephone=no" />
-            <meta name="google-site-verification" content="KEhzy-ypBbx50vcnOIS_iau_5kgUBEyBkadn0VDuYBU" />
+            {schema}
         </Helmet>
     );
 }

@@ -33,11 +33,11 @@ const data = [
 const Links = ({ page, styleClass }) => {
     return (
         <Nav>
-            <ul className={`page-links ${styleClass ? styleClass : ""}`}>
+            <ul className={`page-links ${styleClass ? styleClass : ""}`} itemScope itemType="http://www.schema.org/SiteNavigationElement">
                 {data.map(link => {
                     return (
-                        <li key={link.id} className={page === link.text ? "active" : ""} >
-                            <Link to={link.url}>{link.text}</Link>
+                        <li key={link.id} className={page === link.text ? "active" : ""} itemProp="name" content="Main Menu">
+                            <Link to={link.url} itemProp="url">{link.text}</Link>
                         </li>
                     );
                 })}
