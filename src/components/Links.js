@@ -36,7 +36,7 @@ const Links = ({ page, styleClass }) => {
             <ul className={`page-links ${styleClass ? styleClass : ""}`} itemScope itemType="http://www.schema.org/SiteNavigationElement">
                 {data.map(link => {
                     return (
-                        <li key={link.id} className={page === link.text ? "active" : ""} itemProp="name" content="Main Menu">
+                        <li key={link.id} className={page === link.text ? "active" : ""} itemProp="name">
                             <Link to={link.url} itemProp="url">{link.text}</Link>
                         </li>
                     );
