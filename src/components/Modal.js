@@ -29,7 +29,7 @@ const Modal = (props) => {
                                 <div className="modal-info">
                                     <h4>{props.data.title}</h4>
                                     <p>{props.data.description}</p>
-                                    <a href={props.data.buttonURL} target="_blank" rel="noreferrer" className="btn-primary">{props.data.buttonText}</a>
+                                    {props.data.buttonURL === undefined ? "" : <a href={props.data.buttonURL} target="_blank" rel="noreferrer" className="btn-primary">{props.data.buttonText}</a>}
                                     <button className="btn-primary" onClick={() => props.handleClose()}>close</button>
                                 </div>
                             </div>
