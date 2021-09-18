@@ -14,7 +14,7 @@ const ContactForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        if (state.BotField === undefined) {
+        if (state.botfield === undefined) {
             setLoading(true);
 
             const form = document.getElementById("contact-form");
@@ -116,7 +116,7 @@ const ContactForm = (props) => {
                                     <option hidden value=""> -- select an option -- </option>
                                     <option value="Wedding">Wedding Videography</option>
                                     <option value="Live Stream">Live Stream</option>
-                                    <option value="Web Design">Web Design</option>
+                                    <option value="Website">Web Design</option>
                                 </select>
                             </div>
                             <div className={state.jobtype === "Wedding" ? "form-group" : "form-group hidden"}>
@@ -231,6 +231,17 @@ const Wrapper = styled.section`
         label {
             color: var(--text-light);
             font-size: 0.8em;
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%235c6b8c'><polygon points='0,0 100,0 50,50'/></svg>") no-repeat;
+            background-size: 12px;
+            background-position: calc(100% - 13px) 18px;
+            background-repeat: no-repeat;
+            background-color: #fff;
         }
 
         input:-webkit-autofill,

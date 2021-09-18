@@ -33,6 +33,20 @@ const Customer = (props) => {
                 </label>
             </div>
             <div className="form-group" style={props.data.category.includes("package") ? {display: "block"} : {display: "none"}}>
+                <label htmlFor="jobrole">I'm the...</label><br />
+                <select name="JobRole" id="jobrole" onChange={props.handleChange}>
+                    <option hidden value=""> -- select an option -- </option>
+                    <option value="Bride">Bride</option>
+                    <option value="Groom">Groom</option>
+                    <option value="Planner">Wedding Planner</option>
+                    <option value="Photographer">Photographer</option>
+                    <option value="Client 1">Other</option>
+                </select>
+            </div>
+
+            {!props.data.category.includes("package") ? <input type="hidden" name="JobRole" id="jobrole" value="Client 1" /> : null}
+
+            <div className="form-group" style={props.data.category.includes("package") ? {display: "block"} : {display: "none"}}>
                 <label htmlFor="spouse_name">Your future spouse's name</label><br />
                 <input type="text" name="CF-708915" id="spouse_name" value={props.data.spouse_name} onChange={props.handleChange} />
             </div>

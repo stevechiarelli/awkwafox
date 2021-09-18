@@ -15,12 +15,13 @@ class Registration extends React.Component {
             error: "",
             loading: false,
             required: { color: "#111111" },
-            botfield: "",
+            botfield: null,
             firstname: "",
             lastname: "",
             email: "",
             phone: "",
             phonetype: "MobilePhone",
+            jobtype: "",
             referral: "",
             total: 0,
             category: "",
@@ -139,7 +140,7 @@ class Registration extends React.Component {
         event.preventDefault();
         const responseURL = "https://www.awkwafox.com/form_response/" + this.props.type;
         
-        if (this.state.botfield === undefined) {
+        if (this.state.botfield === null) {
             this.setState({ loading: true });
 
             const form = document.getElementById("registration-form");
@@ -226,6 +227,7 @@ class Registration extends React.Component {
     }
 
     render() {
+        let jobtype = "";
         const service = this.props.data.filter(item => item.category === this.props.type && item.package === true);
         const details = this.props.data.filter(item => item.category === this.props.type && item.name === this.state.category && item.package === true);
         const addon = this.props.data.filter(item => item.category === this.props.type && item.addon === true);
@@ -236,12 +238,25 @@ class Registration extends React.Component {
         const page2 = <Event data={this.state} handleDayClick={this.handleDayClick} handleChange={this.handleChange} />;
         const page3 = <Customer data={this.state} handleChange={this.handleChange} />;
         const page4 = <Summary data={this.state} serviceSummary={serviceSummary} addonSummary={addonSummary} />;
+
+
+        if (this.props.type === "videography") {
+            jobtype = "Wedding";
+        }
+        else if (this.props.type === "livestream") {
+            jobtype = "Live Stream";
+        }
+        else {
+            jobtype = "Website";
+        }
         
         return (
             <Wrapper>
                 <form id="registration-form" name="registration" method="POST" onSubmit={this.handleSubmit}>
 
                     <input type="hidden" name="SecretKey" value={process.env.TAVE_SECRET_KEY} />
+                    <input type="hidden" name="JobType" value={jobtype} />
+                    <input type="hidden" name="CF-708858" id="total" value={this.state.total} />
                     <div hidden>
                         <label>Don’t fill this out: <input type="text" name="CF-709314" id="botfield" onChange={this.handleChange} /></label>
                     </div>
@@ -297,14 +312,11 @@ class Registration extends React.Component {
                         </button>
                         <button 
                             className="btn-primary" 
-                            value="submit"
                             type="submit"
                             style={this.state.page === 4 ? {display: "block"} : {display: "none"}}>
                             Submit
                         </button>
                     </div>
-
-                    <input type="hidden" name="CF-708858" id="total" value={this.state.total} />
                 </form>
 
                 {this.state.loading === true ? <Loading /> : null}
@@ -393,7 +405,7 @@ const Wrapper = styled.section`
     }
 
     .form-group {
-        margin-top: 2em;
+        margin-top: 1.5em;
 
         label {
             color: var(--text-dark);
@@ -405,8 +417,14 @@ const Wrapper = styled.section`
         }
 
         select {
-            width: 100%;
-            height: 40px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%235c6b8c'><polygon points='0,0 100,0 50,50'/></svg>") no-repeat;
+            background-size: 12px;
+            background-position: calc(100% - 13px) 16px;
+            background-repeat: no-repeat;
+            background-color: var(--background1);
             font-size: 1em;
         }
 
@@ -417,9 +435,9 @@ const Wrapper = styled.section`
             padding: 0.8em;
         }
 
-        input {
+        input, select {
             width: 100%;
-            height: 35px;
+            height: 40px;
         }
 
         input, textarea {
@@ -446,7 +464,7 @@ const Wrapper = styled.section`
             width: 125px;
             
             select {
-                height: 35px;
+                height: 40px;
             }
         }
     }
