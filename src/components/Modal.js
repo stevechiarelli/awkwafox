@@ -216,7 +216,12 @@ const Wrapper = styled.section`
 
         h4 {
             color: var(--primary);
-            font-size: 1.5em;
+            font-size: 1.4em;
+        }
+
+        p {
+            font-size: 0.8em;
+            margin-bottom: 2.5em;
         }
     }
 
@@ -256,6 +261,16 @@ const Wrapper = styled.section`
     @media only screen and (min-width: 768px) {
         .modal-body {
             padding: 2em;
+        }
+
+        .modal-success {
+            h4{
+                font-size: 1.5em;
+            }
+            
+            p {
+                font-size: 1em;
+            }
         }
     }
 

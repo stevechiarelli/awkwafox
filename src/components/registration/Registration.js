@@ -148,8 +148,6 @@ class Registration extends React.Component {
             const FD = new FormData(form);
             xhr.open("POST", process.env.TAVE_ENDPOINT);
             xhr.onreadystatechange = function() {
-                this.setState({ loading: false });
-                
                 if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                     window.location.href = responseURL;
                 }

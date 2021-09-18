@@ -11,7 +11,7 @@ const Package = (props) => {
                         return (
                             <option 
                                 key={item.id} 
-                                value={item.name + "," + item.price}>
+                                value={item.name + ", " + item.price}>
                                 {item.description} ({item.price === 0 && item.subcategory === "other" ? "$TBD" : (Number(item.price)).toLocaleString('en-US', {style: 'currency', currency: 'USD'})})
                             </option>
                         );
@@ -27,7 +27,7 @@ const Package = (props) => {
                         {props.addon.map(item => {
                             return (
                                 <label key={item.id} htmlFor={item.subcategory} className="checkbox">{item.description} (+${item.price})
-                                    <input type="checkbox" name={item.name} id={item.subcategory} value={true + "," + item.price} onChange={props.handleChange} checked={props.data[item.subcategory]} />
+                                    <input type="checkbox" name={item.name} id={item.subcategory} value={true + ", " + item.price} onChange={props.handleChange} checked={props.data[item.subcategory]} />
                                     <span className="checkmark"></span><br />
                                     <small>{item.details}</small>
                                 </label>

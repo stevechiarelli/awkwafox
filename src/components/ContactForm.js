@@ -22,8 +22,6 @@ const ContactForm = (props) => {
             const FD = new FormData(form);
             xhr.open("POST", process.env.TAVE_ENDPOINT);
             xhr.onreadystatechange = function() {
-                setLoading(false);
-                
                 if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                     window.location.href = 'https://www.awkwafox.com/form_response/default'
                 }
