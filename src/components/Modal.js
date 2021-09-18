@@ -65,9 +65,9 @@ const Modal = (props) => {
             modal = <div id="modal" className="modal" style={props.modal === true ? {display: "block"} : {display: "none"}}>
                         <div className="modal-content-center">
                             <div className="modal-success">
-                                <h4>{props.data.successHeading}</h4>
-                                <p>{props.data.successBody}</p>
-                                <Link to={props.data.redirectURL} className="btn-primary">Close</Link>
+                                <h4>{props.data === undefined ? "Error!" : props.data.successHeading}</h4>
+                                <p>{props.data === undefined ? "An error has occured." : props.data.successBody}</p>
+                                <Link to={props.data === undefined ? "/" : props.data.redirectURL} className="btn-primary">Close</Link>
                             </div>
                         </div>
                     </div>
