@@ -1,5 +1,4 @@
 import React from "react";
-import { navigate } from 'gatsby-link';
 import Loading from "../Loading";
 import styled from "styled-components";
 import Package from "./Package";
@@ -16,9 +15,12 @@ class Registration extends React.Component {
             error: "",
             loading: false,
             required: { color: "#111111" },
-            name: "",
+            botfield: "",
+            firstname: "",
+            lastname: "",
             email: "",
             phone: "",
+            phonetype: "MobilePhone",
             referral: "",
             total: 0,
             category: "",
@@ -27,7 +29,7 @@ class Registration extends React.Component {
             requests: "",
             details: "",
             spouse_name: "",
-            flashdrive: false,
+            second_shooter: false,
             footage: false,
             ceremony_livestream: false,
             ceremony_edit: false,
@@ -40,15 +42,16 @@ class Registration extends React.Component {
     }
 
     handleChange = (event) => { 
-        const {name, value} = event.target;
-        if (name === "category") {
-            let arr = event.target.value.split(",");
+        const {id, value, type, checked} = event.target;
+        const arr = value.split(",");
+
+        if (id === "category") {
             this.setState({
                 total: Number(arr[1]),
                 category: arr[0],
-                flashdrive: false,
+                second_shooter: false,
                 footage: false,
-                ceremony: false,
+                ceremony_livestream: false,
                 ceremony_edit: false,
                 trailer: false,
                 montage: false,
@@ -58,25 +61,23 @@ class Registration extends React.Component {
                 details: ""
             });
         }
-        else if (event.target.type === "checkbox") {
-            let arr = event.target.value.split(",");
-
-            if (event.target.checked === true) {
+        else if (type === "checkbox") {
+            if (checked === true) {
                 this.setState((state) => ({
                     total: state.total + Number(arr[1]),
-                    [name]: true
+                    [id]: true
                 }));
             }
             else {
                 this.setState((state) => ({
                     total: state.total - Number(arr[1]),
-                    [name]: false
+                    [id]: false
                 }));
             }
         }
         else {
             this.setState({
-                [name]: value
+                [id]: value
             });
         }
     }
@@ -134,25 +135,32 @@ class Registration extends React.Component {
         event.preventDefault();
     }
 
-    handleSubmit = (event) => {        
+    handleSubmit = (event) => {      
         event.preventDefault();
-        this.setState({ loading: true });
-        const form = event.target;
-        fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: encode({
-                'form-name': form.getAttribute('name'),
-                ...this.state,
-            }),
-        })
-        .then(() => {
-            setTimeout(() => {
-                navigate(form.getAttribute('action'));
+        const responseURL = "https://www.awkwafox.com/form_response/" + this.props.type;
+        
+        if (this.state.botfield === undefined) {
+            this.setState({ loading: true });
+
+            const form = document.getElementById("registration-form");
+            const xhr = new XMLHttpRequest();
+            const FD = new FormData(form);
+            xhr.open("POST", process.env.TAVE_ENDPOINT);
+            xhr.onreadystatechange = function() {
                 this.setState({ loading: false });
+                
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    window.location.href = responseURL;
+                }
+            }
+    
+            setTimeout(() => { 
+                xhr.send(FD); 
             }, 3000);
-        })
-        .catch((error) => alert(error));
+        }
+        else {
+            window.location.href = responseURL;
+        }
     }
 
     formValidation() {
@@ -189,7 +197,7 @@ class Registration extends React.Component {
         }
 
         if (this.state.page === 3) {
-            if (this.state.name === "" || this.state.email === "" || this.state.phone === "") {
+            if (this.state.firstname === "" || this.state.lastname === "" || this.state.email === "" || this.state.phone === "") {
                 this.setState({
                     error: "Fields indicated with * are required!"
                 });
@@ -222,7 +230,7 @@ class Registration extends React.Component {
         const details = this.props.data.filter(item => item.category === this.props.type && item.name === this.state.category && item.package === true);
         const addon = this.props.data.filter(item => item.category === this.props.type && item.addon === true);
         const serviceSummary = this.props.data.filter(item => item.category === this.props.type && item.name === this.state.category && item.package === true);
-        const addonSummary = this.props.data.filter(item => item.category === this.props.type && item.addon === true && this.state[item.name] !== false);
+        const addonSummary = this.props.data.filter(item => item.category === this.props.type && item.addon === true && this.state[item.subcategory] !== false);
 
         const page1 = <Package data={this.state} type={this.props.type} service={service} details={details} addon={addon} handleChange={this.handleChange} />;
         const page2 = <Event data={this.state} handleDayClick={this.handleDayClick} handleChange={this.handleChange} />;
@@ -231,12 +239,11 @@ class Registration extends React.Component {
         
         return (
             <Wrapper>
-                <form id="registration-form" name="registration" method="POST" action="/success/" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={this.handleSubmit}>
+                <form id="registration-form" name="registration" method="POST" onSubmit={this.handleSubmit}>
 
-                    {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-                    <input type="hidden" name="form-name" value="registration" />
+                    <input type="hidden" name="SecretKey" value={process.env.TAVE_SECRET_KEY} />
                     <div hidden>
-                        <label>Don’t fill this out: <input name="bot-field" /></label>
+                        <label>Don’t fill this out: <input type="text" name="CF-709314" id="botfield" onChange={this.handleChange} /></label>
                     </div>
 
                     {/* Page 1 */}
@@ -297,7 +304,7 @@ class Registration extends React.Component {
                         </button>
                     </div>
 
-                    <input type="hidden" name="total" value={this.state.total} />
+                    <input type="hidden" name="CF-708858" id="total" value={this.state.total} />
                 </form>
 
                 {this.state.loading === true ? <Loading /> : null}
@@ -305,12 +312,6 @@ class Registration extends React.Component {
         );
 
     }
-}
-
-function encode(data) {
-    return Object.keys(data)
-      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-      .join('&');
 }
 
 const Wrapper = styled.section`
@@ -392,11 +393,15 @@ const Wrapper = styled.section`
     }
 
     .form-group {
-        margin: 2em 0;
+        margin-top: 2em;
 
         label {
             color: var(--text-dark);
             font-size: 0.9em;
+        }
+
+        input, textarea, select {
+            padding: 0 0.8em;
         }
 
         select {
@@ -409,6 +414,7 @@ const Wrapper = styled.section`
             width: 100%;
             height: 150px;
             resize: none;
+            padding: 0.8em;
         }
 
         input {
@@ -423,6 +429,40 @@ const Wrapper = styled.section`
         }
     }
 
+    .phone-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .form-group {
+            margin-top: 0;
+        }
+
+        .form-group:nth-of-type(1) {
+            width: 100%;
+        }
+
+        .form-group:nth-of-type(2) {
+            width: 125px;
+            
+            select {
+                height: 35px;
+            }
+        }
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px #fff inset;      
+    }
+
     .service ul {
         list-style-type: initial;
         margin-left: 1em;
@@ -431,6 +471,7 @@ const Wrapper = styled.section`
     .btn-group {
         display: flex;
         justify-content: flex-end;
+        margin-top: 2em;
 
         button:first-child {
             margin-right: 5px;
@@ -465,7 +506,7 @@ const Wrapper = styled.section`
     }
     
     .checkbox input {
-        position: absolute;
+        position: relative;
         opacity: 0;
         cursor: pointer;
         height: 0;
@@ -524,6 +565,16 @@ const Wrapper = styled.section`
         .calendar-mobile {
             display: none;
         }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+
+            .form-group {
+                width: 48%;
+                margin: 0;
+            }
+        } 
     }
 `
 

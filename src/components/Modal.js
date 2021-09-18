@@ -65,9 +65,9 @@ const Modal = (props) => {
             modal = <div id="modal" className="modal" style={props.modal === true ? {display: "block"} : {display: "none"}}>
                         <div className="modal-content-center">
                             <div className="modal-success">
-                                <h4>Success!</h4>
-                                <p>Your form has been submitted. Thanks for your interest.</p>
-                                <Link to="/" className="btn-primary">Close</Link>
+                                <h4>{props.data.successHeading}</h4>
+                                <p>{props.data.successBody}</p>
+                                <Link to={props.data.redirectURL} className="btn-primary">Close</Link>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ const Wrapper = styled.section`
         top: 0;
         width: 100%;
         height: 100%; 
-        overflow: auto;
+        overflow: hidden;
         background-color: rgb(0,0,0);
         background-color: rgba(0,0,0,0.8);
     }
@@ -129,7 +129,7 @@ const Wrapper = styled.section`
         -webkit-animation-name: animatetop;
         -webkit-animation-duration: 0.4s;
         animation-name: animatetop;
-        animation-duration: 0.4s
+        animation-duration: 0.4s;
     }
 
     .modal-dialog {

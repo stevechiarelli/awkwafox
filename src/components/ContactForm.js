@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { navigate } from 'gatsby-link';
 import Loading from "./Loading";
 import styled from "styled-components";
 import contactHero from "../assets/images/contact.jpg";
@@ -9,39 +8,44 @@ const ContactForm = (props) => {
     const [state, setState] = useState({});
 
     const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.value });
+        setState({ ...state, [event.target.id]: event.target.value });
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setLoading(true);
-        const form = event.target;
-        fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: encode({
-                'form-name': form.getAttribute('name'),
-                ...state,
-            }),
-        })
-        .then(() => {
-            setTimeout(() => {
-                navigate(form.getAttribute('action'));
+        
+        if (state.BotField === undefined) {
+            setLoading(true);
+
+            const form = document.getElementById("contact-form");
+            const xhr = new XMLHttpRequest();
+            const FD = new FormData(form);
+            xhr.open("POST", process.env.TAVE_ENDPOINT);
+            xhr.onreadystatechange = function() {
                 setLoading(false);
+                
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    window.location.href = 'https://www.awkwafox.com/form_response/default'
+                }
+            }
+    
+            setTimeout(() => { 
+                xhr.send(FD); 
             }, 3000);
-        })
-        .catch((error) => alert(error));
+        }
+        else {
+            window.location.href = 'https://www.awkwafox.com/form_response/default'
+        }
     }
 
     return (
         <Wrapper>
             <div className="container">
-                <form id="contact-form" name="contact" method="POST" action="/success/" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={handleSubmit}>
+                <form id="contact-form" name="contact" method="POST" onSubmit={handleSubmit}>
                     <div className="fields">
-                        {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-                        <input type="hidden" name="form-name" value="contact" />
+                        <input type="hidden" name="SecretKey" value={process.env.TAVE_SECRET_KEY} />
                         <div hidden>
-                            <label>Don’t fill this out: <input name="bot-field" /></label>
+                            <label>Don’t fill this out: <input type="text" name="CF-709314" id="botfield" onChange={handleChange} /></label>
                         </div>
                         <div className="form-left">
                             <h3>{props.data.heading}</h3>
@@ -50,52 +54,109 @@ const ContactForm = (props) => {
                                 <li>Phone: {props.data.phone}</li>
                                 <li>Email: {props.data.email}</li>
                             </ul>
-                            <div className="form-group">
-                                <label htmlFor="first_name">first name</label><br />
-                                <input 
-                                    type="text" 
-                                    name="first_name" 
-                                    placeholder="first name here..."
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="last_name">last name</label><br />
-                                <input 
-                                    type="text" 
-                                    name="last_name" 
-                                    placeholder="last name here..."
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email">email</label><br />
-                                <input 
-                                    type="text" 
-                                    name="email" 
-                                    placeholder="email here..."
-                                    onChange={handleChange} 
-                                    required
-                                />
-                            </div>
                         </div>
                         <div className="form-right">
+                            <div className="input-group">
+                                <div className="form-group">
+                                    <label htmlFor="firstname">First Name</label><br />
+                                    <input 
+                                        type="text" 
+                                        name="FirstName" 
+                                        id="firstname"
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="lastname">Last Name</label><br />
+                                    <input 
+                                        type="text" 
+                                        name="LastName" 
+                                        id="lastname"
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                            </div>
                             <div className="form-group">
-                                <label htmlFor="subject">subject</label><br />
+                                <label htmlFor="email">Email</label><br />
                                 <input 
                                     type="text" 
-                                    name="subject" 
-                                    placeholder="subject here..."
+                                    name="Email" 
+                                    id="email"
                                     onChange={handleChange} 
                                     required
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="message">message</label><br />
+                                <label className="phone-group" htmlFor="phone">
+                                    <div className="form-group">
+                                        Phone
+                                        <input 
+                                            type="tel" 
+                                            name={state.phonetype !== undefined ? state.phonetype : "MobilePhone"} 
+                                            id="phone"
+                                            maxLength="14"
+                                            onChange={handleChange} 
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <select id="phonetype" onChange={handleChange}>
+                                            <option value="MobilePhone" defaultValue>mobile</option>
+                                            <option value="HomePhone">home</option>
+                                            <option value="WorkPhone">work</option>
+                                        </select>
+                                    </div>
+                                </label>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="jobtype">What service are you interested in?</label><br />
+                                <select name="JobType" id="jobtype" onChange={handleChange} required>
+                                    <option hidden value=""> -- select an option -- </option>
+                                    <option value="Wedding">Wedding Videography</option>
+                                    <option value="Live Stream">Live Stream</option>
+                                    <option value="Web Design">Web Design</option>
+                                </select>
+                            </div>
+                            <div className={state.jobtype === "Wedding" ? "form-group" : "form-group hidden"}>
+                                <label htmlFor="jobrole">I'm the...</label><br />
+                                <select name="JobRole" id="jobrole" onChange={handleChange} required={state.jobtype === "Wedding" ? "required" : ""}>
+                                    <option hidden value=""> -- select an option -- </option>
+                                    <option value="Bride">Bride</option>
+                                    <option value="Groom">Groom</option>
+                                    <option value="Planner">Wedding Planner</option>
+                                    <option value="Photographer">Photographer</option>
+                                    <option value="Client 1">Other</option>
+                                </select>
+                            </div>
+
+                            {state.jobtype !== "Wedding" ? <input type="hidden" name="JobRole" value="Client 1" /> : null}
+
+                            <div className={state.jobtype === "Wedding" || state.jobtype === "Live Stream" ? "form-group" : "form-group hidden"}>
+                                <label htmlFor="eventdate">Event Date</label><br />
+                                <input 
+                                    type="date" 
+                                    name="EventDate" 
+                                    id="eventdate"
+                                    onChange={handleChange} 
+                                    required={state.jobtype === "Wedding" || state.jobtype === "Live Stream" ? "required" : ""}
+                                />
+                            </div>
+                            <div className={state.jobtype === "Wedding" || state.jobtype === "Live Stream" ? "form-group" : "form-group hidden"}>
+                                <label htmlFor="location">Location (city or venue name)</label><br />
+                                <input 
+                                    type="text" 
+                                    name="CF-708912" 
+                                    id="location"
+                                    onChange={handleChange} 
+                                    required={state.jobtype === "Wedding" || state.jobtype === "Live Stream" ? "required" : ""}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="message">Message</label><br />
                                 <textarea 
-                                    name="message"
+                                    name="Message"
                                     id="message"
                                     onChange={handleChange}
                                     required
@@ -111,12 +172,6 @@ const ContactForm = (props) => {
             </div>
         </Wrapper>
     );
-}
-
-function encode(data) {
-    return Object.keys(data)
-      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-      .join('&');
 }
 
 const Wrapper = styled.section`
@@ -153,46 +208,55 @@ const Wrapper = styled.section`
         background: #333;
     }
 
-    .iframe {
-        width: 100%;
-        height: 300px;
-        overflow: visible;
-        border: none;
-        margin: 3em 0 0 0;
-        padding: 0;
-    }
-
-    .loading {
-        position: fixed;
-        background: rgba(0, 0, 0, 0.7);
-        top: 0;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        z-index: 1000;
-    }
-
     .form-group {
-        margin: 0.8em 0;
+        margin-top: 0.8em;
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
-            background: var(--background4);
+            background: #fff;
             border: 0;
-            color: #eee;
+            color: #000;
+            padding: 0 0.8em;
         }
         
-        input {
+        input, select {
             height: 40px;
         }
         
         textarea {
             height: 292px;
+            padding: 0.8em;
         }
         
         label {
             color: var(--text-light);
             font-size: 0.8em;
+        }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0px 1000px #fff inset;      
+        }
+    }
+
+    .phone-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .form-group:nth-of-type(1) {
+            width: 100%;
+        }
+
+        .form-group:nth-of-type(2) {
+            width: 115px;
         }
     }
 
@@ -200,6 +264,15 @@ const Wrapper = styled.section`
         .container {
             padding: 8em 0;
             margin: 0 auto;
+
+            .input-group {
+                display: flex;
+                justify-content: space-between;
+
+                .form-group {
+                    width: 48%;
+                }
+            } 
         }
     }
 

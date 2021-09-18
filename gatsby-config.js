@@ -40,7 +40,7 @@ module.exports = {
             resolve: `gatsby-source-google-calendar`,
             options: {
                 calendarIds: [
-                    'steve@awkwafox.com',
+                    'c_a7lekj0jbjopvn0ngi4luobitc@group.calendar.google.com',
                 ],
             },
         },

@@ -26,13 +26,13 @@ const Event = (props) => {
             <label htmlFor="details">
                 Are there any details you would like to share about your wedding?
             </label><br />
-            <textarea name="details" value={props.data.details} onChange={props.handleChange} />
+            <textarea name="CF-708918" id="details" value={props.data.details} onChange={props.handleChange} />
         </div>
     }
     else if (props.data.category === "sporting_event") {
         details = <div className="form-group">
             <label htmlFor="details">Sport</label><br />
-            <select name="details" onChange={props.handleChange}>
+            <select name="CF-708918" id="details" onChange={props.handleChange}>
                 <option hidden value="none"> -- select an option -- </option>
                 <option value="soccer">soccer</option>
                 <option value="baseball">baseball</option>
@@ -48,7 +48,7 @@ const Event = (props) => {
             <label htmlFor="details">
                 Are there any details you would like to share about your event?
             </label><br />
-            <textarea name="details" value={props.data.details} onChange={props.handleChange} />
+            <textarea name="CF-708918" id="details" value={props.data.details} onChange={props.handleChange} />
         </div>
     }
 
@@ -75,12 +75,12 @@ const Event = (props) => {
                         disabledDays={[{ daysOfWeek: [1, 2, 3, 4, 5] }, {before: new Date()}, ...disabledDays.map(day => new Date(day))]}
                     />
                 </div>
-                <input type="text" name="date" value={props.data.date ? props.data.date.toISOString().substring(0, 10) : ""} onChange={props.handleChange} readOnly/>
+                <input type="text" name="EventDate" id="date" value={props.data.date ? props.data.date.toISOString().substring(0, 10) : ""} onChange={props.handleChange} readOnly/>
                 <p>{props.data.date ? props.data.date.toLocaleDateString() + " is available!" : ""}</p>
             </div>
             <div className="form-group">
                 <label style={props.data.required} htmlFor="location">*Location <small>(City or Venue Name)</small></label><br />
-                <input type="text" name="location" value={props.data.location} onChange={props.handleChange} />
+                <input type="text" name="CF-708912" id="location" value={props.data.location} onChange={props.handleChange} />
                 <small>*Travel fees my apply if outside of Southwest Florida</small>
             </div>
             {details}

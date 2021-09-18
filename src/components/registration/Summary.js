@@ -58,7 +58,7 @@ const Summary = (props) => {
             </div>
 
             <p className="highlight">Your Info</p>
-            <p>Name: {props.data.name}<br />
+            <p>Name: {props.data.firstname + " " + props.data.lastname}<br />
                 Email: {props.data.email}<br />
                 Phone: {props.data.phone}<br />
                 {props.data.category.includes("package") ? "Your future spouse's name: " + props.data.spouse_name : "" }<br />

@@ -5,7 +5,7 @@ const Package = (props) => {
         <>
             <div className="form-group">
                 <label style={props.data.required} htmlFor="category">*Select from the list of {props.type} options below and click next when complete.</label><br /><br />
-                <select name="category" onChange={props.handleChange}>
+                <select name="CF-708855" id="category" onChange={props.handleChange}>
                     <option hidden value=""> -- select an option -- </option>
                     {props.service.map(item => {
                         return (
@@ -26,8 +26,8 @@ const Package = (props) => {
                         <h3>Choose your add-ons</h3>
                         {props.addon.map(item => {
                             return (
-                                <label key={item.id} className="checkbox">{item.description} (+${item.price})
-                                    <input type="checkbox" name={item.name} value={true + "," + item.price} onChange={props.handleChange} checked={props.data[item.name]} />
+                                <label key={item.id} htmlFor={item.subcategory} className="checkbox">{item.description} (+${item.price})
+                                    <input type="checkbox" name={item.name} id={item.subcategory} value={true + "," + item.price} onChange={props.handleChange} checked={props.data[item.subcategory]} />
                                     <span className="checkmark"></span><br />
                                     <small>{item.details}</small>
                                 </label>
@@ -37,7 +37,8 @@ const Package = (props) => {
                     <div className="form-group">
                         <label htmlFor="requests">Do you have any other requests?</label><br />
                         <textarea 
-                            name="requests"
+                            name="CF-708921"
+                            id="requests"
                             value={props.data.requests}
                             onChange={props.handleChange}
                         />
@@ -48,7 +49,8 @@ const Package = (props) => {
                     <div className="form-group">
                         <label htmlFor="requests">Tell us about your event</label><br />
                         <textarea 
-                            name="requests"
+                            name="CF-708921"
+                            id="requests"
                             value={props.data.requests}
                             onChange={props.handleChange}
                         />
