@@ -27,11 +27,11 @@ const ContactForm = (props) => {
                 }),
             })
             .then(() => {
-                navigate("https://www.awkwafox.com/form_response/default");
+                //navigate("https://www.awkwafox.com/form_response/default");
             })
         }
         else {
-            navigate("https://www.awkwafox.com/form_response/default");
+            //navigate("https://www.awkwafox.com/form_response/default");
         }
     }
 
