@@ -28,7 +28,14 @@ const ContactForm = (props) => {
             })
             .then(() => {
                 //navigate("https://www.awkwafox.com/form_response/default");
+                console.log(encode({
+                    'SecretKey': process.env.TAVE_SECRET_KEY,
+                    ...state,
+                }),)
             })
+            .catch(function(error) {
+                console.log(error);
+            });
         }
         else {
             //navigate("https://www.awkwafox.com/form_response/default");
