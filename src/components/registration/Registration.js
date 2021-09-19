@@ -143,7 +143,7 @@ class Registration extends React.Component {
         if (this.state.botfield === null) {
             this.setState({ loading: true });
 
-            fetch(process.env.TAVE_ENDPOINT, {
+            fetch(process.env.GATSBY_TAVE_ENDPOINT, {
                 method : "POST",
                 body: new FormData(document.getElementById("contact-form")),
             }).then(() => new Promise(resolve => setTimeout(resolve, 3000))
@@ -248,7 +248,7 @@ class Registration extends React.Component {
             <Wrapper>
                 <form id="registration-form" name="registration" method="POST" onSubmit={this.handleSubmit}>
 
-                    <input type="hidden" name="SecretKey" value={process.env.TAVE_SECRET_KEY} />
+                    <input type="hidden" name="SecretKey" value={process.env.GATSBY_TAVE_SECRET_KEY} />
                     <input type="hidden" name="JobType" value={jobtype} />
                     <input type="hidden" name="CF-708858" id="total" value={this.state.total} />
                     <div hidden>

@@ -18,18 +18,18 @@ const ContactForm = (props) => {
         if (state["CF-709314"] === undefined) {
             setLoading(true);
             
-            fetch(process.env.TAVE_ENDPOINT, {
+            fetch(process.env.GATSBY_TAVE_ENDPOINT, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: encode({
-                    'SecretKey': process.env.TAVE_SECRET_KEY,
+                    'SecretKey': process.env.GATSBY_TAVE_SECRET_KEY,
                     ...state,
                 }),
             })
             .then(() => {
                 //navigate("https://www.awkwafox.com/form_response/default");
                 console.log(encode({
-                    'SecretKey': process.env.TAVE_SECRET_KEY,
+                    'SecretKey': process.env.GATSBY_TAVE_SECRET_KEY,
                     ...state,
                 }),)
             })
