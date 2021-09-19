@@ -1,4 +1,5 @@
 import React from "react";
+import { navigate } from 'gatsby-link';
 import Loading from "../Loading";
 import styled from "styled-components";
 import Package from "./Package";
@@ -143,18 +144,20 @@ class Registration extends React.Component {
         if (this.state.botfield === null) {
             this.setState({ loading: true });
 
-            fetch(process.env.GATSBY_TAVE_ENDPOINT, {
-                method : "POST",
-                body: new FormData(document.getElementById("contact-form")),
-            }).then(() => new Promise(resolve => setTimeout(resolve, 3000))
-            ).then(
-                response => response.text()
-            ).then(
-                window.location.href = "https://www.awkwafox.com/form_response/default"
-            );
+            const form = document.getElementById("registration-form");
+            const xhr = new XMLHttpRequest();
+            const FD = new FormData(form);
+            xhr.open("POST", process.env.GATSBY_TAVE_ENDPOINT);
+            xhr.onreadystatechange = function() {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    navigate(responseURL);
+                }
+            }
+
+            xhr.send(FD); 
         }
         else {
-            window.location.href = responseURL;
+            navigate(responseURL);
         }
     }
 
