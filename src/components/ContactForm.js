@@ -13,26 +13,22 @@ const ContactForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
+
         if (state.botfield === undefined) {
             setLoading(true);
 
-            const form = document.getElementById("contact-form");
-            const xhr = new XMLHttpRequest();
-            const FD = new FormData(form);
-            xhr.open("POST", process.env.TAVE_ENDPOINT);
-            xhr.onreadystatechange = function() {
-                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                    window.location.href = 'https://www.awkwafox.com/form_response/default'
-                }
-            }
-    
-            setTimeout(() => { 
-                xhr.send(FD); 
-            }, 3000);
+            fetch(process.env.TAVE_ENDPOINT, {
+                method : "POST",
+                body: new FormData(document.getElementById("contact-form")),
+            }).then(() => new Promise(resolve => setTimeout(resolve, 3000))
+            ).then(
+                response => response.text()
+            ).then(
+                window.location.href = "https://www.awkwafox.com/form_response/default"
+            );
         }
         else {
-            window.location.href = 'https://www.awkwafox.com/form_response/default'
+            window.location.href = "https://www.awkwafox.com/form_response/default";
         }
     }
 
