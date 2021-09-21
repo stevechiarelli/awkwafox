@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { navigate } from 'gatsby-link';
 import Loading from "./Loading";
 import styled from "styled-components";
@@ -6,7 +6,13 @@ import contactHero from "../assets/images/contact.jpg";
 
 const ContactForm = (props) => {
     const [loading, setLoading] = useState(false);
+    const [phone, setPhone] = useState("");
+    const [phoneType, setPhoneType] = useState("MobilePhone");
     const [state, setState] = useState({});
+
+    useEffect(() => {
+        setState({JobRole: "Client 1"})
+    }, []);
 
     const handleChange = (event) => {
         setState({ ...state, [event.target.id]: event.target.value });
@@ -15,20 +21,21 @@ const ContactForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (state.botfield === undefined) {
+        if (state["CF-709314"] === undefined) {
             setLoading(true);
-
-            const form = document.getElementById("contact-form");
-            const xhr = new XMLHttpRequest();
-            const FD = new FormData(form);
-            xhr.open("POST", process.env.GATSBY_TAVE_ENDPOINT);
-            xhr.onreadystatechange = function() {
-                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                    navigate("https://www.awkwafox.com/form_response/default");
-                }
-            }
-
-            xhr.send(FD); 
+            
+            fetch(process.env.GATSBY_TAVE_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: encode({
+                    'SecretKey': process.env.GATSBY_TAVE_SECRET_KEY,
+                    ...state, 
+                    [phoneType]: phone
+                }),
+            })
+            .then(() => {
+                navigate("https://www.awkwafox.com/form_response/default");
+            })
         }
         else {
             navigate("https://www.awkwafox.com/form_response/default");
@@ -40,9 +47,8 @@ const ContactForm = (props) => {
             <div className="container">
                 <form id="contact-form" name="contact" method="POST" onSubmit={handleSubmit}>
                     <div className="fields">
-                        <input type="hidden" name="SecretKey" value={process.env.GATSBY_TAVE_SECRET_KEY} />
                         <div hidden>
-                            <label>Don’t fill this out: <input type="text" name="CF-709314" id="botfield" onChange={handleChange} /></label>
+                            <label>Don’t fill this out: <input type="text" id="CF-709314" onChange={handleChange} /></label>
                         </div>
                         <div className="form-left">
                             <h3>{props.data.heading}</h3>
@@ -55,32 +61,29 @@ const ContactForm = (props) => {
                         <div className="form-right">
                             <div className="input-group">
                                 <div className="form-group">
-                                    <label htmlFor="firstname">First Name</label><br />
+                                    <label htmlFor="FirstName">First Name</label><br />
                                     <input 
                                         type="text" 
-                                        name="FirstName" 
-                                        id="firstname"
+                                        id="FirstName"
                                         onChange={handleChange}
                                         required
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="lastname">Last Name</label><br />
+                                    <label htmlFor="LastName">Last Name</label><br />
                                     <input 
                                         type="text" 
-                                        name="LastName" 
-                                        id="lastname"
+                                        id="LastName" 
                                         onChange={handleChange}
                                         required
                                     />
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email">Email</label><br />
+                                <label htmlFor="Email">Email</label><br />
                                 <input 
                                     type="text" 
-                                    name="Email" 
-                                    id="email"
+                                    id="Email" 
                                     onChange={handleChange} 
                                     required
                                 />
@@ -90,17 +93,16 @@ const ContactForm = (props) => {
                                     <div className="form-group">
                                         Phone
                                         <input 
-                                            type="tel" 
-                                            name={state.phonetype !== undefined ? state.phonetype : "MobilePhone"} 
-                                            id="phone"
+                                            type="tel"
+                                            id="phone" 
                                             maxLength="14"
-                                            onChange={handleChange} 
+                                            onChange={(e) => setPhone(e.target.value)} 
                                             required
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <select id="phonetype" onChange={handleChange}>
-                                            <option value="MobilePhone" defaultValue>mobile</option>
+                                        <select onChange={(e) => setPhoneType(e.target.value)}>
+                                            <option value="MobilePhone">mobile</option>
                                             <option value="HomePhone">home</option>
                                             <option value="WorkPhone">work</option>
                                         </select>
@@ -108,17 +110,17 @@ const ContactForm = (props) => {
                                 </label>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="jobtype">What service are you interested in?</label><br />
-                                <select name="JobType" id="jobtype" onChange={handleChange} required>
+                                <label htmlFor="JobType">What service are you interested in?</label><br />
+                                <select id="JobType" onChange={handleChange} required>
                                     <option hidden value=""> -- select an option -- </option>
                                     <option value="Wedding">Wedding Videography</option>
                                     <option value="Live Stream">Live Stream</option>
                                     <option value="Website">Web Design</option>
                                 </select>
                             </div>
-                            <div className={state.jobtype === "Wedding" ? "form-group" : "form-group hidden"}>
-                                <label htmlFor="jobrole">I'm the...</label><br />
-                                <select name="JobRole" id="jobrole" onChange={handleChange} required={state.jobtype === "Wedding" ? "required" : ""}>
+                            <div className={state.JobType === "Wedding" ? "form-group" : "form-group hidden"}>
+                                <label htmlFor="JobRole">I'm the...</label><br />
+                                <select id="JobRole" onChange={handleChange} required={state.JobType === "Wedding" ? "required" : ""}>
                                     <option hidden value=""> -- select an option -- </option>
                                     <option value="Bride">Bride</option>
                                     <option value="Groom">Groom</option>
@@ -128,33 +130,28 @@ const ContactForm = (props) => {
                                 </select>
                             </div>
 
-                            {state.jobtype !== "Wedding" ? <input type="hidden" name="JobRole" value="Client 1" /> : null}
-
-                            <div className={state.jobtype === "Wedding" || state.jobtype === "Live Stream" ? "form-group" : "form-group hidden"}>
-                                <label htmlFor="eventdate">Event Date</label><br />
+                            <div className={state.JobType === "Wedding" || state.JobType === "Live Stream" ? "form-group" : "form-group hidden"}>
+                                <label htmlFor="EventDate">Event Date</label><br />
                                 <input 
                                     type="date" 
-                                    name="EventDate" 
-                                    id="eventdate"
+                                    id="EventDate" 
                                     onChange={handleChange} 
-                                    required={state.jobtype === "Wedding" || state.jobtype === "Live Stream" ? "required" : ""}
+                                    required={state.JobType === "Wedding" || state.JobType === "Live Stream" ? "required" : ""}
                                 />
                             </div>
-                            <div className={state.jobtype === "Wedding" || state.jobtype === "Live Stream" ? "form-group" : "form-group hidden"}>
-                                <label htmlFor="location">Location (city or venue name)</label><br />
+                            <div className={state.JobType === "Wedding" || state.JobType === "Live Stream" ? "form-group" : "form-group hidden"}>
+                                <label htmlFor="CF-708912">Location (city or venue name)</label><br />
                                 <input 
                                     type="text" 
-                                    name="CF-708912" 
-                                    id="location"
+                                    id="CF-708912" 
                                     onChange={handleChange} 
-                                    required={state.jobtype === "Wedding" || state.jobtype === "Live Stream" ? "required" : ""}
+                                    required={state.JobType === "Wedding" || state.JobType === "Live Stream" ? "required" : ""}
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="message">Message</label><br />
+                                <label htmlFor="Message">Message</label><br />
                                 <textarea 
-                                    name="Message"
-                                    id="message"
+                                    id="Message"
                                     onChange={handleChange}
                                     required
                                 />

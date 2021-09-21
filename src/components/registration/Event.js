@@ -21,18 +21,18 @@ const Event = (props) => {
         return disabledDays.push(new Date(yyyy, mm, dd));
     });
 
-    if (props.data.category.includes("package")) {
+    if (props.data.package.includes("package")) {
         details = <div className="form-group">
-            <label htmlFor="details">
+            <label htmlFor="CF-708918">
                 Are there any details you would like to share about your wedding?
             </label><br />
-            <textarea name="CF-708918" id="details" value={props.data.details} onChange={props.handleChange} />
+            <textarea id="CF-708918" value={props.data.customFields['CF-708918']} onChange={props.handleCustomFields} />
         </div>
     }
-    else if (props.data.category === "sporting_event") {
+    else if (props.data.package === "sporting_event") {
         details = <div className="form-group">
-            <label htmlFor="details">Sport</label><br />
-            <select name="CF-708918" id="details" onChange={props.handleChange}>
+            <label htmlFor="CF-708918">Sport</label><br />
+            <select id="CF-708918" onChange={props.handleCustomFields}>
                 <option hidden value="none"> -- select an option -- </option>
                 <option value="soccer">soccer</option>
                 <option value="baseball">baseball</option>
@@ -45,21 +45,21 @@ const Event = (props) => {
     }
     else {
         details = <div className="form-group">
-            <label htmlFor="details">
+            <label htmlFor="CF-708918">
                 Are there any details you would like to share about your event?
             </label><br />
-            <textarea name="CF-708918" id="details" value={props.data.details} onChange={props.handleChange} />
+            <textarea id="CF-708918" value={props.data.customFields['CF-708918']} onChange={props.handleCustomFields} />
         </div>
     }
 
     return (
         <>
             <div className="form-group" >
-                <label style={props.data.required} htmlFor="date">*Select the date of your event using the calendar below. 
+                <label style={props.data.required} htmlFor="EventDate">*Select the date of your event using the calendar below. 
                 Only available days can be selected. Disabled days are unavailable.</label><br /><br />
                 <div className="calendar hidden center">
                     <DayPicker 
-                        selectedDays={props.data.date}
+                        selectedDays={props.data.formData.EventDate}
                         onDayClick={props.handleDayClick}
                         numberOfMonths={2} 
                         pagedNavigation
@@ -68,19 +68,19 @@ const Event = (props) => {
                 </div>
                 <div className="calendar-mobile center">
                     <DayPicker 
-                        selectedDays={props.data.date}
+                        selectedDays={props.data.formData.EventDate}
                         onDayClick={props.handleDayClick}
                         numberOfMonths={1} 
                         pagedNavigation
                         disabledDays={[{ daysOfWeek: [1, 2, 3, 4, 5] }, {before: new Date()}, ...disabledDays.map(day => new Date(day))]}
                     />
                 </div>
-                <input type="text" name="EventDate" id="date" value={props.data.date ? props.data.date.toISOString().substring(0, 10) : ""} onChange={props.handleChange} readOnly/>
-                <p>{props.data.date ? props.data.date.toLocaleDateString() + " is available!" : ""}</p>
+                <input type="text" id="EventDate" value={props.data.formData.EventDate ? props.data.formData.EventDate.toISOString().substring(0, 10) : ""} onChange={props.handleFormData} readOnly/>
+                <p>{props.data.formData.EventDate ? props.data.formData.EventDate.toLocaleDateString() + " is available!" : ""}</p>
             </div>
             <div className="form-group">
-                <label style={props.data.required} htmlFor="location">*Location <small>(City or Venue Name)</small></label><br />
-                <input type="text" name="CF-708912" id="location" value={props.data.location} onChange={props.handleChange} />
+                <label style={props.data.required} htmlFor="CF-708912">*Location <small>(City or Venue Name)</small></label><br />
+                <input type="text" id="CF-708912" value={props.data.customFields['CF-708912']} onChange={props.handleCustomFields} />
                 <small>*Travel fees my apply if outside of Southwest Florida</small>
             </div>
             {details}

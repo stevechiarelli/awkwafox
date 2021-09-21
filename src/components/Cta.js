@@ -78,7 +78,7 @@ const query = graphql`
         id
         description
         category
-        subcategory
+        disabledPackageList
         name
         price
         details
