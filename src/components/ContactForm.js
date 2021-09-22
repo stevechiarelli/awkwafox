@@ -217,6 +217,7 @@ const Wrapper = styled.section`
             border: 0;
             color: #000;
             padding: 0 0.8em;
+            -webkit-min-logical-width: calc(100% - 16px);
         }
         
         input, select {
