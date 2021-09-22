@@ -63,7 +63,7 @@ const query = graphql`
         category
       }
     }
-    services:allStrapiServices {
+    services:allStrapiServices(sort: {fields: strapiId}) {
       nodes {
         id
         description

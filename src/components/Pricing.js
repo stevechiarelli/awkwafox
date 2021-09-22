@@ -29,7 +29,7 @@ const Pricing = (props) => {
 
 const query = graphql`
 {
-    services:allStrapiServices {
+    services:allStrapiServices(sort: {fields: strapiId}) {
       nodes {
         id
         description
