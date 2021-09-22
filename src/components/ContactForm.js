@@ -264,6 +264,7 @@ const Wrapper = styled.section`
 
         .form-group:nth-of-type(1) {
             width: 100%;
+            margin-right: 1.5em;
         }
 
         .form-group:nth-of-type(2) {

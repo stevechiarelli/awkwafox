@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { graphql, useStaticQuery, Link } from "gatsby";
 import styled from "styled-components";
 import Modal from "./Modal";
@@ -15,10 +15,6 @@ const Cta = (props) => {
 
     faqs = faqs.filter(item => item.category === props.category);
 
-    useEffect(() => {
-        document.addEventListener('click', handleClickOutside, true);
-    });
-
     const handleClick = (event) => {
         if (event.target.id === "faq") {
             setCategory("faq");
@@ -34,12 +30,6 @@ const Cta = (props) => {
 
     const handleClose = () => {
         setModal(false);
-    }
-
-    const handleClickOutside = (event) => {
-        if (event.target.id === "modal") {
-            setModal(false);
-        }
     }
 
     return (

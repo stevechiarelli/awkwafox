@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
+import icon from "../assets/images/icon.svg";
 
 const Pricing = (props) => {
     // GraphQL FAQ Query
@@ -14,6 +15,7 @@ const Pricing = (props) => {
                 {services.map(item => {
                     return (                
                         <div key={item.id} className="pricing">
+                            <img src={icon} alt="Awkwa Fox icon" />
                             <h3>{item.description}</h3>
                             <h2>{item.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</h2>
                             <ul dangerouslySetInnerHTML={{ __html: item.details }} />
@@ -86,12 +88,23 @@ const Wrapper = styled.section`
         .btn-primary:hover {
             background: var(--background1);
         }
+
+        img {
+            width: 80px;
+            margin: -15px auto 0 auto;
+        }
     }
 
     p {
         margin-top: 3em;
         text-align: center;
         color: var(--text-light);
+    }
+
+    @media only screen and (min-width: 768px) { 
+        img {
+            width: 100px;
+        }
     }
 
     @media only screen and (min-width: 1200px) {

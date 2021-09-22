@@ -61,8 +61,8 @@ const Wrapper = styled.section`
         }
         
         ul {
-            list-style-type: none;
-            margin: 1em 0;
+            list-style-type: initial;
+            margin: 1em 0 1em 1em;
         }
         
         ul li {
@@ -109,6 +109,7 @@ const Wrapper = styled.section`
 
             h3, p, ul {
                 text-align: ${props => props.category === "livestream" ? "right" : "left"};
+                list-style-position: ${props => props.category === "livestream" ? "inside" : "initial"};
                 width: 40%;
                 line-height: 25px;
             }
