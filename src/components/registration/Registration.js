@@ -36,15 +36,15 @@ class Registration extends React.Component {
                 'CF-708921': "", // requests
                 'CF-708912': "", // location
                 'CF-708915': "", // spouse's name
-                'CF-708942': "", // second shooter
-                'CF-708927': "", // raw footage
-                'CF-708930': "", // live stream
-                'CF-708933': "", // ceremony edit
-                'CF-708936': "", // cinematic trailer
-                'CF-708939': "", // photo montage
-                'CF-708945': "", // event website
-                'CF-708948': "", // content management system
-                'CF-708951': "" // database management system
+                'CF-708942': false, // second shooter
+                'CF-708927': false, // raw footage
+                'CF-708930': false, // live stream
+                'CF-708933': false, // ceremony edit
+                'CF-708936': false, // cinematic trailer
+                'CF-708939': false, // photo montage
+                'CF-708945': false, // event website
+                'CF-708948': false, // content management system
+                'CF-708951': false // database management system
             }
         }
     }
@@ -60,15 +60,15 @@ class Registration extends React.Component {
                     ...state.customFields,
                     'CF-708858': Number(arr[2]), // quote total
                     'CF-708855': arr[1], // package
-                    'CF-708942': "", // second shooter
-                    'CF-708927': "", // raw footage
-                    'CF-708930': "", // live stream
-                    'CF-708933': "", // ceremony edit
-                    'CF-708936': "", // cinematic trailer
-                    'CF-708939': "", // photo montage
-                    'CF-708945': "", // event website
-                    'CF-708948': "", // content management system
-                    'CF-708951': "", // database management system
+                    'CF-708942': false, // second shooter
+                    'CF-708927': false, // raw footage
+                    'CF-708930': false, // live stream
+                    'CF-708933': false, // ceremony edit
+                    'CF-708936': false, // cinematic trailer
+                    'CF-708939': false, // photo montage
+                    'CF-708945': false, // event website
+                    'CF-708948': false, // content management system
+                    'CF-708951': false, // database management system
                     'CF-708918': "", // details
                 }
             }));
@@ -88,7 +88,7 @@ class Registration extends React.Component {
                     customFields: {
                         ...state.customFields, 
                         'CF-708858': state.customFields['CF-708858'] - Number(arr[1]),
-                        [id]: "" 
+                        [id]: false 
                     }
                 }));
             }
@@ -282,9 +282,22 @@ class Registration extends React.Component {
     }
 
     encode(data) {
-        return Object.keys(data)
-          .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-          .join('&');
+        let str = "";
+        const keys = Object.keys(data);
+        const last = keys[keys.length-1];
+
+        // Do not include empty or false data in the URI string
+        Object.keys(data).forEach(function(key) {
+            if (data[key] !== false && data[key] !== "") {
+                str = str + encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+
+                if (last !== key) {
+                    str = str + '&';
+                }
+            }
+        });
+
+        return str;
     }
 
     render() {
@@ -292,7 +305,7 @@ class Registration extends React.Component {
         const details = this.props.data.filter(item => item.category === this.props.type && item.name === this.state.package && item.package === true);
         const addon = this.props.data.filter(item => item.category === this.props.type && item.addon === true);
         const serviceSummary = this.props.data.filter(item => item.category === this.props.type && item.name === this.state.package && item.package === true);
-        const addonSummary = this.props.data.filter(item => item.category === this.props.type && item.addon === true && this.state.customFields[item.name] !== "");
+        const addonSummary = this.props.data.filter(item => item.category === this.props.type && item.addon === true && this.state.customFields[item.name] !== false);
         
         return (
             <Wrapper>
