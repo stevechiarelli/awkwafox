@@ -24,7 +24,6 @@ class Registration extends React.Component {
                 LastName: "",
                 Email: "",
                 JobRole: "Client 1",
-                JobType: "Wedding",
                 Source: "",
                 EventDate: new Date(),
             },
@@ -170,7 +169,6 @@ class Registration extends React.Component {
     }
 
     handleSubmit = (event) => {  
-        this.setJobType();
         event.preventDefault();
         const responseURL = "https://www.awkwafox.com/form_response/" + this.props.type;
         
@@ -182,11 +180,12 @@ class Registration extends React.Component {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: this.encode({
                     'SecretKey': process.env.GATSBY_TAVE_SECRET_KEY,
+                    'JobType': this.getJobType(),
+                    [this.state.phonetype]: this.state.phone,
                     ...this.state.formData,
                     ...this.state.customFields,
                     'CF-708858': this.state.customFields['CF-708858'].toLocaleString('en-US', {style: 'currency', currency: 'USD'}),
-                    'EventDate': this.props.type !== "webdesign" ? this.state.formData.EventDate.toISOString().substring(0, 10) : "",
-                    [this.state.phonetype]: this.state.phone
+                    'EventDate': this.props.type !== "webdesign" ? this.state.formData.EventDate.toISOString().substring(0, 10) : ""
                 }),
             })
             .then(() => {
@@ -198,25 +197,16 @@ class Registration extends React.Component {
         }
     }
 
-    setJobType() {
-        let jobType; 
-
+    getJobType() {
         if (this.props.type === "videography") {
-            jobType = "Wedding";
+            return "Wedding";
         }
         else if (this.props.type === "livestream") {
-            jobType = "Live Stream";
+            return "Live Stream";
         }
         else {
-            jobType = "Website";
+            return "Website";
         }
-
-        this.setState((state) => ({
-            formData: { 
-                ...state.formData, 
-                JobType: jobType
-            }
-        }));
     }
 
     formValidation() {
@@ -283,21 +273,16 @@ class Registration extends React.Component {
 
     encode(data) {
         let str = "";
-        const keys = Object.keys(data);
-        const last = keys[keys.length-1];
 
-        // Do not include empty or false data in the URI string
         Object.keys(data).forEach(function(key) {
+            // Do not include empty or false data in the URI string
             if (data[key] !== false && data[key] !== "") {
                 str = str + encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
-
-                if (last !== key) {
-                    str = str + '&';
-                }
+                str = str + '&';
             }
         });
 
-        return str;
+        return str.slice(0, -1);
     }
 
     render() {
@@ -309,7 +294,7 @@ class Registration extends React.Component {
         
         return (
             <Wrapper>
-                <form id="registration-form" name="registration" method="POST" onSubmit={this.handleSubmit}>
+                <form id="contact-form" name="contact" method="POST" onSubmit={this.handleSubmit}>
                     <div hidden>
                         <label>Don’t fill this out: <input type="text" id="CF-709314" onChange={this.handleCustomFields} /></label>
                     </div>
