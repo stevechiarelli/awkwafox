@@ -10,13 +10,9 @@ import Seo from "../components/Seo";
 const Home = ({ data }) => {
     const { hero, about, info, cta, meta } = data.home.nodes[0];
 
-    const schema =  <script type="application/ld+json">
-        {`{"@context": "https://schema.org","@type": "Organization","name": "Awkwa Fox","url": "https://www.awkwafox.com","logo": "https://www.awkwafox.com/logo.png",` +
-        `"contactPoint": {"@type": "ContactPoint","telephone": "+1-941-404-2496","contactType": "Customer Support"}}`}</script>;
-
     return (
         <Layout page="home">
-            <Seo title={meta.title} description={meta.description} schema={schema} />
+            <Seo title={meta.title} description={meta.description} />
             <Hero data={hero} />
             <About data={about} />
             <Info data={info} />

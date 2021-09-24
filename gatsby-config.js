@@ -37,7 +37,7 @@ module.exports = {
                     '/form_response/default',
                     '/form_response/videography',
                     '/form_response/livestream',
-                    '/form_response/webdesign',
+                    '/form_response/webdesign'
                 ],
             },
         },
