@@ -3,6 +3,7 @@ import { Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import Registration from "./registration/Registration";
+import icon from "../assets/images/icon.svg";
 
 const Modal = (props) => {
     let modal;
@@ -65,6 +66,7 @@ const Modal = (props) => {
             modal = <div id="modal" className="modal" style={props.modal === true ? {display: "block"} : {display: "none"}}>
                         <div className="modal-content-center">
                             <div className="modal-success">
+                                <img src={icon} alt="Awkwa Fox icon" />
                                 <h4>{props.data === undefined ? "Error!" : props.data.successHeading}</h4>
                                 <p>{props.data === undefined ? "An error has occured." : props.data.successBody}</p>
                                 <Link to={props.data === undefined ? "/" : props.data.redirectURL} className="btn-primary">Close</Link>
@@ -223,6 +225,11 @@ const Wrapper = styled.section`
             font-size: 0.8em;
             margin-bottom: 2.5em;
         }
+
+        img {
+            width: 50px;
+            margin: 0 auto;
+        }
     }
 
     .modal-form {
@@ -280,6 +287,7 @@ const Wrapper = styled.section`
         }
 
         .modal-content-center {
+            margin: 10% auto;
             width: 60%;
         }
 
