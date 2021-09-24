@@ -185,7 +185,8 @@ class Registration extends React.Component {
                     ...this.state.formData,
                     ...this.state.customFields,
                     'CF-708858': this.state.customFields['CF-708858'].toLocaleString('en-US', {style: 'currency', currency: 'USD'}),
-                    'EventDate': this.props.type !== "webdesign" ? this.state.formData.EventDate.toISOString().substring(0, 10) : ""
+                    'EventDate': this.props.type !== "webdesign" ? this.state.formData.EventDate.toISOString().substring(0, 10) : "",
+                    'Message': "Submitted on " + new Date()
                 }),
             })
             .then(() => {
@@ -294,7 +295,7 @@ class Registration extends React.Component {
         
         return (
             <Wrapper>
-                <form id="contact-form" name="contact" method="POST" onSubmit={this.handleSubmit}>
+                <form id="registration-form" name="registration" method="POST" onSubmit={this.handleSubmit}>
                     <div hidden>
                         <label>Don’t fill this out: <input type="text" id="CF-709314" onChange={this.handleCustomFields} /></label>
                     </div>
