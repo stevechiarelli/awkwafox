@@ -329,7 +329,7 @@ class Registration extends React.Component {
                         <h2 className="step-title">Summary</h2>
                         <hr />
                         <p className="step-indicator">({this.props.type === "webdesign" ? "3 of 3" : "4 of 4"})</p>
-                        <Summary data={this.state} serviceSummary={serviceSummary} addonSummary={addonSummary} />
+                        <Summary data={this.state} type={this.props.type} serviceSummary={serviceSummary} addonSummary={addonSummary} />
                     </div>
 
                     {/* Navigation */}

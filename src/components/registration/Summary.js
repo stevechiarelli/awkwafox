@@ -47,7 +47,7 @@ const Summary = (props) => {
             <p className="highlight">Additional Requests</p>
             <p>{props.data.customFields['CF-708921'] === "" ? "none" : props.data.customFields['CF-708921']}</p>
 
-            <div style={props.data.formData.EventDate !== null ? {display: "block"} : {display: "none"}}>
+            <div style={props.type !== "webdesign" ? {display: "block"} : {display: "none"}}>
                 <p className="highlight">Event Info</p>
                 <p>*Event Date: {props.data.formData.EventDate ? props.data.formData.EventDate.toLocaleDateString() : ""}<br />
                     Location: {props.data.customFields['CF-708912']}<br />
