@@ -33,7 +33,12 @@ module.exports = {
         {
             resolve: `gatsby-plugin-sitemap`,
             options: {
-                excludes: ['/success'],
+                excludes: [
+                    '/form_response/default',
+                    '/form_response/videography',
+                    '/form_response/livestream',
+                    '/form_response/webdesign',
+                ],
             },
         },
         {
