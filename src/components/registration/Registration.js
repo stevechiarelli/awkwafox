@@ -16,16 +16,17 @@ class Registration extends React.Component {
             error: "",
             loading: false,
             required: { color: "#111111" },
+            package: "",
             phone: "",
             phonetype: "MobilePhone",
-            package: "",
             formData: {
                 FirstName: "",
                 LastName: "",
                 Email: "",
-                JobRole: "Client 1",
+                JobRole: "Primary Contact",
                 Source: "",
-                EventDate: new Date(),
+                EventDate: new Date("0001-01-01"),
+
             },
             customFields: {
                 'CF-709314': "", // bot field
@@ -34,7 +35,8 @@ class Registration extends React.Component {
                 'CF-708918': "", // details
                 'CF-708921': "", // requests
                 'CF-708912': "", // location
-                'CF-708915': "", // spouse's name
+                'CF-711549': "", // business or event name
+                'CF-711552': "", // website type
                 'CF-708942': false, // second shooter
                 'CF-708927': false, // raw footage
                 'CF-708930': false, // live stream
@@ -133,30 +135,18 @@ class Registration extends React.Component {
 
     handleClick = (event) => {
         if (event.target.value === "next" && this.formValidation() === true) {
-            if (this.props.type === "webdesign" && this.state.page === 1) {
-                this.setState((state) => ({ page: state.page + 2 }));
-            }
-            else {
-                this.setState((state) => ({ page: state.page + 1 }));
-            }
-
-            this.setState({
+            this.setState((state) => ({ 
+                page: state.page + 1,
                 error: "",
-                required: { color: "#111111" } 
-            });
+                required: { color: "#111111" }  
+            }));
         }
         else if (event.target.value === "previous") {
-            if (this.props.type === "webdesign" && this.state.page === 3) {
-                this.setState((state) => ({ page: state.page - 2 }));
-            }
-            else {
-                this.setState((state) => ({ page: state.page - 1 }));
-            }
-
-            this.setState({
+            this.setState((state) => ({ 
+                page: state.page - 1,
                 error: "",
-                required: { color: "#111111" } 
-            });
+                required: { color: "#111111" }  
+            }));
         }
         else {
             this.setState({  
@@ -217,54 +207,47 @@ class Registration extends React.Component {
 
         if (this.state.page === 1) {
             if (this.state.package === "") {
-                this.setState({ 
-                    error: "Fields indicated with * are required!" 
-                });
-                
+                this.setState({ error: "*Please select a package!" });
                 return false;
             }
         }
 
         if (this.state.page === 2) {
-            if (this.state.customFields['CF-708912'] === "") {
-                this.setState({ 
-                    error: "Fields indicated with * are required!" 
-                });
-                
-                return false;
-            }
-
-            if (this.state.EventDate === null) {
-                this.setState({
-                    error: "Please select an event date!"
-                });
-
-                return false;
+            if (this.props.type !== "webdesign") {
+                if (this.state.formData.EventDate.toISOString().substring(0, 10) === new Date("0001-01-01").toISOString().substring(0, 10)) {
+                    this.setState({ error: "*Please select an event date!" });
+                    return false;
+                }
+    
+                if (this.state.customFields['CF-708912'] === "") {
+                    this.setState({ error: "*Location is required!" });
+                    return false;
+                }
             }
         }
 
         if (this.state.page === 3) {
-            if (this.state.formData.FirstName === "" || this.state.formData.LastName === "" || this.state.formData.Email === "" || this.state.phone === "") {
-                this.setState({
-                    error: "Fields indicated with * are required!"
-                });
-            
+            let requiredFields = ["FirstName", "LastName", "Email"];
+
+            for (let required of requiredFields) {
+                if (this.state.formData[required] === "") {
+                    this.setState({ error: "*" + required + " is required!" });
+                    return false;
+                }
+            }
+
+            if (this.state.phone === "") {
+                this.setState({ error: "*Phone number is required!" });
                 return false;
             }
 
             if (!mailformat.test(this.state.formData.Email)) {
-                this.setState({
-                    error: "Invalid email format!"
-                });
-
+                this.setState({ error: "*Invalid email format!" });
                 return false;
             }
 
             if (!phoneformat.test(this.state.phone)) {
-                this.setState({
-                    error: "Invalid phone number format!"
-                });
-
+                this.setState({ error: "*Invalid phone number format!" });
                 return false;
             }
         }
@@ -310,10 +293,10 @@ class Registration extends React.Component {
 
                     {/* Page 2 */}
                     <div style={this.state.page === 2 ? {display: "block"} : {display: "none"}}>
-                        <h2 className="step-title">Event Info</h2>
+                        <h2 className="step-title">{this.props.type === "webdesign" ? "Website Info" : "Event Info"}</h2>
                         <hr />
                         <p className="step-indicator">(2 of 4)</p>
-                        <Event data={this.state} handleDayClick={this.handleDayClick} handleCustomFields={this.handleCustomFields} />
+                        <Event data={this.state} type={this.props.type} handleDayClick={this.handleDayClick} handleCustomFields={this.handleCustomFields} />
                     </div>
 
                     {/* Page 3 */}

@@ -57,12 +57,19 @@ const Summary = (props) => {
                 an initial payment of 50% and a signed contract are required to officially reserve this date.</small>
             </div>
 
+            <div style={props.type === "webdesign" ? {display: "block"} : {display: "none"}}>
+                <p className="highlight">Website Info</p>
+                <p>Website type: {props.data.customFields['CF-711552']}<br />
+                   Business or Event name: {props.data.customFields['CF-711549']}<br />
+                   {details}
+                </p>
+            </div>
+
             <p className="highlight">Your Info</p>
             <p>Name: {props.data.formData.FirstName + " " + props.data.formData.LastName}<br />
                 Email: {props.data.formData.Email}<br />
                 Phone: {props.data.phone}<br />
-                {props.data.package.includes("package") ? "Your future spouse's name: " + props.data.customFields['CF-708915'] : "" }<br />
-                How did you hear about us? {props.data.formData.Source}
+                {props.data.formData.Source === "" ? "" : "How did you hear about us? " + props.data.formData.Source}
             </p><br />
         </>
     );

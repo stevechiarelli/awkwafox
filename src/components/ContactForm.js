@@ -11,7 +11,7 @@ const ContactForm = (props) => {
     const [state, setState] = useState({});
 
     useEffect(() => {
-        setState({JobRole: "Client 1"})
+        setState({JobRole: "Primary Contact"})
     }, []);
 
     const handleChange = (event) => {
@@ -118,18 +118,6 @@ const ContactForm = (props) => {
                                     <option value="Website">Web Design</option>
                                 </select>
                             </div>
-                            <div className={state.JobType === "Wedding" ? "form-group" : "form-group hidden"}>
-                                <label htmlFor="JobRole">I'm the...</label><br />
-                                <select id="JobRole" onChange={handleChange} required={state.JobType === "Wedding" ? "required" : ""}>
-                                    <option hidden value=""> -- select an option -- </option>
-                                    <option value="Bride">Bride</option>
-                                    <option value="Groom">Groom</option>
-                                    <option value="Planner">Wedding Planner</option>
-                                    <option value="Photographer">Photographer</option>
-                                    <option value="Client 1">Other</option>
-                                </select>
-                            </div>
-
                             <div className={state.JobType === "Wedding" || state.JobType === "Live Stream" ? "form-group" : "form-group hidden"}>
                                 <label htmlFor="EventDate">Event Date</label><br />
                                 <input 
@@ -148,7 +136,7 @@ const ContactForm = (props) => {
                                     required={state.JobType === "Wedding" || state.JobType === "Live Stream" ? "required" : ""}
                                 />
                             </div>
-                            <div className={state.JobType === undefined ? "form-group hidden" : "form-group"}>>
+                            <div className={state.JobType === undefined ? "form-group hidden" : "form-group"}>
                                 <label htmlFor="Source">How did you hear about us?</label><br />
                                 <select id="Source" onChange={handleChange} required>
                                     <option hidden value=""> -- select an option -- </option>
