@@ -26,13 +26,13 @@ const Event = (props) => {
             <label htmlFor="CF-708918">
                 Are there any details you would like to share about your wedding?
             </label><br />
-            <textarea id="CF-708918" value={props.data.customFields['CF-708918']} onChange={props.handleCustomFields} />
+            <textarea id="CF-708918" value={props.data.customFields['CF-708918']} onChange={props.handleData} />
         </div>
     }
     else if (props.data.package === "sporting_event") {
         details = <div className="form-group">
             <label htmlFor="CF-708918">Sport</label><br />
-            <select id="CF-708918" onChange={props.handleCustomFields}>
+            <select id="CF-708918" onChange={props.handleData}>
                 <option hidden value="none"> -- select an option -- </option>
                 <option value="soccer">soccer</option>
                 <option value="baseball">baseball</option>
@@ -48,7 +48,7 @@ const Event = (props) => {
             <label htmlFor="CF-708918">
                 Are there any design details that you would like included in your website?
             </label><br />
-            <textarea id="CF-708918" value={props.data.customFields['CF-708918']} onChange={props.handleCustomFields} />
+            <textarea id="CF-708918" value={props.data.customFields['CF-708918']} onChange={props.handleData} />
         </div>
     }
     else {
@@ -56,7 +56,7 @@ const Event = (props) => {
             <label htmlFor="CF-708918">
                 Are there any details you would like to share about your event?
             </label><br />
-            <textarea id="CF-708918" value={props.data.customFields['CF-708918']} onChange={props.handleCustomFields} />
+            <textarea id="CF-708918" value={props.data.customFields['CF-708918']} onChange={props.handleData} />
         </div>
     }
 
@@ -88,12 +88,12 @@ const Event = (props) => {
 
             <div className="form-group" style={props.type === "webdesign" ? {display: "none"} : {display: "block"}}>
                 <label style={props.data.required} htmlFor="CF-708912">*Location <small>(City or Venue Name)</small></label><br />
-                <input type="text" id="CF-708912" value={props.data.customFields['CF-708912']} onChange={props.handleCustomFields} />
+                <input type="text" id="CF-708912" value={props.data.customFields['CF-708912']} onChange={props.handleData} />
                 <small>*Travel fees my apply if outside of Southwest Florida</small>
             </div>
             <div className="form-group" style={props.type === "webdesign" ? {display: "block"} : {display: "none"}}>
                 <label htmlFor="CF-711552">Website type?</label><br />
-                <select id="CF-711552" onChange={props.handleCustomFields}>
+                <select id="CF-711552" onChange={props.handleData}>
                     <option hidden value=""> -- select an option -- </option>
                     <option value="Portfolio">Portfolio</option>
                     <option value="Event">Event</option>
@@ -105,7 +105,7 @@ const Event = (props) => {
             </div>
             <div className="form-group" style={props.type === "webdesign" ? {display: "block"} : {display: "none"}}>
                 <label htmlFor="CF-711549">Business or Event name (leave blank if none)</label><br />
-                <input type="text" id="CF-711549" value={props.data.customFields['CF-711549']} onChange={props.handleCustomFields} />
+                <input type="text" id="CF-711549" value={props.data.customFields['CF-711549']} onChange={props.handleData} />
             </div>
             {details}
         </>

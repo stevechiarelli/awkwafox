@@ -5,7 +5,7 @@ const Package = (props) => {
         <>
             <div className="form-group">
                 <label style={props.data.required} htmlFor="CF-708855">*Select from the list of {props.type} options below and click next when complete.</label><br /><br />
-                <select id="CF-708855" onChange={props.handleCustomFields}>
+                <select id="CF-708855" onChange={props.handleData}>
                     <option hidden value=""> -- select an option -- </option>
                     {props.service.map(item => {
                         return (
@@ -36,8 +36,8 @@ const Package = (props) => {
                                         type="checkbox" 
                                         id={item.name} 
                                         value={true + "," + item.price} 
-                                        onChange={props.handleCustomFields}
-                                        checked={disabled.includes(props.data.package) ? true: props.data.customFields[item.name]} 
+                                        onChange={props.handleData}
+                                        checked={disabled.includes(props.data.package) ? true : props.data.addons[item.name]} 
                                         disabled={disabled.includes(props.data.package) ? true : false}
                                     />
                                     <span className="checkmark"></span><br />
@@ -51,7 +51,7 @@ const Package = (props) => {
                         <textarea 
                             id="CF-708921"
                             value={props.data.customFields['CF-708921']}
-                            onChange={props.handleCustomFields}
+                            onChange={props.handleData}
                         />
                         <small>*Additional fees my apply for requests and will not be reflected in the total price.</small>
                     </div>
@@ -62,7 +62,7 @@ const Package = (props) => {
                         <textarea 
                             id="CF-708921"
                             value={props.data.customFields['CF-708921']}
-                            onChange={props.handleCustomFields}
+                            onChange={props.handleData}
                         />
                     </div>
                 </div>

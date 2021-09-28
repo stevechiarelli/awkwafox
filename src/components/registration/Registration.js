@@ -16,6 +16,7 @@ class Registration extends React.Component {
             error: "",
             loading: false,
             required: { color: "#111111" },
+            botfield: "",
             package: "",
             phone: "",
             phonetype: "MobilePhone",
@@ -26,10 +27,8 @@ class Registration extends React.Component {
                 JobRole: "Primary Contact",
                 Source: "",
                 EventDate: new Date("0001-01-01"),
-
             },
             customFields: {
-                'CF-709314': "", // bot field
                 'CF-708858': 0, // quote total
                 'CF-708855': "", // package
                 'CF-708918': "", // details
@@ -37,20 +36,24 @@ class Registration extends React.Component {
                 'CF-708912': "", // location
                 'CF-711549': "", // business or event name
                 'CF-711552': "", // website type
-                'CF-708942': false, // second shooter
-                'CF-708927': false, // raw footage
-                'CF-708930': false, // live stream
-                'CF-708933': false, // ceremony edit
-                'CF-708936': false, // cinematic trailer
-                'CF-708939': false, // photo montage
-                'CF-708945': false, // event website
-                'CF-708948': false, // content management system
-                'CF-708951': false // database management system
+            },
+            addons: {
+                second_shooter: false,
+                raw_footage: false,
+                ceremony_live_stream: false,
+                ceremony_edit: false,
+                cinematic_trailer: false,
+                event_promo: false,
+                photo_montage: false,
+                wedding_website: false,
+                event_website: false,
+                content_management_system: false,
+                database_integration: false,
             }
         }
     }
 
-    handleCustomFields = (event) => { 
+    handleData = (event) => { 
         const {id, value, type, checked} = event.target;
         const arr = value.split(",");
 
@@ -60,17 +63,21 @@ class Registration extends React.Component {
                 customFields: {
                     ...state.customFields,
                     'CF-708858': Number(arr[2]), // quote total
-                    'CF-708855': arr[1], // package
-                    'CF-708942': false, // second shooter
-                    'CF-708927': false, // raw footage
-                    'CF-708930': false, // live stream
-                    'CF-708933': false, // ceremony edit
-                    'CF-708936': false, // cinematic trailer
-                    'CF-708939': false, // photo montage
-                    'CF-708945': false, // event website
-                    'CF-708948': false, // content management system
-                    'CF-708951': false, // database management system
+                    'CF-708855': arr[1], // package,
                     'CF-708918': "", // details
+                },
+                addons: {
+                    second_shooter: false,
+                    raw_footage: false,
+                    ceremony_live_stream: false,
+                    ceremony_edit: false,
+                    cinematic_trailer: false,
+                    event_promo: false,
+                    photo_montage: false,
+                    wedding_website: false,
+                    event_website: false,
+                    content_management_system: false,
+                    database_integration: false,
                 }
             }));
         }
@@ -79,8 +86,11 @@ class Registration extends React.Component {
                 this.setState((state) => ({
                     customFields: { 
                         ...state.customFields,
-                        'CF-708858': state.customFields['CF-708858'] + Number(arr[1]), 
-                        [id]: true 
+                        'CF-708858': state.customFields['CF-708858'] + Number(arr[1]),  
+                    },
+                    addons: {
+                        ...state.addons,
+                        [id]: true
                     }
                 }));
             }
@@ -89,6 +99,9 @@ class Registration extends React.Component {
                     customFields: {
                         ...state.customFields, 
                         'CF-708858': state.customFields['CF-708858'] - Number(arr[1]),
+                    },
+                    addons: {
+                        ...state.addons,
                         [id]: false 
                     }
                 }));
@@ -107,7 +120,7 @@ class Registration extends React.Component {
     handleChange = (event) => {
         const {id, value} = event.target;
 
-        if (id === "phone" || id === "phonetype") {
+        if (id === "phone" || id === "phonetype" || id === "botfield") {
             this.setState({ [id]: value })
         }
         else {
@@ -162,7 +175,7 @@ class Registration extends React.Component {
         event.preventDefault();
         const responseURL = "https://www.awkwafox.com/form_response/" + this.props.type;
         
-        if (this.state.customFields["CF-709314"] === "") {
+        if (this.state.botfield === "") {
             this.setState({ loading: true });
             
             fetch(process.env.GATSBY_TAVE_ENDPOINT, {
@@ -176,6 +189,7 @@ class Registration extends React.Component {
                     ...this.state.customFields,
                     'CF-708858': this.state.customFields['CF-708858'].toLocaleString('en-US', {style: 'currency', currency: 'USD'}),
                     'EventDate': this.props.type !== "webdesign" ? this.state.formData.EventDate.toISOString().substring(0, 10) : "",
+                    'CF-711795': this.getAddonList(),
                     'Message': "Submitted on " + new Date()
                 }),
             })
@@ -198,6 +212,24 @@ class Registration extends React.Component {
         else {
             return "Website";
         }
+    }
+
+    getAddonList() {
+        let addons = "";
+        let selected = false;
+
+        for (let key in this.state.addons) {
+            if (this.state.addons[key] === true) {
+                addons = addons + key.replaceAll("_", " ") + ", ";
+                selected = true;
+            }
+        }
+
+        if (selected === true) {
+            return addons.slice(0, -2);
+        }
+
+        return "none";
     }
 
     formValidation() {
@@ -274,13 +306,13 @@ class Registration extends React.Component {
         const details = this.props.data.filter(item => item.category === this.props.type && item.name === this.state.package && item.package === true);
         const addon = this.props.data.filter(item => item.category === this.props.type && item.addon === true);
         const serviceSummary = this.props.data.filter(item => item.category === this.props.type && item.name === this.state.package && item.package === true);
-        const addonSummary = this.props.data.filter(item => item.category === this.props.type && item.addon === true && this.state.customFields[item.name] !== false);
+        const addonSummary = this.props.data.filter(item => item.category === this.props.type && item.addon === true && this.state.addons[item.name] !== false);
         
         return (
             <Wrapper>
                 <form id="registration-form" name="registration" method="POST" onSubmit={this.handleSubmit}>
                     <div hidden>
-                        <label>Don’t fill this out: <input type="text" id="CF-709314" onChange={this.handleCustomFields} /></label>
+                        <label>Don’t fill this out: <input type="text" id="botfield" onChange={this.handleChange} /></label>
                     </div>
 
                     {/* Page 1 */}
@@ -288,7 +320,7 @@ class Registration extends React.Component {
                         <h2 className="step-title">Select Package</h2>
                         <hr />
                         <p className="step-indicator">({this.props.type === "webdesign" ? "1 of 3" : "1 of 4"})</p>
-                        <Package data={this.state} type={this.props.type} service={service} details={details} addon={addon} handleCustomFields={this.handleCustomFields} />
+                        <Package data={this.state} type={this.props.type} service={service} details={details} addon={addon} handleData={this.handleData} />
                     </div>
 
                     {/* Page 2 */}
@@ -296,7 +328,7 @@ class Registration extends React.Component {
                         <h2 className="step-title">{this.props.type === "webdesign" ? "Website Info" : "Event Info"}</h2>
                         <hr />
                         <p className="step-indicator">(2 of 4)</p>
-                        <Event data={this.state} type={this.props.type} handleDayClick={this.handleDayClick} handleCustomFields={this.handleCustomFields} />
+                        <Event data={this.state} type={this.props.type} handleDayClick={this.handleDayClick} handleData={this.handleData} />
                     </div>
 
                     {/* Page 3 */}
@@ -304,7 +336,7 @@ class Registration extends React.Component {
                         <h2 className="step-title">Your Info</h2>
                         <hr />
                         <p className="step-indicator">({this.props.type === "webdesign" ? "2 of 3" : "3 of 4"})</p>
-                        <Customer data={this.state} handleChange={this.handleChange} handleCustomFields={this.handleCustomFields} />
+                        <Customer data={this.state} handleChange={this.handleChange} />
                     </div>
 
                     {/* Page 4 */}

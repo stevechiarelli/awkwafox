@@ -21,7 +21,7 @@ const ContactForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (state["CF-709314"] === undefined) {
+        if (state.botfield === undefined) {
             setLoading(true);
             
             fetch(process.env.GATSBY_TAVE_ENDPOINT, {
@@ -48,7 +48,7 @@ const ContactForm = (props) => {
                 <form id="contact-form" name="contact" method="POST" onSubmit={handleSubmit}>
                     <div className="fields">
                         <div hidden>
-                            <label>Don’t fill this out: <input type="text" id="CF-709314" onChange={handleChange} /></label>
+                            <label>Don’t fill this out: <input type="text" id="botfield" onChange={handleChange} /></label>
                         </div>
                         <div className="form-left">
                             <h3>{props.data.heading}</h3>
