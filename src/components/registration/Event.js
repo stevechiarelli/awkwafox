@@ -29,7 +29,7 @@ const Event = (props) => {
             <textarea id="CF-708918" value={props.data.customFields['CF-708918']} onChange={props.handleData} />
         </div>
     }
-    else if (props.data.package === "sporting_event") {
+    else if (props.data.package === "Sporting_Event") {
         details = <div className="form-group">
             <label htmlFor="CF-708918">Sport</label><br />
             <select id="CF-708918" onChange={props.handleData}>

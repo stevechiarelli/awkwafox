@@ -3,7 +3,7 @@ import React from "react";
 const Summary = (props) => {
     let details;
 
-    if (props.data.package === "sporting_event") {
+    if (props.data.package === "Sporting_Event") {
         details = "Sport: " + props.data.customFields['CF-708918'];
     }
     else if (props.data.customFields['CF-708918'] !== "") {
