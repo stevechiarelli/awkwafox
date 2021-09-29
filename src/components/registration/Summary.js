@@ -24,7 +24,7 @@ const Summary = (props) => {
                         return (
                             <tr key={item.id}>
                                 <td>{item.description}</td>
-                                <td>{item.price === 0 && item.name === "other" ? "$TBD" : (Number(item.price)).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
+                                <td>{item.price === 0 && item.name === "Other" ? "$TBD" : (Number(item.price)).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
                             </tr>
                         );
                     })}
@@ -39,7 +39,7 @@ const Summary = (props) => {
                     })}
                     <tr>
                         <td>quote total</td>
-                        <td>{props.data.customFields['CF-708858'] === 0 && props.data.package.includes("other") ? "$TBD" : (props.data.customFields['CF-708858']).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
+                        <td>{props.data.customFields['CF-708858'] === 0 && props.data.package.includes("Other") ? "$TBD" : (props.data.customFields['CF-708858']).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</td>
                     </tr>
                 </tbody>
             </table>

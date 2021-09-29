@@ -38,17 +38,17 @@ class Registration extends React.Component {
                 'CF-711552': "", // website type
             },
             addons: {
-                second_shooter: false,
-                raw_footage: false,
-                ceremony_live_stream: false,
-                ceremony_edit: false,
-                cinematic_trailer: false,
-                event_promo: false,
-                photo_montage: false,
-                wedding_website: false,
-                event_website: false,
-                content_management_system: false,
-                database_integration: false,
+                Second_Shooter: false,
+                Raw_Footage: false,
+                Ceremony_Live_Stream: false,
+                Ceremony_Edit: false,
+                Cinematic_Trailer: false,
+                Event_Promo: false,
+                Photo_Montage: false,
+                Wedding_Website: false,
+                Event_Website: false,
+                Content_Management_System: false,
+                Database_Integration: false,
             }
         }
     }
@@ -67,17 +67,17 @@ class Registration extends React.Component {
                     'CF-708918': "", // details
                 },
                 addons: {
-                    second_shooter: false,
-                    raw_footage: false,
-                    ceremony_live_stream: false,
-                    ceremony_edit: false,
-                    cinematic_trailer: false,
-                    event_promo: false,
-                    photo_montage: false,
-                    wedding_website: false,
-                    event_website: false,
-                    content_management_system: false,
-                    database_integration: false,
+                    Second_Shooter: false,
+                    Raw_Footage: false,
+                    Ceremony_Live_Stream: false,
+                    Ceremony_Edit: false,
+                    Cinematic_Trailer: false,
+                    Event_Promo: false,
+                    Photo_Montage: false,
+                    Wedding_Website: false,
+                    Event_Website: false,
+                    Content_Management_System: false,
+                    Database_Integration: false,
                 }
             }));
         }
