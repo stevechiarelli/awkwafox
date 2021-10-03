@@ -21,6 +21,8 @@ const Event = (props) => {
         return disabledDays.push(new Date(yyyy, mm, dd));
     });
 
+    console.log(disabledDays)
+
     if (props.data.package.includes("package")) {
         details = <div className="form-group">
             <label htmlFor="CF-708918">
