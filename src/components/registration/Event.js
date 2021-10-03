@@ -9,7 +9,7 @@ const Event = (props) => {
     let details;
 
     const data = useStaticQuery(query);
-    scheduled = data.calendar.nodes[0].childrenCalendarEvent;
+    scheduled = data.calendar.nodes;
     
     scheduled.map(item => {
         const date = new Date(item.start.date);
@@ -116,12 +116,10 @@ const Event = (props) => {
 
 const query = graphql`
   {
-    calendar:allCalendar {
+    calendar:allCalendarEvent {
       nodes {
-        childrenCalendarEvent {
-          start {
-            date
-          }
+        start {
+          date
         }
       }
     }
