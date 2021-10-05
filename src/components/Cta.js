@@ -21,7 +21,7 @@ const Cta = (props) => {
             setData(faqs);
         }
         else {
-            setCategory("registration");
+            setCategory("inquiry");
             setData(services);
         }
 

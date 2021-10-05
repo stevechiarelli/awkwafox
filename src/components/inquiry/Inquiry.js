@@ -8,7 +8,7 @@ import Customer from "./Customer";
 import Summary from "./Summary";
 import dots_sm from "../../assets/images/dots-sm.svg";
 
-class Registration extends React.Component {
+class Inquiry extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -310,7 +310,7 @@ class Registration extends React.Component {
         
         return (
             <Wrapper>
-                <form id="registration-form" name="registration" method="POST" onSubmit={this.handleSubmit}>
+                <form id="inquiry-form" name="inquiry" method="POST" onSubmit={this.handleSubmit}>
                     <div hidden>
                         <label>Don’t fill this out: <input type="text" id="botfield" onChange={this.handleChange} /></label>
                     </div>
@@ -655,4 +655,4 @@ const Wrapper = styled.section`
     }
 `
 
-export default Registration;
+export default Inquiry;

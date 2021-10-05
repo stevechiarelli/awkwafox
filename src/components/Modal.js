@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
-import Registration from "./registration/Registration";
+import Inquiry from "./inquiry/Inquiry";
 import icon from "../assets/images/icon.svg";
 
 const Modal = (props) => {
@@ -76,11 +76,11 @@ const Modal = (props) => {
         }
         else {
             modal = <div id="modal" className="modal" style={props.modal === true ? {display: "block"} : {display: "none"}}>
-                        <div className="modal-dialog" id="registration">
+                        <div className="modal-dialog" id="inquiry">
                             <div className="modal-content">
                                 <div className="modal-form" id="modal-form">
                                     <span role="button" tabIndex="0" className="close" onClick={() => props.handleClose()} onKeyDown={() => props.handleClose()}>&times;</span>
-                                    <Registration type={props.type} data={props.data} />
+                                    <Inquiry type={props.type} data={props.data} />
                                 </div>
                             </div>
                         </div>
