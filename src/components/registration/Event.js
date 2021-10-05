@@ -21,7 +21,7 @@ const Event = (props) => {
         return disabledDays.push(new Date(yyyy, mm, dd));
     });
 
-    if (props.data.package.includes("package")) {
+    if (props.data.customFields['CF-708855'].includes("Package")) {
         details = <div className="form-group">
             <label htmlFor="CF-708918">
                 Are there any details you would like to share about your wedding?
@@ -63,8 +63,10 @@ const Event = (props) => {
     return (
         <>
             <div className="form-group" style={props.type === "webdesign" ? {display: "none"} : {display: "block"}}>
-                <label style={props.data.required} htmlFor="EventDate">*Select the date of your event using the calendar below. 
-                Only available days can be selected. Disabled days are unavailable.</label><br /><br />
+                <label style={props.data.required} htmlFor="EventDate">*Select the date of your 
+                    {props.data.customFields['CF-708855'].includes("Package") ? " wedding " : " event "} 
+                    using the calendar below. Only available days can be selected. Disabled days are unavailable.
+                </label><br /><br />
                 <div className="calendar hidden center">
                     <DayPicker 
                         selectedDays={props.data.formData.EventDate}
