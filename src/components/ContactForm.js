@@ -97,7 +97,7 @@ const ContactForm = (props) => {
                             <div className="form-group">
                                 <label htmlFor="Email">Email</label><br />
                                 <input 
-                                    type="text" 
+                                    type="email" 
                                     id="Email" 
                                     onChange={handleChange} 
                                     required
