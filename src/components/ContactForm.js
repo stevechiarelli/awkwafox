@@ -15,7 +15,22 @@ const ContactForm = (props) => {
     }, []);
 
     const handleChange = (event) => {
-        setState({ ...state, [event.target.id]: event.target.value });
+        const {id, value} = event.target;
+
+        if (id === "phone") {
+            if ((value.length === 3 && phone.length !== 4) || (value.length === 7 && phone.length !== 8)) {
+                setPhone(value + "-");
+            }
+            else if (value.length === 10 && !value.includes("-")) {
+                setPhone(value.substring(0, 3) + "-" + value.substring(3, 6) + "-" + value.substring(6, 10));
+            } 
+            else {
+                setPhone(value);
+            }
+        }
+        else {
+            setState({ ...state, [id]: value });
+        }
     }
 
     const handleSubmit = (event) => {
@@ -94,9 +109,12 @@ const ContactForm = (props) => {
                                         Phone
                                         <input 
                                             type="tel"
-                                            id="phone" 
-                                            maxLength="14"
-                                            onChange={(e) => setPhone(e.target.value)} 
+                                            id="phone"
+                                            value={phone}
+                                            placeholder="___-___-____"
+                                            maxLength="12"
+                                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                            onChange={handleChange} 
                                             required
                                         />
                                     </div>

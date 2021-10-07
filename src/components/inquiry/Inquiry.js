@@ -120,7 +120,18 @@ class Inquiry extends React.Component {
     handleChange = (event) => {
         const {id, value} = event.target;
 
-        if (id === "phone" || id === "phonetype" || id === "botfield") {
+        if (id === "phone") {
+            if ((value.length === 3 && this.state.phone.length !== 4) || (value.length === 7 && this.state.phone.length !== 8)) {
+                this.setState({ [id]: value + "-" })
+            }
+            else if (value.length === 10 && !value.includes("-")) {
+                this.setState({ [id]: value.substring(0, 3) + "-" + value.substring(3, 6) + "-" + value.substring(6, 10) })
+            } 
+            else {
+                this.setState({ [id]: value })
+            }
+        }
+        else if (id === "phonetype" || id === "botfield") {
             this.setState({ [id]: value })
         }
         else {
@@ -234,8 +245,9 @@ class Inquiry extends React.Component {
 
     formValidation() {
         const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        const phoneformat = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im;
-        /* const zipformat = /(^\d{5}$)|(^\d{5}-\d{4}$)/; */
+        const phoneformat = /^[1-9]\d{2}-\d{3}-\d{4}/;
+        // const phoneformat = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im; 
+        // const zipformat = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
 
         if (this.state.page === 1) {
             if (this.state.package === "") {

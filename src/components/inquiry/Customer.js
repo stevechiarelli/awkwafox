@@ -21,7 +21,7 @@ const Customer = (props) => {
             <div className="form-group">
                 <label style={props.data.required} className="phone-group" htmlFor="phone">
                     <div className="form-group">*Phone
-                        <input type="tel" id="phone" maxLength="14" value={props.data.phone} onChange={props.handleChange} />
+                        <input type="tel" id="phone" placeholder="___-___-____" maxLength="12" value={props.data.phone} onChange={props.handleChange} />
                     </div>
                     <div className="form-group">
                         <select id="phonetype" onChange={props.handleChange}>
