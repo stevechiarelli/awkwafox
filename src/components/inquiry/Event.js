@@ -63,9 +63,9 @@ const Event = (props) => {
     return (
         <>
             <div className="form-group" style={props.type === "webdesign" ? {display: "none"} : {display: "block"}}>
-                <label style={props.data.required} htmlFor="EventDate">*Select the date of your 
+                <label style={props.data.required} htmlFor="EventDate">Select the date of your 
                     {props.data.customFields['CF-708855'].includes("Package") ? " wedding " : " event "} 
-                    using the calendar below. Only available days can be selected. Disabled days are unavailable.
+                    using the calendar below. Only available days can be selected. Disabled days are unavailable.<span className="error">&nbsp;*</span>
                 </label><br /><br />
                 <div className="calendar hidden center">
                     <DayPicker 
@@ -89,7 +89,7 @@ const Event = (props) => {
             </div>
 
             <div className="form-group" style={props.type === "webdesign" ? {display: "none"} : {display: "block"}}>
-                <label style={props.data.required} htmlFor="CF-708912">*Location <small>(City or Venue Name)</small></label><br />
+                <label style={props.data.required} htmlFor="CF-708912">Location <small>(City or Venue Name)</small><span className="error">&nbsp;*</span></label><br />
                 <input type="text" id="CF-708912" value={props.data.customFields['CF-708912']} onChange={props.handleData} />
                 <small>*Travel fees my apply if outside of Southwest Florida</small>
             </div>

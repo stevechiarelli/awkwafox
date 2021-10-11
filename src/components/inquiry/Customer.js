@@ -6,24 +6,24 @@ const Customer = (props) => {
             <p>Complete the fields below and click next when complete.</p>
             <div className="input-group">
                 <div className="form-group">
-                    <label style={props.data.required} htmlFor="FirstName">*First Name</label><br />
+                    <label style={props.data.required} htmlFor="FirstName">First Name<span className="error">&nbsp;*</span></label><br />
                     <input type="text" id="FirstName" value={props.data.formData.FirstName} onChange={props.handleChange} />
                 </div>
                 <div className="form-group">
-                    <label style={props.data.required} htmlFor="LastName">*Last Name</label><br />
+                    <label style={props.data.required} htmlFor="LastName">Last Name<span className="error">&nbsp;*</span></label><br />
                     <input type="text" id="LastName" value={props.data.formData.LastName} onChange={props.handleChange} />
                 </div>
             </div>
             <div className="form-group">
-                <label style={props.data.required} htmlFor="Email">*Email</label><br />
+                <label style={props.data.required} htmlFor="Email">Email<span className="error">&nbsp;*</span></label><br />
                 <input type="email" id="Email" value={props.data.formData.Email} onChange={props.handleChange} />
             </div>
             <div className="form-group">
                 <label style={props.data.required} className="phone-group" htmlFor="phone">
-                    <div className="form-group">*Phone
-                        <input type="tel" id="phone" placeholder="___-___-____" maxLength="12" value={props.data.phone} onChange={props.handleChange} />
+                    <div className="input-type">Phone<span className="error">&nbsp;*</span>
+                        <input type="tel" id="phone" maxLength="12" value={props.data.phone} onChange={props.handleChange} />
                     </div>
-                    <div className="form-group">
+                    <div className="input-type">
                         <select id="phonetype" onChange={props.handleChange}>
                             <option value="MobilePhone">mobile</option>
                             <option value="HomePhone">home</option>

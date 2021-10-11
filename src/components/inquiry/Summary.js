@@ -15,7 +15,7 @@ const Summary = (props) => {
 
     return (
         <>
-            <p>Verify all details below and click submit to send this form.</p>
+            <p>Verify all details below and click submit to finish.</p>
             
             <p className="highlight">Package Details</p>
             <table>

@@ -15,7 +15,7 @@ class Inquiry extends React.Component {
             page: 1,
             error: "",
             loading: false,
-            required: { color: "#111111" },
+            required: { color: "#666666" },
             botfield: "",
             package: "",
             phone: "",
@@ -162,14 +162,14 @@ class Inquiry extends React.Component {
             this.setState((state) => ({ 
                 page: state.page + 1,
                 error: "",
-                required: { color: "#111111" }  
+                required: { color: "#666666" }  
             }));
         }
         else if (event.target.value === "previous") {
             this.setState((state) => ({ 
                 page: state.page - 1,
                 error: "",
-                required: { color: "#111111" }  
+                required: { color: "#666666" }  
             }));
         }
         else {
@@ -427,11 +427,12 @@ const Wrapper = styled.section`
     h3 {
         color: var(--primary);
         margin: 1em 0;
+        font-size: 1em;
     }
 
     p, .form-group p {
         color: var(--text-dark);
-        font-size: 1em;
+        font-size: 0.9em;
         text-align: left;
     }
 
@@ -449,10 +450,15 @@ const Wrapper = styled.section`
         color: var(--primary);
         font-size: 0.9em;
         text-align: center;
+        padding-bottom: 1em;
     }
 
     ul {
         margin-top: 1em;
+
+        li {
+            font-size: 0.9em;
+        }
     }
 
     .highlight {
@@ -460,7 +466,7 @@ const Wrapper = styled.section`
         text-align: left;
         background: var(--background1);
         color: var(--primary);
-        padding: 0.5em;
+        padding: 13px 0 15px 15px;
         width: 100%;
         height: 50px;
         z-index: 1;
@@ -473,6 +479,8 @@ const Wrapper = styled.section`
 
     .form-group {
         margin-top: 1.5em;
+        color: var(--text-dark);
+        font-size: 0.9em;
 
         label {
             color: var(--text-dark);
@@ -481,6 +489,8 @@ const Wrapper = styled.section`
 
         input, textarea, select {
             padding: 0 0.8em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         select {
@@ -491,7 +501,7 @@ const Wrapper = styled.section`
             background-size: 12px;
             background-position: calc(100% - 13px) 16px;
             background-repeat: no-repeat;
-            background-color: var(--background1);
+            background-color: transparent;
             font-size: 1em;
         }
 
@@ -510,7 +520,6 @@ const Wrapper = styled.section`
         input, textarea {
             background: #fff;
             color: var(--text-dark);
-            border: 1px solid #aaa;
         }
     }
 
@@ -523,13 +532,13 @@ const Wrapper = styled.section`
             margin-top: 0;
         }
 
-        .form-group:nth-of-type(1) {
+        .input-type:nth-of-type(1) {
             width: 100%;
-            margin-right: 1.5em;
+            margin-right: 10px;
         }
 
-        .form-group:nth-of-type(2) {
-            width: 125px;
+        .input-type:nth-of-type(2) {
+            width: 140px;
             
             select {
                 height: 40px;
@@ -574,6 +583,10 @@ const Wrapper = styled.section`
 
         td:first-child {
             padding-right: 1em;
+        }
+
+        td {
+            font-size: 0.9em;
         }
     }
 
@@ -660,7 +673,7 @@ const Wrapper = styled.section`
             justify-content: space-between;
 
             .form-group {
-                width: 48%;
+                width: 49%;
                 margin: 0;
             }
         } 

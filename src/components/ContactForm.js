@@ -105,20 +105,19 @@ const ContactForm = (props) => {
                             </div>
                             <div className="form-group">
                                 <label className="phone-group" htmlFor="phone">
-                                    <div className="form-group">
+                                    <div className="input-type">
                                         Phone
                                         <input 
                                             type="tel"
                                             id="phone"
                                             value={phone}
-                                            placeholder="___-___-____"
                                             maxLength="12"
                                             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                             onChange={handleChange} 
                                             required
                                         />
                                     </div>
-                                    <div className="form-group">
+                                    <div className="input-type">
                                         <select onChange={(e) => setPhoneType(e.target.value)}>
                                             <option value="MobilePhone">mobile</option>
                                             <option value="HomePhone">home</option>
@@ -237,6 +236,8 @@ const Wrapper = styled.section`
             color: #000;
             padding: 0 0.8em;
             -webkit-min-logical-width: calc(100% - 16px);
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
         
         input, select {
@@ -282,13 +283,13 @@ const Wrapper = styled.section`
         justify-content: space-between;
         align-items: flex-end;
 
-        .form-group:nth-of-type(1) {
+        .input-type:nth-of-type(1) {
             width: 100%;
-            margin-right: 1.5em;
+            margin-right: 10px;
         }
 
-        .form-group:nth-of-type(2) {
-            width: 115px;
+        .input-type:nth-of-type(2) {
+            width: 140px;
         }
     }
 
@@ -302,7 +303,7 @@ const Wrapper = styled.section`
                 justify-content: space-between;
 
                 .form-group {
-                    width: 48%;
+                    width: 49%;
                 }
             } 
         }

@@ -4,7 +4,7 @@ const Package = (props) => {
     return (
         <>
             <div className="form-group">
-                <label style={props.data.required} htmlFor="CF-708855">*Select from the list of {props.type} options below and click next when complete.</label><br /><br />
+                <label style={props.data.required} htmlFor="CF-708855">Select from the list of {props.type} options below and click next when complete.<span className="error">&nbsp;*</span></label><br /><br />
                 <select id="CF-708855" onChange={props.handleData}>
                     <option hidden value=""> -- select an option -- </option>
                     {props.service.map(item => {
@@ -22,8 +22,8 @@ const Package = (props) => {
                 <div style={props.data.package === "" || props.data.package.includes("Other") ? {display: "none"} : {display: "block"}}>
                     <h3>Here's what's included</h3>
                     <ul dangerouslySetInnerHTML={{ __html: props.details[0] === undefined ? "" : props.details[0].details }}></ul>
+                    <h3>Choose your add-ons</h3>
                     <div className="form-group">
-                        <h3>Choose your add-ons</h3>
                         {props.addon.map(item => {
                             let disabled = item.disabledPackageList === null ? "" : item.disabledPackageList;
                             return (
