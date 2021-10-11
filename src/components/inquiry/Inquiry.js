@@ -426,7 +426,7 @@ const Wrapper = styled.section`
 
     h3 {
         color: var(--primary);
-        margin: 1em 0;
+        margin: 2em 0 1em 0;
         font-size: 1em;
     }
 
