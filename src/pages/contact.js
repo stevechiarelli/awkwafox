@@ -8,7 +8,7 @@ const contact = ({ data }) => {
     const content = data.contact.nodes[0];
     return (
         <Layout page="contact">
-            <Seo title={content.meta.title} description={content.meta.description} />
+            <Seo title={content.meta.title} description={content.meta.description} noindex={false} />
             <ContactForm data={content} />
         </Layout>
     );

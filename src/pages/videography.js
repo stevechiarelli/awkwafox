@@ -15,7 +15,7 @@ const videography = ({ data }) => {
 
     return (
         <Layout page="videography">
-            <Seo title={meta.title} description={meta.description} />
+            <Seo title={meta.title} description={meta.description} noindex={false} />
             <Hero data={hero} />
             <About data={about} />
             <Info data={info} />

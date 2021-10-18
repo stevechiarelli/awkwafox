@@ -10,7 +10,7 @@ const home = ({ data }) => {
 
     return (
         <Layout page="home">
-            <Seo title={meta.title} description={meta.description} />
+            <Seo title={meta.title} description={meta.description} noindex={true} />
             <Hero data={hero} />
             <Modal category="success" data={meta} modal={true} />
         </Layout>

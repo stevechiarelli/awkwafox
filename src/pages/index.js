@@ -18,7 +18,7 @@ const Home = ({ data }) => {
 
     return (
         <Layout page="home">
-            <Seo title={meta.title} description={meta.description} organization={organization} website={website} />
+            <Seo title={meta.title} description={meta.description} organization={organization} website={website} noindex={false} />
             <Hero data={hero} />
             <About data={about} />
             <Info data={info} />

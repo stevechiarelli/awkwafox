@@ -1,11 +1,13 @@
 import React from "react";
 import Layout from "../components/Layout";
+import Seo from "../components/Seo";
 import { Link } from "gatsby";
 import styled from "styled-components";
 
 const NotFoundPage = () => {
     return (
         <Layout page="error">
+            <Seo title="Page Not Found - Awkwa Fox" description="Error Page" noindex={true} />
             <Wrapper>
                 <div className="container">
                     <h1> 404</h1>
