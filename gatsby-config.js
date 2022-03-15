@@ -9,6 +9,9 @@ module.exports = {
         description: "Awkwa Fox is a creative design and video production company based in Fort Myers, Florida specializing in wedding videography. We also offer event live stream and web design services.",
         author: "Steve Chiarelli"
     },
+    flags: {
+        DEV_SSR: false,
+    },
     plugins: [  
         `gatsby-plugin-styled-components`,
         `gatsby-plugin-image`,
@@ -18,10 +21,10 @@ module.exports = {
         {
             resolve: `gatsby-source-strapi`,
             options: {
-                apiURL: `https://awkwafox.herokuapp.com`,
+                apiURL: `http://localhost:1337`,
                 queryLimit: 1000, // Defaults to 100
                 collectionTypes: [`faqs`, `projects`, `services`, `customers`],
-                singleTypes: [`home`, `videography`, `live-stream`, `web-design`, `contact`],
+                singleTypes: [`home`, `videography`, `live-stream`, `contact`],
             },
         },
         {
@@ -32,14 +35,6 @@ module.exports = {
         },
         {
             resolve: `gatsby-plugin-sitemap`,
-            options: {
-                excludes: [
-                    '/form_response/default',
-                    '/form_response/videography',
-                    '/form_response/livestream',
-                    '/form_response/webdesign'
-                ],
-            },
         },
         {
             resolve: `gatsby-source-google-calendar`,

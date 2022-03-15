@@ -1,36 +1,46 @@
 import React from "react";
 import { Link } from "gatsby";
+import { navigate } from 'gatsby-link';
+import ScrollTo from "./ScrollTo";
 import styled from "styled-components";
 
-const data = [
-    {
-        id: 1,
-        text: "home",
-        url: "/",
-    },
-    {
-        id: 2,
-        text: "videography",
-        url: "/videography/",
-    },
-    {
-        id: 3,
-        text: "live stream",
-        url: "/livestream/",
-    },
-    {
-        id: 4,
-        text: "web design",
-        url: "/webdesign/",
-    },
-    {
-        id: 5,
-        text: "contact",
-        url: "/contact/",
-    },
-]
+const Links = ({ page, styleClass, toggleSidebar }) => {
 
-const Links = ({ page, styleClass }) => {
+    const data = [
+        {
+            id: 1,
+            text: "home",
+            url: "/",
+        },
+        {
+            id: 2,
+            text: "wedding films",
+            url: "/weddingfilms/",
+        },
+        {
+            id: 3,
+            text: "live stream",
+            url: "/livestream/",
+        },
+        {
+            id: 4,
+            text: "contact",
+            url: "/contact/",
+        },
+    ]
+
+    const handleClick = (event) => {
+        let section = document.querySelector(event.target.name);
+    
+        if (page === "contact") {
+            navigate("/#cta");
+        }
+        else {
+            ScrollTo(section, 1250, 65);
+        }
+        toggleSidebar();
+    };
+
     return (
         <Nav>
             <ul className={`page-links ${styleClass ? styleClass : ""}`} itemScope itemType="http://www.schema.org/SiteNavigationElement">
@@ -41,6 +51,9 @@ const Links = ({ page, styleClass }) => {
                         </li>
                     );
                 })}
+                <li>
+                    <button className="btn-primary" name="#cta" onClick={handleClick}>Book Now</button>
+                </li>
             </ul>
         </Nav>
     );
@@ -51,6 +64,13 @@ const Nav = styled.nav`
         li {
             opacity: 0;
             animation: slideRight 0.5s ease-in-out 0.3s forwards;
+            text-align: center;
+
+            .btn-primary {
+                color: var(--primary);
+                border: 3px solid var(--primary);
+                margin-top: 3em;
+            }
         }
 
         li a {
@@ -66,7 +86,7 @@ const Nav = styled.nav`
         }
 
         li a:hover {
-            color: var(--primary-light);
+            color: var(--primary-medium);
         }
 
         li:nth-of-type(1) {
@@ -101,7 +121,7 @@ const Nav = styled.nav`
         }
 
         .active a {
-            color: var(--primary-light);
+            color: var(--primary-medium);
             cursor: default;
         }
     }
@@ -124,6 +144,18 @@ const Nav = styled.nav`
                 &:last-child {
                     padding-right: 0;
                 }
+
+                .btn-primary {
+                    margin: 0;
+                    padding: 0.8em 1.8em 0.8em 1.8em;
+                    font-size: .6em;
+                    color: var(--primary-medium);
+                    border: 3px solid var(--primary-medium);
+                }
+
+                .btn-primary:hover {
+                    background: #222;
+                }
             }
         
             li a {
@@ -136,12 +168,12 @@ const Nav = styled.nav`
             }
 
             li a:hover {
-                color: var(--primary);
+                color: var(--primary-medium);
                 cursor: pointer;
             }
 
             .active a {
-                color: var(--primary);
+                color: var(--primary-medium);
             }
         }
     }

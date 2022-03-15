@@ -7,7 +7,7 @@ const Pricing = (props) => {
     // GraphQL FAQ Query
     const content = useStaticQuery(query);
     let services = content.services.nodes;
-    services = services.filter(item => item.category === props.category && item.subcategory === props.subcategory && item.package === true)
+    services = services.filter(item => item.category === props.category && item.package === true && !item.name.includes("other"))
 
     return (
         <Wrapper>
@@ -34,7 +34,6 @@ const query = graphql`
         id
         description
         category
-        subcategory
         name
         price
         details

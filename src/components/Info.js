@@ -4,7 +4,8 @@ import styled from "styled-components";
 import homeInfo from "../assets/images/home-info.jpg";
 import videographyInfo from "../assets/images/videography-info.jpg";
 import livestreamInfo from "../assets/images/livestream-info.jpg";
-import webdesignInfo from "../assets/images/webdesign-info.jpg";
+import webdesign1Info from "../assets/images/webdesign1-info.jpg";
+import webdesign2Info from "../assets/images/webdesign2-info.jpg";
 
 const Info = (props) => {
     let backgroundImage;
@@ -18,9 +19,13 @@ const Info = (props) => {
         backgroundImage = livestreamInfo;
         mobileImage = <StaticImage src="../assets/images/livestream-info-mobile.jpg" className="image" alt="live stream" />
     }
-    else if (props.data.background === "webdesign") {
-        backgroundImage = webdesignInfo;
-        mobileImage = <StaticImage src="../assets/images/webdesign-info-mobile.jpg" className="image" alt="web design" />
+    else if (props.data.background === "webdesign1") {
+        backgroundImage = webdesign1Info;
+        mobileImage = <StaticImage src="../assets/images/webdesign1-info-mobile.jpg" className="image" alt="web design" />
+    }
+    else if (props.data.background === "webdesign2") {
+        backgroundImage = webdesign2Info;
+        mobileImage = <StaticImage src="../assets/images/webdesign2-info-mobile.jpg" className="image" alt="web design" />
     }
     else {
         backgroundImage = homeInfo;
@@ -104,12 +109,12 @@ const Wrapper = styled.section`
 
             ul li {
                 font-size: 1em;
-                margin: .5em 0;
+                margin: 0;
             }
 
             h3, p, ul {
-                text-align: ${props => props.category === "livestream" ? "right" : "left"};
-                list-style-position: ${props => props.category === "livestream" ? "inside" : "initial"};
+                text-align: ${props => (props.category === "webdesign1" || props.category === "livestream")  ? "right" : "left"};
+                list-style-position: ${props => (props.category === "webdesign1" || props.category === "livestream") ? "inside" : "initial"};
                 width: 40%;
                 line-height: 25px;
             }
@@ -118,7 +123,7 @@ const Wrapper = styled.section`
         .container {
             display: flex;
             flex-direction: column;
-            align-items: ${props => props.category === "livestream" ? "flex-end" : "flex-start"};
+            align-items: ${props => (props.category === "webdesign1" || props.category === "livestream") ? "flex-end" : "flex-start"};
         }
 
         img, .image {

@@ -4,11 +4,9 @@ import ScrollTo from "./ScrollTo";
 import homeHero from "../assets/images/home-hero.jpg";
 import videographyHero from "../assets/images/videography-hero.jpg";
 import livestreamHero from "../assets/images/livestream-hero.jpg";
-import webdesignHero from "../assets/images/webdesign-hero.jpg";
 import homeMobile from "../assets/images/home-hero-mobile.jpg";
 import videographyMobile from "../assets/images/videography-hero-mobile.jpg";
 import livestreamMobile from "../assets/images/livestream-hero-mobile.jpg";
-import webdesignMobile from "../assets/images/webdesign-hero-mobile.jpg";
 
 const Hero = (props) => {
     let backgroundImage;
@@ -21,10 +19,6 @@ const Hero = (props) => {
     else if (props.data.background === "livestream") {
         backgroundImage = livestreamHero;
         mobileImage = livestreamMobile;
-    }
-    else if (props.data.background === "webdesign") {
-        backgroundImage = webdesignHero;
-        mobileImage = webdesignMobile;
     }
     else {
         backgroundImage = homeHero;

@@ -3,6 +3,7 @@
 :root {
     --primary: #5c6b8c;
     --primary-light: #BDCEF2;
+    --primary-medium: #9cb6ee;
     --primary-dark: #424c64;
     --primary-watermark: #EFF1F5;
     --secondary: #D3C09A;
@@ -72,9 +73,7 @@ button {
 
 .btn-primary {
     background: transparent;
-    padding: 1.1em 2.2em 1.1em 2.2em;
     color: var(--primary);
-    font-size: .8em;
     font-weight: 700;
     display: inline-block;
     border: 3px solid var(--primary);
@@ -82,10 +81,13 @@ button {
     text-transform: uppercase;
     text-align: center;
     cursor: pointer;
+    padding: 1.1em 2.2em 1.1em 2.2em;
+    font-size: .8em;
 }
 
 .btn-primary:hover {
     background: var(--background1);
+    opacity: 0.9;
 }
 
 .btn-disabled {

@@ -44,7 +44,7 @@ const Navbar = ({ page, toggleSidebar }) => {
                             </button>
                         </div>
                     </header>
-                    <Links page={page} styleClass="nav-links"></Links>
+                    <Links page={page} toggleSidebar={toggleSidebar} styleClass="nav-links"></Links>
                 </div>
             </div>
         </Wrapper>
@@ -111,6 +111,15 @@ const Wrapper = styled.div`
 
     .navbar.sticky .active a, .navbar.sticky nav ul li a:hover {
         color: var(--primary);
+    }
+
+    .navbar.sticky nav ul li .btn-primary {
+        color: var(--primary);
+        border: 3px solid var(--primary);
+    }
+
+    .navbar.sticky nav ul li .btn-primary:hover {
+        background: var(--background1);
     }
 
     @keyframes navbar {

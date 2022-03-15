@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { graphql, useStaticQuery, Link } from "gatsby";
+import { navigate } from 'gatsby-link';
 import styled from "styled-components";
 import Modal from "./Modal";
 
@@ -15,28 +16,43 @@ const Cta = (props) => {
 
     faqs = faqs.filter(item => item.category === props.category);
 
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside, true);
+    });
+
     const handleClick = (event) => {
-        if (event.target.id === "faq") {
+        if (event.target.id === "link" && (props.data.linkURL === "" || props.data.linkURL === "#")) {
             setCategory("faq");
             setData(faqs);
+            setModal(true);
+        }
+        else if (event.target.id === "link") {
+            navigate(props.data.linkURL);
         }
         else {
             setCategory("inquiry");
             setData(services);
+            setModal(true);
         }
-
-        setModal(true);
     }
 
     const handleClose = () => {
         setModal(false);
     }
 
+    const handleClickOutside = (event) => {
+        if (event.target.id === "inquiry" || event.target.id === "faq") {
+            setModal(false);
+        }
+    }
+
     return (
         <Wrapper category={props.category}>
-            <div className="container">
+            <div className="container" id="cta">
                 <h2>{props.data.heading}</h2>
-                <p>{props.data.content}<button className="link" id="faq" aria-label="faq" onClick={handleClick}>{props.data.link}</button></p>
+                <p>{props.data.content}
+                    <button className="link" id="link" aria-label="link" onClick={handleClick}>{props.data.linkText}</button>
+                </p>
                 {props.data.button.map(item => {
                     if (item.buttonURL === "#" || item.buttonURL === "") {
                         return <button key={item.id} className="btn-primary" onClick={handleClick}>{item.buttonText}</button>
@@ -81,6 +97,7 @@ const query = graphql`
 `
 
 const Wrapper = styled.section`
+    position: relative;
     background: ${props => props.category === "livestream" ? "#D3C09A" : "#1F3857"};
     padding: 5em 0 5em 0;
 

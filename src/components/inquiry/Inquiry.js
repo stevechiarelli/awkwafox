@@ -3,10 +3,11 @@ import { navigate } from 'gatsby-link';
 import Loading from "../Loading";
 import styled from "styled-components";
 import Package from "./Package";
-import Event from "./Event";
+import Addons from "./Addons";
+import EventDate from "./EventDate";
+import EventInfo from "./EventInfo";
 import Customer from "./Customer";
 import Summary from "./Summary";
-import dots_sm from "../../assets/images/dots-sm.svg";
 
 class Inquiry extends React.Component {
     constructor() {
@@ -38,17 +39,17 @@ class Inquiry extends React.Component {
                 'CF-711552': "", // website type
             },
             addons: {
-                Second_Shooter: false,
-                Raw_Footage: false,
-                Ceremony_Live_Stream: false,
-                Ceremony_Edit: false,
-                Cinematic_Trailer: false,
-                Event_Promo: false,
-                Photo_Montage: false,
-                Wedding_Website: false,
-                Event_Website: false,
-                Content_Management_System: false,
-                Database_Integration: false,
+                second_shooter: false,
+                raw_footage: false,
+                ceremony_live_stream: false,
+                ceremony_edit: false,
+                cinematic_trailer: false,
+                event_promo: false,
+                photo_montage: false,
+                wedding_website: false,
+                event_website: false,
+                content_management_system: false,
+                database_integration: false,
             }
         }
     }
@@ -67,17 +68,17 @@ class Inquiry extends React.Component {
                     'CF-708918': "", // details
                 },
                 addons: {
-                    Second_Shooter: false,
-                    Raw_Footage: false,
-                    Ceremony_Live_Stream: false,
-                    Ceremony_Edit: false,
-                    Cinematic_Trailer: false,
-                    Event_Promo: false,
-                    Photo_Montage: false,
-                    Wedding_Website: false,
-                    Event_Website: false,
-                    Content_Management_System: false,
-                    Database_Integration: false,
+                    second_shooter: false,
+                    raw_footage: false,
+                    ceremony_live_stream: false,
+                    ceremony_edit: false,
+                    cinematic_trailer: false,
+                    event_promo: false,
+                    photo_montage: false,
+                    wedding_website: false,
+                    event_website: false,
+                    content_management_system: false,
+                    database_integration: false,
                 }
             }));
         }
@@ -199,7 +200,7 @@ class Inquiry extends React.Component {
                     ...this.state.formData,
                     ...this.state.customFields,
                     'CF-708858': this.state.customFields['CF-708858'].toLocaleString('en-US', {style: 'currency', currency: 'USD'}),
-                    'EventDate': this.props.type !== "webdesign" ? this.state.formData.EventDate.toISOString().substring(0, 10) : "",
+                    'EventDate': this.state.formData.EventDate.toISOString().substring(0, 10),
                     'CF-711795': this.getAddonList(),
                     'Message': "Submitted on " + new Date()
                 }),
@@ -256,21 +257,22 @@ class Inquiry extends React.Component {
             }
         }
 
-        if (this.state.page === 2) {
-            if (this.props.type !== "webdesign") {
-                if (this.state.formData.EventDate.toISOString().substring(0, 10) === new Date("0001-01-01").toISOString().substring(0, 10)) {
-                    this.setState({ error: "*Please select an event date!" });
-                    return false;
-                }
-    
-                if (this.state.customFields['CF-708912'] === "") {
-                    this.setState({ error: "*Location is required!" });
-                    return false;
-                }
+        if (this.state.page === 3) {
+            if (this.state.formData.EventDate.toISOString().substring(0, 10) === new Date("0001-01-01").toISOString().substring(0, 10)) {
+                this.setState({ error: "*Please select an event date!" });
+                return false;
             }
         }
 
-        if (this.state.page === 3) {
+        
+        if (this.state.page === 4) {
+            if (this.state.customFields['CF-708912'] === "") {
+                this.setState({ error: "*Location is required!" });
+                return false;
+            }
+        }
+
+        if (this.state.page === 5) {
             let requiredFields = ["FirstName", "LastName", "Email"];
 
             for (let required of requiredFields) {
@@ -329,33 +331,43 @@ class Inquiry extends React.Component {
 
                     {/* Page 1 */}
                     <div style={this.state.page === 1 ? {display: "block"} : {display: "none"}}>
-                        <h2 className="step-title">Select Package</h2>
+                        <h2 className="step-title">Select Package  <span className="step-indicator">(1 of 6)</span></h2>
                         <hr />
-                        <p className="step-indicator">({this.props.type === "webdesign" ? "1 of 3" : "1 of 4"})</p>
-                        <Package data={this.state} type={this.props.type} service={service} details={details} addon={addon} handleData={this.handleData} />
+                        <Package data={this.state} type={this.props.type} service={service} details={details} handleData={this.handleData} />
                     </div>
 
                     {/* Page 2 */}
                     <div style={this.state.page === 2 ? {display: "block"} : {display: "none"}}>
-                        <h2 className="step-title">{this.props.type === "webdesign" ? "Website Info" : "Event Info"}</h2>
+                        <h2 className="step-title">{this.state.package.includes("other") ? "Select Package Cont." : "Select Add-ons"} <span className="step-indicator">(2 of 6)</span></h2>
                         <hr />
-                        <p className="step-indicator">(2 of 4)</p>
-                        <Event data={this.state} type={this.props.type} handleDayClick={this.handleDayClick} handleData={this.handleData} />
+                        <Addons data={this.state} type={this.props.type} addon={addon} handleData={this.handleData} />
                     </div>
 
                     {/* Page 3 */}
                     <div style={this.state.page === 3 ? {display: "block"} : {display: "none"}}>
-                        <h2 className="step-title">Your Info</h2>
+                        <h2 className="step-title">Event Date <span className="step-indicator">(3 of 6)</span></h2>
                         <hr />
-                        <p className="step-indicator">({this.props.type === "webdesign" ? "2 of 3" : "3 of 4"})</p>
+                        <EventDate data={this.state} type={this.props.type} handleDayClick={this.handleDayClick} handleData={this.handleData} />
+                    </div>
+                    
+                    {/* Page 4 */}
+                    <div style={this.state.page === 4 ? {display: "block"} : {display: "none"}}>
+                        <h2 className="step-title">Event Info <span className="step-indicator">(4 of 6)</span></h2>
+                        <hr />
+                        <EventInfo data={this.state} type={this.props.type} handleDayClick={this.handleDayClick} handleData={this.handleData} />
+                    </div>
+
+                    {/* Page 5 */}
+                    <div style={this.state.page === 5 ? {display: "block"} : {display: "none"}}>
+                        <h2 className="step-title">Your Info <span className="step-indicator">(5 of 6)</span></h2>
+                        <hr />
                         <Customer data={this.state} handleChange={this.handleChange} />
                     </div>
 
-                    {/* Page 4 */}
-                    <div style={this.state.page === 4 ? {display: "block"} : {display: "none"}}>
-                        <h2 className="step-title">Summary</h2>
+                    {/* Page 6 */}
+                    <div style={this.state.page === 6 ? {display: "block"} : {display: "none"}}>
+                        <h2 className="step-title">Summary <span className="step-indicator">(6 of 6)</span></h2>
                         <hr />
-                        <p className="step-indicator">({this.props.type === "webdesign" ? "3 of 3" : "4 of 4"})</p>
                         <Summary data={this.state} type={this.props.type} serviceSummary={serviceSummary} addonSummary={addonSummary} />
                     </div>
 
@@ -366,20 +378,20 @@ class Inquiry extends React.Component {
                             className="btn-primary" 
                             value="previous" 
                             onClick={this.handleClick} 
-                            style={this.state.page > 1 && this.state.page < 5 ? {display: "block"} : {display: "none"}}>
+                            style={this.state.page > 1 && this.state.page <= 6 ? {display: "block"} : {display: "none"}}>
                             Previous
                         </button>
                         <button 
                             className="btn-primary" 
                             value="next" 
                             onClick={this.handleClick}
-                            style={this.state.page < 4 ? {display: "block"} : {display: "none"}}>
+                            style={this.state.page < 6 && this.state.package !== "" ? {display: "block"} : {display: "none"}}>
                             Next
                         </button>
                         <button 
                             className="btn-primary" 
                             type="submit"
-                            style={this.state.page === 4 ? {display: "block"} : {display: "none"}}>
+                            style={this.state.page === 6 ? {display: "block"} : {display: "none"}}>
                             Submit
                         </button>
                     </div>
@@ -393,47 +405,43 @@ class Inquiry extends React.Component {
 
 const Wrapper = styled.section`
     position: relative;
-    padding: 2em;
+    padding: 0 1.5em;
 
     form {
-        max-width: 600px;
-        margin: -5.0em auto 2em auto;
+        position: relative;
+        max-width: 900px;
+        margin: 0;
+        height: 575px;
     }
 
     &::after {
         content: 'awkwa fox';
         position: absolute;
-        top: -20px;
-        left: -30px;
-        font-size: 8em;
+        top: -90px;
+        right: -50px;
+        font-size: 6em;
         font-weight: 600;
         color: #f9f9f9;
         z-index: 0;
         width: 1000px;
     }
 
-    &::before {
-        content: '';
-        background: url(${dots_sm});
-        background-repeat: no-repeat;
-        position: absolute;
-        right: -20px;
-        top: 125px;
-        width: 50px;
-        height: 700px;
-        z-index: 1000;
-    }
+
 
     h3 {
         color: var(--primary);
-        margin: 2em 0 1em 0;
-        font-size: 1em;
+        margin: 1em 0;
+        font-size: 0.9em;
     }
 
     p, .form-group p {
         color: var(--text-dark);
-        font-size: 0.9em;
+        font-size: 0.8em;
         text-align: left;
+    }
+
+    .small {
+        font-size: 0.6em;
     }
 
     .step-title {
@@ -441,23 +449,19 @@ const Wrapper = styled.section`
         z-index: 1;
         font-weight: 600;
         color: var(--primary);
-        margin-top: 6em;
+        font-size: 1.2em;
     }
 
     .step-indicator {
         position: relative;
         z-index: 1;
         color: var(--primary);
-        font-size: 0.9em;
-        text-align: center;
-        padding-bottom: 1em;
+        font-size: 0.6em;
     }
 
     ul {
-        margin-top: 1em;
-
         li {
-            font-size: 0.9em;
+            font-size: 0.7em;
         }
     }
 
@@ -466,25 +470,25 @@ const Wrapper = styled.section`
         text-align: left;
         background: var(--background1);
         color: var(--primary);
-        padding: 13px 0 15px 15px;
+        padding: 11px 0 8px 8px;
         width: 100%;
-        height: 50px;
+        height: 45px;
         z-index: 1;
     }
 
     .error {
         color: red;
-        margin: 2em 0;
+        margin: 0.5em 0;
     }
 
     .form-group {
-        margin-top: 1.5em;
+        margin: 0.5em 0;
         color: var(--text-dark);
         font-size: 0.9em;
 
         label {
             color: var(--text-dark);
-            font-size: 0.9em;
+            font-size: 0.8em;
         }
 
         input, textarea, select {
@@ -507,9 +511,10 @@ const Wrapper = styled.section`
 
         textarea {
             width: 100%;
-            height: 150px;
+            height: 90px;
             resize: none;
             padding: 0.8em;
+            margin-top: 0.5em;
         }
 
         input, select {
@@ -542,6 +547,7 @@ const Wrapper = styled.section`
             
             select {
                 height: 40px;
+                width: 100%;
             }
         }
     }
@@ -564,9 +570,12 @@ const Wrapper = styled.section`
     }
 
     .btn-group {
+        /* position: absolute;
+        bottom: 0;
+        right: 0; */
         display: flex;
         justify-content: flex-end;
-        margin-top: 2em;
+        margin: 1em 0;
 
         button:first-child {
             margin-right: 5px;
@@ -586,7 +595,7 @@ const Wrapper = styled.section`
         }
 
         td {
-            font-size: 0.9em;
+            font-size: 0.7em;
         }
     }
 
@@ -659,6 +668,8 @@ const Wrapper = styled.section`
     }
 
     @media only screen and (min-width: 768px) {
+        padding: 0 2em;
+
         .calendar {
             display: block;
             width: 100%;
@@ -666,6 +677,12 @@ const Wrapper = styled.section`
 
         .calendar-mobile {
             display: none;
+        }
+
+        .form-group {
+            select {
+                width: 50%;
+            }
         }
 
         .input-group {
@@ -677,6 +694,30 @@ const Wrapper = styled.section`
                 margin: 0;
             }
         } 
+
+        .step-title {
+            margin-top: 1em;
+        }
+
+        ul {
+            li {
+                font-size: 0.8em;
+            }
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: 48% 48%;
+            grid-column-gap: 25px;
+
+            p, td {
+                font-size: 0.7em;
+            }
+
+            .small {
+                font-size: 0.6em;
+            }
+        }
     }
 `
 

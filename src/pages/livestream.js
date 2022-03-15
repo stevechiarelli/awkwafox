@@ -5,22 +5,27 @@ import Hero from "../components/Hero";
 import About from "../components/About";
 import Info from "../components/Info";
 import Features from "../components/Features";
-import Work from "../components/Work";
+//import Work from "../components/Work";
 import Cta from "../components/Cta";
 import Seo from "../components/Seo";
+import Modal from "../components/Modal";
 
-const livestream = ({ data }) => {
-    const { hero, about, info, features, cta, meta } = data.livestream.nodes[0];
+const livestream = ({ data, location }) => {
+    const { hero, about, livestream, webdesign, features, cta, meta } = data.livestream.nodes[0];
+    const params = new URLSearchParams(location.search);
+    const modal = Boolean(params.get("modal"));
 
     return (
         <Layout page="live stream">
             <Seo title={meta.title} description={meta.description} noindex={false} />
             <Hero data={hero} />
             <About data={about} />
-            <Info data={info} />
+            <Info data={livestream} />
             <Features data={features} />
-            <Work category="livestream" />
+            {/* <Work category="livestream" /> */}
+            <Info data={webdesign} />
             <Cta data={cta} category="livestream" />
+            <Modal category="success" data={meta} modal={modal} />
         </Layout>
     );
 }
@@ -49,7 +54,17 @@ export const query = graphql`
             }
           }
         }
-        info:Info {
+        livestream:Info {
+          heading
+          subheading
+          content
+          background
+          List {
+            id
+            item
+          }
+        }
+        webdesign:WebDesign {
           heading
           subheading
           content
@@ -67,7 +82,8 @@ export const query = graphql`
         cta:CTA {
           heading
           content
-          link
+          linkText
+          linkURL
           button {
             buttonText
             buttonURL
@@ -77,6 +93,9 @@ export const query = graphql`
         meta:Meta {
           title
           description
+          successHeading
+          successBody
+          redirectURL
         }
       }
     }

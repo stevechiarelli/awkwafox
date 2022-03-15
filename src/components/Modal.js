@@ -9,10 +9,10 @@ const Modal = (props) => {
     let modal;
 
     if (props.data !== null) {
-        if (props.category === "videography" || props.category === "livestream") {
-            modal = <div id="modal" className="modal modal-iframe" style={props.modal === true ? {display: "block"} : {display: "none"}}>
-                        <span role="button" tabIndex="0" className="iframe-close" onClick={() => props.handleClose()} onKeyDown={() => props.handleClose()}>&times;</span>
-                        <iframe title={props.data.title} src={props.data.url}></iframe>
+        if (props.category === "videography" || props.category === "livestream" || props.category === "featured") {
+            modal = <div id="modal" className="modal modal-iframe modal-opacity-dark" style={props.modal === true ? {display: "block"} : {display: "none"}}>
+                        <span role="button" tabIndex="0" className="close-alt" onClick={() => props.handleClose()} onKeyDown={() => props.handleClose()}>&times;</span>
+                        <iframe title={props.data.title} src={props.data.url} allowFullScreen></iframe>
                         <h4>{props.data.title}</h4>
                     </div>
         }
@@ -40,7 +40,7 @@ const Modal = (props) => {
         else if (props.category === "faq") {
             modal = <div id="modal" className="modal" style={props.modal === true ? {display: "block"} : {display: "none"}}>
                         <div className="modal-dialog" id="faq">
-                            <div className="modal-content">
+                            <div className="modal-content-center">
                                 <div className="modal-form">
                                     <span role="button" tabIndex="0" className="close" onClick={() => props.handleClose()} onKeyDown={() => props.handleClose()}>&times;</span>
                                     <div className="form-content">
@@ -62,8 +62,8 @@ const Modal = (props) => {
                         </div>
                     </div>
         }
-        else if (props.category === "success") {
-            modal = <div id="modal" className="modal" style={props.modal === true ? {display: "block"} : {display: "none"}}>
+        else if (props.category === "success" && props.modal === true) {
+            modal = <div id="modal" className="modal modal-show">
                         <div className="modal-content-center">
                             <div className="modal-success">
                                 <img src={icon} alt="Awkwa Fox icon" />
@@ -74,10 +74,10 @@ const Modal = (props) => {
                         </div>
                     </div>
         }
-        else {
+        else if (props.category === "inquiry") {
             modal = <div id="modal" className="modal" style={props.modal === true ? {display: "block"} : {display: "none"}}>
                         <div className="modal-dialog" id="inquiry">
-                            <div className="modal-content">
+                            <div className="modal-content-center">
                                 <div className="modal-form" id="modal-form">
                                     <span role="button" tabIndex="0" className="close" onClick={() => props.handleClose()} onKeyDown={() => props.handleClose()}>&times;</span>
                                     <Inquiry type={props.type} data={props.data} />
@@ -106,10 +106,10 @@ const Wrapper = styled.section`
         height: 100%; 
         overflow: hidden;
         background-color: rgb(0,0,0);
-        background-color: rgba(0,0,0,0.8);
+        background-color: rgba(0,0,0,0.7);
     }
     
-    .modal-content {
+    .modal-content-right {
         position: relative;
         background-color: #fff;
         padding: 0;
@@ -124,10 +124,10 @@ const Wrapper = styled.section`
 
     .modal-content-center {
         background: #fff;
-        margin: 15% auto;
-        padding: 20px;
+        margin: 5% auto 0 auto;
         border: 1px solid #888;
-        width: 80%;
+        width: 95%;
+        box-shadow: 0 4px 15px 0 rgb(0, 0, 0), 0 6px 20px 0 rgb(0, 0, 0);
         -webkit-animation-name: animatetop;
         -webkit-animation-duration: 0.4s;
         animation-name: animatetop;
@@ -136,6 +136,15 @@ const Wrapper = styled.section`
 
     .modal-dialog {
         overflow-y: initial !important;
+    }
+
+    .modal-show {
+        display: block;
+    }
+
+    .modal-opacity-dark {
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.9);
     }
     
     @-webkit-keyframes animateright {
@@ -157,27 +166,28 @@ const Wrapper = styled.section`
         from {top: -300px; opacity: 0}
         to {top: 0; opacity: 1}
     }
-    
+
     .close {
-        display: flex;
-        justify-content: flex-end;
+        position: absolute;
+        top: 30px;
+        right: 35px;
         color: var(--primary);
         font-size: 35px;
         font-weight: bold;
-        margin: 15px 35px 0 0;
+        transition: 0.3s;
     }
 
-    .iframe-close {
+    .close-alt {
         position: absolute;
-        top: 15px;
+        top: 30px;
         right: 35px;
         color: #f1f1f1;
-        font-size: 40px;
+        font-size: 35px;
         font-weight: bold;
         transition: 0.3s;
     }
     
-    .close:hover, .close:focus, .iframe-close:hover, .iframe-close:focus {
+    .close:hover, .close:focus, .close-alt:hover, .close-alt:focus {
         color: var(--primary-light);
         text-decoration: none;
         cursor: pointer;
@@ -233,8 +243,9 @@ const Wrapper = styled.section`
     }
 
     .modal-form {
-        height: 100vh;
+        height: 88vh;
         width: 100%;
+        margin-top: 3em;
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -265,9 +276,20 @@ const Wrapper = styled.section`
         }
     }
 
+    @media (orientation: landscape) and (min-height: 415px) {
+        .modal-form {
+            height: 90vh;
+        }
+    }
+
     @media only screen and (min-width: 768px) {
         .modal-body {
             padding: 2em;
+        }
+
+        .modal-content-center {
+            margin: 15% auto 0 auto;
+            width: 85%;
         }
 
         .modal-success {
@@ -279,6 +301,20 @@ const Wrapper = styled.section`
                 font-size: 1em;
             }
         }
+
+        .modal-form {
+            height: 50vh;
+            margin-top: 0;
+        }
+
+        .close, .close-alt {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            transition: 0.3s;
+        }
     }
 
     @media only screen and (min-width: 992px) {
@@ -287,8 +323,8 @@ const Wrapper = styled.section`
         }
 
         .modal-content-center {
-            margin: 10% auto;
-            width: 60%;
+            margin: 3% auto;
+            width: 65%;
         }
 
         .modal-iframe {
@@ -299,12 +335,25 @@ const Wrapper = styled.section`
             }
         }
 
-        .close {
-            position: absolute;
-            top: 0;
-            right: -100px;
-            color: #f1f1f1;
-            font-size: 40px;
+        .modal-form {
+            height: 87vh;
+        }
+    }
+
+    @media only screen and (min-width: 1600px) {
+        .modal-form {
+            height: 65vh;
+        }
+    }
+
+    @media (min-height: 1366px) {
+        .modal-content-center {
+            margin: 15% auto;
+            width: 80%;
+        }
+
+        .modal-form {
+            height: 50vh;
         }
     }
 `

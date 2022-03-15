@@ -5,42 +5,62 @@ import dots from "../assets/images/dots.svg";
 import dots_sm from "../assets/images/dots-sm.svg";
 
 const About = (props) => {
-    const image = getImage(props.data[0].image.localFile);
+    const about = [];
+
+    for (let i=0; i < props.data.length; i++) {
+        if (i === 0) {
+            about.push(
+                <React.Fragment key={i}>
+                    <div className="about">
+                        <h2>{props.data[i].heading}</h2>
+                        <p>{props.data[i].content}</p>
+                    </div>
+                    <GatsbyImage image={getImage(props.data[i].image.localFile)} alt={props.data[i].alt} className="image" imgStyle={{objectFit: `cover`}} />
+                </React.Fragment>
+            )
+        }
+        else {
+            about.push(
+                <React.Fragment key={i}>
+                    <GatsbyImage image={getImage(props.data[i].image.localFile)} alt={props.data[i].alt} className="image" imgStyle={{objectFit: `cover`}} />
+                    <div className="about">
+                        <h2>{props.data[i].heading}</h2>
+                        <p>{props.data[i].content}</p>
+                    </div>
+                </React.Fragment>
+            )
+        }
+    }
 
     return (
         <Wrapper category={props.data[0].heading}>
-            <div className="container" id="about">
-                <div className="container-left">
-                    {props.data.map(item => {
-                        return (
-                            <React.Fragment key={item.id}>
-                                <h2>{item.heading}</h2>
-                                <p>{item.content}</p>
-                            </React.Fragment>
-                        )
-                    })}
-                </div>
+            <div className="grid-container" id="about">
+                {about}
             </div>
-            <GatsbyImage image={image} alt={props.data[0].alt} className="image" imgStyle={{objectFit: `cover`}} />
         </Wrapper>
     );
 }
 
 const Wrapper = styled.section`
     position: relative;
-    margin: 6em 0 0 0;
+    margin: 0;
     width: 100%;
 
-    h2 {
-        color: ${props => props.category === "live stream" ? "#D3C09A" : "#5c6b8c"};
-        font-size: ${props => props.category === "design" ? "1.2em" : "1.5em"};
-    }
-    
-    p {
-        margin: 1.5em 0 5em 0;
-        line-height: 1.7;
-        width: 90%;
-        font-size: ${props => props.category === "design" ? "0.9em" : "1em"};
+    .about {
+        padding: 0 1.5em;
+
+        h2 {
+            margin-top: 3em;
+            color: ${props => props.category === "live stream" ? "#D3C09A" : "#5c6b8c"};
+            font-size: ${props => props.category === "design" ? "1.2em" : "1.5em"};
+        }
+        
+        p {
+            margin: 1.5em 0 5em 0;
+            line-height: 1.7;
+            width: 90%;
+            font-size: ${props => props.category === "design" ? "0.9em" : "1em"};
+        }
     }
 
     &::before {
@@ -49,7 +69,7 @@ const Wrapper = styled.section`
         background-repeat: no-repeat;
         position: absolute;
         right: -20px;
-        top: 0;
+        top: 0px;
         width: 50px;
         height: 700px;
         z-index: -1;
@@ -58,7 +78,7 @@ const Wrapper = styled.section`
     &::after {
         content: 'awkwa fox';
         position: absolute;
-        top: -110px;
+        top: 60px;
         left: -30px;
         font-size: 8em;
         font-weight: 600;
@@ -67,50 +87,52 @@ const Wrapper = styled.section`
         width: 1000px;
     }
 
-    @media only screen and (min-width: 768px) { 
-        margin: 8em 0 0 0;
-    }
+    @media only screen and (min-width: 768px) {
+        padding: 2em; 
 
-    @media only screen and (min-width: 992px) {
-        display: grid;
-        grid-template-columns: 48% 48%;
-        grid-column-gap: 4%;
-        grid-template-areas: ${props => props.category === "live stream" ? "'image content'" : "'content image'"};
-        max-width: 1200px;
-        margin:  0 auto 3em auto;
-
-        p {
-            width: 100%;
-            margin: ${props => props.category === "design" ? "0.5em 0" : "2em 0 5em 0"};
-        }
-    
-        h2 {
-            margin-top: ${props => props.category === "design" ? "3em" : "7em"};
-        }
-    
-        .image {
-            margin-top: 100px;
-            grid-area: image;
+        .grid-container {
+            display: grid;
+            grid-template-columns: 50% 50%;
         }
 
-        .container {
-            grid-area: content;
-        }
-    
-        &::after {
-            top: 50px;
-            left: -30px;
+        .about {
+            padding: 2em 0.5em;
+
+            h2 {
+                margin: 1em auto 0 auto;
+                text-align: center;
+                font-size: 1em;
+            }
+
+            p {
+                margin: 2em auto;
+                font-size: 0.9em;
+            }
         }
     }
 
     @media only screen and (min-width: 1200px) {
+        .about {
+            padding: 3em;
+
+            h2 {
+                margin: 4em auto 0 auto;
+                font-size: 1.4em;
+            }
+
+            p {
+                margin: 2.5em auto;
+                font-size: 1em;
+            }
+        }
+
         &::before {
             content: '';
             background: url(${dots});
             background-repeat: no-repeat;
             position: absolute;
-            right: -180px;
-            top: 0px;
+            right: -30px;
+            top: 50px;
             width: 110px;
             height: 800px;
             z-index: -1;
