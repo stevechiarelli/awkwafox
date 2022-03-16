@@ -23,7 +23,7 @@ module.exports = {
             options: {
                 apiURL: `https://awkwafox.herokuapp.com`,
                 queryLimit: 1000, // Defaults to 100
-                collectionTypes: [`faqs`, `projects`, `services`, `customers`],
+                collectionTypes: [`faqs`, `projects`, `services`],
                 singleTypes: [`home`, `videography`, `live-stream`, `contact`],
             },
         },
