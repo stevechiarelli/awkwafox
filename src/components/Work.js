@@ -252,7 +252,7 @@ const Wrapper = styled.section`
             content: 'featured';
             position: absolute;
             top: -120px;
-            left: -150px;
+            left: -200px;
             font-size: 8em;
             font-weight: 600;
             color: var(--primary-watermark);
@@ -281,7 +281,7 @@ const Wrapper = styled.section`
         }
 
         .home {
-            height: 425px;
+            height: 375px;
             padding: 4em 0;
 
             .grid-container {
@@ -309,7 +309,7 @@ const Wrapper = styled.section`
 
             .grid-container:after {
                 top: -100px;
-                left: 300px;
+                left: 100px;
             }
 
             .grid-container > div {
@@ -344,6 +344,12 @@ const Wrapper = styled.section`
     @media only screen and (min-width: 1600px) {
         .work {
             margin: 6em 0 4em 0;
+        }
+    }
+
+    @media (min-height: 1366px) {
+        .home {
+            height: 500px;
         }
     }
 `

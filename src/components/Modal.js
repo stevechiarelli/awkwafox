@@ -303,7 +303,7 @@ const Wrapper = styled.section`
         }
 
         .modal-form {
-            height: 60vh;
+            height: 65vh;
             margin-top: 0;
         }
 
