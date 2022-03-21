@@ -187,7 +187,10 @@ class Inquiry extends React.Component {
         event.preventDefault();
         let responseURL = "/" + this.props.type + "/?modal=true";
 
-        if (this.props.type === "videography") {
+        if (this.state.package.includes("other")) {
+            responseURL = "/?modal=true";
+        }
+        else if (this.props.type === "videography") {
             responseURL = "/weddingfilms/?modal=true";
         }
      
