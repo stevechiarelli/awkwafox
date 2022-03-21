@@ -185,10 +185,10 @@ class Inquiry extends React.Component {
 
     handleSubmit = (event) => {  
         event.preventDefault();
-        let responseURL = "https://www.awkwafox.com/" + this.props.type + "/?modal=true";
+        let responseURL = "/" + this.props.type + "/?modal=true";
 
         if (this.props.type === "videography") {
-            responseURL = "https://www.awkwafox.com/weddingfilms/?modal=true";
+            responseURL = "/weddingfilms/?modal=true";
         }
      
         if (this.state.botfield === "") {
