@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import Inquiry from "./inquiry/Inquiry";
@@ -69,7 +68,7 @@ const Modal = (props) => {
                                 <img src={icon} alt="Awkwa Fox icon" />
                                 <h4>{props.data === undefined ? "Error!" : props.data.successHeading}</h4>
                                 <p>{props.data === undefined ? "An error has occured." : props.data.successBody}</p>
-                                <Link to={props.data === undefined ? "/" : props.data.redirectURL} className="btn-primary">Close</Link>
+                                <a href={props.data === undefined ? "/" : props.data.redirectURL} className="btn-primary">Close</a>
                             </div>
                         </div>
                     </div>

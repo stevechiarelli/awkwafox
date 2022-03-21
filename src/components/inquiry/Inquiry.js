@@ -211,7 +211,6 @@ class Inquiry extends React.Component {
             })
             .then(() => {
                 navigate(responseURL);
-                this.setState({ loading: false });
             })
         }
         else {

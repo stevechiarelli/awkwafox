@@ -49,11 +49,11 @@ const ContactForm = (props) => {
                 }),
             })
             .then(() => {
-                navigate("https://www.awkwafox.com/?modal=true");
+                navigate("/?modal=true");
             })
         }
         else {
-            navigate("https://www.awkwafox.com/?modal=true");
+            navigate("/");
         }
     }
 
