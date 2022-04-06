@@ -76,7 +76,7 @@ const Wrapper = styled.section`
     }
     
     &::after {
-        content: 'awkwa fox';
+        content: 'awkwafox';
         position: absolute;
         top: 60px;
         left: -30px;

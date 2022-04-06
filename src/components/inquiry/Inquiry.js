@@ -422,7 +422,7 @@ const Wrapper = styled.section`
     }
 
     &::after {
-        content: 'awkwa fox';
+        content: 'awkwafox';
         position: absolute;
         top: -90px;
         right: -50px;
