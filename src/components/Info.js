@@ -36,7 +36,6 @@ const Info = (props) => {
         <Wrapper image={backgroundImage} category={props.data.background}>
             <div className="content">
                 <div className={props.data.heading === "" ? "container hidden" : "container"}>
-                    <h3>{props.data.heading}</h3>
                     <p>{props.data.subheading}</p>
                     <ul>
                         {props.data.List.map(list => {
@@ -54,7 +53,9 @@ const Info = (props) => {
 
 const Wrapper = styled.section`
     .content {
+        position: relative;
         background: var(--background3);
+        z-index: -1;
 
         h3 {
             color: var(--text-light);
@@ -68,15 +69,35 @@ const Wrapper = styled.section`
         ul {
             list-style-type: initial;
             margin: 1em 0 1em 1em;
+            z-index: 1;
         }
         
         ul li {
             color: var(--primary-light);
             margin: .2em 0;
+            padding-bottom: 0.5em;
+        }
+
+        p:first-child {
+            padding-top: 5em;
         }
 
         p:last-child {
             padding-bottom: 2.0em;
+        }
+
+        &::after {
+            content: 'awkwafox';
+            position: absolute;
+            top: 0.2em;
+            right: -0.5em;
+            font-size: 8em;
+            font-weight: 600;
+            line-height: 1;
+            color: #302b2b;
+            opacity: 0.5;
+            z-index: -1;
+            width: 750px;
         }
     }
 
@@ -101,22 +122,38 @@ const Wrapper = styled.section`
             background-position: center;
             height: 600px;
             width: 100%;
-            padding-top: 3%;
+            padding-top: 0.3em;
 
             h3 {
                 font-size: 1.7em;
             }
 
             ul li {
-                font-size: 1em;
+                font-size: 1.1em;
                 margin: 0;
+            }
+
+            p {
+                margin-top: 1em;
             }
 
             h3, p, ul {
                 text-align: ${props => (props.category === "webdesign1" || props.category === "livestream")  ? "right" : "left"};
-                list-style-position: ${props => (props.category === "webdesign1" || props.category === "livestream") ? "inside" : "initial"};
                 width: 40%;
                 line-height: 25px;
+            }
+
+            ul{
+                list-style-type: ${props => (props.category === "webdesign1" || props.category === "livestream") ? "none" : "initial"};
+            }
+
+            p:first-child {
+                padding-top: 3em;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
             }
         }
 
@@ -128,6 +165,12 @@ const Wrapper = styled.section`
 
         img, .image {
             display: none;
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        .content {
+           padding-top: 2em;
         }
     }
 

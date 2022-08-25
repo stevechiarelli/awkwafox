@@ -183,6 +183,19 @@ class Inquiry extends React.Component {
         event.preventDefault();
     }
 
+    handleOption = (name, description, price) => {
+        this.setState((state) => ({
+            package: name,
+            error: "",
+            required: { color: "#666666" },  
+            customFields: {
+                ...state.customFields,
+                'CF-708858': Number(price), // quote total
+                'CF-708855': description // package,
+            }
+        }));
+    }
+
     handleSubmit = (event) => {  
         event.preventDefault();
         let responseURL = "/" + this.props.type + "/?modal=true";
@@ -340,7 +353,7 @@ class Inquiry extends React.Component {
                     <div style={this.state.page === 1 ? {display: "block"} : {display: "none"}}>
                         <h2 className="step-title">Select Package  <span className="step-indicator">(1 of 6)</span></h2>
                         <hr />
-                        <Package data={this.state} type={this.props.type} service={service} details={details} handleData={this.handleData} />
+                        <Package data={this.state} type={this.props.type} service={service} details={details} handleData={this.handleData} handleOption={this.handleOption} />
                     </div>
 
                     {/* Page 2 */}
@@ -392,7 +405,7 @@ class Inquiry extends React.Component {
                             className="btn-primary" 
                             value="next" 
                             onClick={this.handleClick}
-                            style={this.state.page < 6 && this.state.package !== "" ? {display: "block"} : {display: "none"}}>
+                            style={this.state.page < 6 ? {display: "block"} : {display: "none"}}>
                             Next
                         </button>
                         <button 
@@ -480,6 +493,7 @@ const Wrapper = styled.section`
         padding: 11px 0 8px 8px;
         width: 100%;
         height: 45px;
+        font-size: 0.9em;
         z-index: 1;
     }
 
@@ -555,6 +569,59 @@ const Wrapper = styled.section`
             select {
                 height: 40px;
                 width: 100%;
+            }
+        }
+    }
+
+    .option-row {
+        margin: -1em 0 1em 0;
+
+        &:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .column {
+            float: left;
+            width: 100%;
+            padding: 0.6em;
+
+            //width: 100%;
+            //display: block;
+            //margin-bottom: 20px;
+
+            .card {
+                padding: 0.7em 0.8em 0.2em 0.8em;
+                background: var(--background1);
+                border: 1px solid var(--primary-light);
+                border-radius: 12px;
+                min-height: 3em;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                cursor: pointer;
+
+                h2 {
+                    font-size: 1em;
+                    color: var(--text-dark);
+                }
+
+
+                p {
+                    font-size: 0.7em;
+                    color: var(--text-dark);
+                    margin: 0.5em 0;
+                }
+
+                .total {
+                    font-size: 1.1em;
+                    color: var(--primary);
+                }
+
+                &:hover {
+                    background: #fafcfc;
+                    border: 1px solid var(--primary);
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+                }
             }
         }
     }
@@ -723,6 +790,18 @@ const Wrapper = styled.section`
 
             .small {
                 font-size: 0.6em;
+            }
+        }
+
+        .option-row {
+            .column {
+                float: left;
+                width: 50%;
+                padding: 0.6em;
+
+                .card {
+                    min-height: 5em;
+                }
             }
         }
     }

@@ -12,7 +12,6 @@ const About = (props) => {
             about.push(
                 <React.Fragment key={i}>
                     <div className="about">
-                        <h2>{props.data[i].heading}</h2>
                         <p>{props.data[i].content}</p>
                     </div>
                     <GatsbyImage image={getImage(props.data[i].image.localFile)} alt={props.data[i].alt} className="image" imgStyle={{objectFit: `cover`}} />
@@ -24,7 +23,6 @@ const About = (props) => {
                 <React.Fragment key={i}>
                     <GatsbyImage image={getImage(props.data[i].image.localFile)} alt={props.data[i].alt} className="image" imgStyle={{objectFit: `cover`}} />
                     <div className="about">
-                        <h2>{props.data[i].heading}</h2>
                         <p>{props.data[i].content}</p>
                     </div>
                 </React.Fragment>
@@ -56,7 +54,7 @@ const Wrapper = styled.section`
         }
         
         p {
-            margin: 1.5em 0 5em 0;
+            margin: 5em 0; 
             line-height: 1.7;
             width: 90%;
             font-size: ${props => props.category === "design" ? "0.9em" : "1em"};
@@ -96,7 +94,7 @@ const Wrapper = styled.section`
         }
 
         .about {
-            padding: 2em 0.5em;
+            padding: 4em 0.5em;
 
             h2 {
                 margin: 1em auto 0 auto;
@@ -121,7 +119,7 @@ const Wrapper = styled.section`
             }
 
             p {
-                margin: 2.5em auto;
+                margin: 5em auto;
                 font-size: 1em;
             }
         }

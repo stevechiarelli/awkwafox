@@ -7,7 +7,6 @@ import Info from "../components/Info";
 import Features from "../components/Features";
 import Work from "../components/Work";
 import Cta from "../components/Cta";
-import Pricing from "../components/Pricing";
 import Seo from "../components/Seo";
 import Modal from "../components/Modal";
 
@@ -25,7 +24,6 @@ const weddingfilms = ({ data, location }) => {
             <Work category="videography" />
             <Info data={webdesign} />
             <Features data={features} />
-            <Pricing category="videography" subcategory="wedding" />
             <Cta data={cta} category="videography" />
             <Modal category="success" data={meta} modal={modal} />
         </Layout>
