@@ -575,7 +575,7 @@ const Wrapper = styled.section`
     }
 
     .option-row {
-        margin: 0 0 1em 0;
+        margin: -1em 0 1em 0;
 
         &:after {
             content: "";
