@@ -7,7 +7,7 @@ const Package = (props) => {
     return (
         <>
             <div className="form-group">
-                <label style={props.data.required} htmlFor="CF-708855">Select from the list of {props.type} packages below and click next when complete.<span className="error">&nbsp;*</span></label><br /><br />
+                <label style={props.data.required} htmlFor="CF-708855">Choose a {props.type} package below, then confirm your selection by clicking next when complete.<span className="error">&nbsp;*</span></label><br /><br />
                 <select id="CF-708855" 
                     onChange={props.handleData} 
                     value={props.data.package + "," + props.data.customFields['CF-708855'] + "," + props.data.customFields['CF-708858']} 

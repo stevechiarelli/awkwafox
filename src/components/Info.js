@@ -56,6 +56,7 @@ const Wrapper = styled.section`
         position: relative;
         background: var(--background3);
         z-index: -1;
+        margin-top: -1em;
 
         h3 {
             color: var(--text-light);

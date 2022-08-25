@@ -405,7 +405,7 @@ class Inquiry extends React.Component {
                             className="btn-primary" 
                             value="next" 
                             onClick={this.handleClick}
-                            style={this.state.page < 6 ? {display: "block"} : {display: "none"}}>
+                            style={this.state.page < 6 && this.state.package !== "" ? {display: "block"} : {display: "none"}}>
                             Next
                         </button>
                         <button 
