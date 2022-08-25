@@ -508,6 +508,7 @@ const Wrapper = styled.section`
         font-size: 0.9em;
 
         label {
+            display: inline-block;
             color: var(--text-dark);
             font-size: 0.8em;
         }
@@ -574,7 +575,7 @@ const Wrapper = styled.section`
     }
 
     .option-row {
-        margin: -1em 0 1em 0;
+        margin: 0 0 1em 0;
 
         &:after {
             content: "";
