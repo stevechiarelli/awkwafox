@@ -56,6 +56,7 @@ const Wrapper = styled.section`
         p {
             margin: 5em 0; 
             line-height: 1.7;
+            font-size: 0.8em;
             width: 90%;
             font-size: ${props => props.category === "design" ? "0.9em" : "1em"};
         }
@@ -104,7 +105,7 @@ const Wrapper = styled.section`
 
             p {
                 margin: 2em auto;
-                font-size: 0.9em;
+                font-size: 0.8em;
             }
         }
     }

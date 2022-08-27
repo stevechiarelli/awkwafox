@@ -15,10 +15,10 @@ const Home = ({ data, location }) => {
     const modal = Boolean(params.get("modal"));
 
     const organization = <script type="application/ld+json">
-        {`{"@context": "https://schema.org","@type": "Organization","name": "Awkwa Fox","url": "https://www.awkwafox.com","logo": "https://www.awkwafox.com/logo.png",` +
+        {`{"@context": "https://schema.org","@type": "Organization","name": "Awkwafox","url": "https://www.awkwafox.com","logo": "https://www.awkwafox.com/logo.png",` +
         `"contactPoint": {"@type": "ContactPoint","telephone": "+1-941-404-2496","contactType": "Customer Support"}}`}</script>;
     const website = <script type="application/ld+json">
-        {`{"@context": "https://schema.org","@type": "WebSite","name": "Awkwa Fox","url": "https://www.awkwafox.com"}`}</script>
+        {`{"@context": "https://schema.org","@type": "WebSite","name": "Awkwafox","url": "https://www.awkwafox.com"}`}</script>
 
     return (
         <Layout page="home">

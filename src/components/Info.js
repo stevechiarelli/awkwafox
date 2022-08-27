@@ -123,7 +123,7 @@ const Wrapper = styled.section`
             background-position: center;
             height: 600px;
             width: 100%;
-            padding-top: 0.3em;
+            padding-top: 1em;
 
             h3 {
                 font-size: 1.7em;
@@ -166,12 +166,6 @@ const Wrapper = styled.section`
 
         img, .image {
             display: none;
-        }
-    }
-
-    @media only screen and (min-width: 992px) {
-        .content {
-           padding-top: 2em;
         }
     }
 

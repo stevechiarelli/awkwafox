@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Footer = () => {
     return (
         <Wrapper>
-            <p>Copyright © 2021 Awkwafox. All rights reserved.</p>
+            <p>Copyright © 2022 Awkwafox. All rights reserved.</p>
         </Wrapper>
     );
 }
