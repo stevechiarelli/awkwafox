@@ -213,6 +213,7 @@ class Inquiry extends React.Component {
             fetch(process.env.GATSBY_TAVE_ENDPOINT, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                mode: "no-cors",
                 body: this.encode({
                     'SecretKey': process.env.GATSBY_TAVE_SECRET_KEY,
                     'JobType': this.getJobType(),
