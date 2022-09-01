@@ -115,6 +115,7 @@ const Wrapper = styled.div`
 
     .navbar.sticky nav ul li .btn-primary {
         color: var(--primary);
+        background: transparent;
         border: 3px solid var(--primary);
     }
 

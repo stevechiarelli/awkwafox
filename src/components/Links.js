@@ -149,8 +149,9 @@ const Nav = styled.nav`
                     margin: 0;
                     padding: 0.8em 1.8em 0.8em 1.8em;
                     font-size: .6em;
-                    color: var(--primary-medium);
-                    border: 3px solid var(--primary-medium);
+                    background: #111;
+                    color: var(--primary-light);
+                    border: 3px solid var(--primary-light);
                 }
 
                 .btn-primary:hover {
