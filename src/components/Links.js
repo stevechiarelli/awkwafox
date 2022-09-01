@@ -169,12 +169,14 @@ const Nav = styled.nav`
             }
 
             li a:hover {
-                color: var(--primary-medium);
+                color: var(--primary-light);
+                text-decoration: underline;
                 cursor: pointer;
             }
 
             .active a {
-                color: var(--primary-medium);
+                color: var(--primary-light);
+                text-decoration: underline;
             }
         }
     }
