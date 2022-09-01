@@ -45,7 +45,9 @@ const EventDate = (props) => {
                         disabledDays={[{ daysOfWeek: [1, 2, 3, 4, 5] }, {before: new Date()}, ...disabledDays.map(day => new Date(day))]}
                     />
                 </div>
-                <p className="highlight">{props.data.formData.EventDate.toISOString().substring(0, 10) === new Date("0001-01-01").toISOString().substring(0, 10) ? "No date selected" : props.data.formData.EventDate.toLocaleDateString() + " is available!"}</p>
+                <p className="highlight">
+                    {props.data.formData.EventDate.toISOString().substring(0, 10) === new Date("0001-01-01").toISOString().substring(0, 10) ? "No date selected" : props.data.formData.EventDate.toLocaleDateString() + " is available!"}
+                </p>
             </div>
         </>
     );

@@ -153,7 +153,7 @@ class Inquiry extends React.Component {
         this.setState((state) => ({
             formData: {
                 ...state.formData,
-                EventDate: modifiers.selected ? null : day
+                EventDate: modifiers.selected ? this.state.formData.EventDate : day
             }
         }));
     }
@@ -549,28 +549,28 @@ const Wrapper = styled.section`
             background: #fff;
             color: var(--text-dark);
         }
-    }
 
-    .phone-group {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
+        .phone-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
 
-        .form-group {
-            margin-top: 0;
-        }
+            .form-group {
+                margin-top: 0;
+            }
 
-        .input-type:nth-of-type(1) {
-            width: 100%;
-            margin-right: 10px;
-        }
-
-        .input-type:nth-of-type(2) {
-            width: 140px;
-            
-            select {
-                height: 40px;
+            .input-type:nth-of-type(1) {
                 width: 100%;
+                margin-right: 10px;
+            }
+
+            .input-type:nth-of-type(2) {
+                width: 140px;
+                
+                select {
+                    height: 40px;
+                    width: 100%;
+                }
             }
         }
     }
