@@ -534,7 +534,7 @@ const Wrapper = styled.section`
 
         textarea {
             width: 100%;
-            height: 90px;
+            height: 5em;
             resize: none;
             padding: 0.8em;
             margin-top: 0.5em;

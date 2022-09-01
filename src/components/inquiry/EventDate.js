@@ -46,7 +46,7 @@ const EventDate = (props) => {
                     />
                 </div>
                 <p className="highlight">
-                    {props.data.formData.EventDate.toISOString().substring(0, 10) === new Date("0001-01-01").toISOString().substring(0, 10) ? "No date selected" : props.data.formData.EventDate.toLocaleDateString() + " is available!"}
+                    {props.data.formData.EventDate.toISOString().substring(0, 10) === new Date("0001-01-01").toISOString().substring(0, 10) ? "No date selected" : props.data.formData.EventDate.toLocaleDateString() + " is available! Click next to continue."}
                 </p>
             </div>
         </>

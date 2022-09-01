@@ -60,6 +60,7 @@ const EventInfo = (props) => {
 
     return (
         <>
+            <p>Complete the fields below and click next when complete.</p>
             <div className="form-group">
                 <label style={props.data.required} htmlFor="CF-708912">Location <small>(City or Venue Name)</small><span className="error">&nbsp;*</span></label><br />
                 <input type="text" id="CF-708912" value={props.data.customFields['CF-708912']} onChange={props.handleData} />

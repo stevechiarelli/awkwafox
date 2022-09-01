@@ -5,7 +5,7 @@ const Addons = (props) => {
         <>
             <div className="service">
                 <div style={props.data.package === "" || props.data.package.includes("other") ? {display: "none"} : {display: "block"}}>
-                    <h3>Choose your add-ons</h3>
+                    <p>Choose your add-ons below and click next when complete.</p>
                     <div className="form-group">
                         {props.addon.map(item => {
                             let disabled = item.disabledPackageList === null ? "" : item.disabledPackageList;
