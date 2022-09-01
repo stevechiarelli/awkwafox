@@ -42,6 +42,7 @@ const ContactForm = (props) => {
             fetch(process.env.GATSBY_TAVE_ENDPOINT, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                mode: "no-cors",
                 body: encode({
                     'SecretKey': process.env.GATSBY_TAVE_SECRET_KEY,
                     ...state, 
