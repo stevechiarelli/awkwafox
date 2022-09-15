@@ -4,14 +4,14 @@ import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import Info from "../components/Info";
-import Features from "../components/Features";
+import Pricing from "../components/Pricing";
 import Work from "../components/Work";
 import Cta from "../components/Cta";
 import Seo from "../components/Seo";
 import Modal from "../components/Modal";
 
 const weddingfilms = ({ data, location }) => {
-    const { hero, about, weddingfilms, webdesign, features, cta, meta } = data.videography.nodes[0];
+    const { hero, about, weddingfilms, webdesign, cta, meta } = data.videography.nodes[0];
     const params = new URLSearchParams(location.search);
     const modal = Boolean(params.get("modal"));
 
@@ -23,7 +23,7 @@ const weddingfilms = ({ data, location }) => {
             <Info data={weddingfilms} />
             <Work category="videography" />
             <Info data={webdesign} />
-            <Features data={features} />
+            <Pricing category="videography" />
             <Cta data={cta} category="videography" />
             <Modal category="success" data={meta} modal={modal} />
         </Layout>
@@ -73,11 +73,6 @@ export const query = graphql`
             id
             item
           }
-        }
-        features:Features {
-          heading
-          content
-          id
         }
         cta:CTA {
           heading

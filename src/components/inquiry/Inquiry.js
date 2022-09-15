@@ -54,6 +54,17 @@ class Inquiry extends React.Component {
         }
     }
 
+    componentDidMount = () => {
+        this.setState((state) => ({
+            package: this.props.selection[0],
+            customFields: {
+                ...state.customFields,
+                'CF-708858': Number(this.props.selection[2]), // quote total
+                'CF-708855': this.props.selection[1], // package,
+            },
+        }));
+    }
+
     handleData = (event) => { 
         const {id, value, type, checked} = event.target;
         const arr = value.split(",");

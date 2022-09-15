@@ -79,7 +79,7 @@ const Modal = (props) => {
                             <div className="modal-content-center">
                                 <div className="modal-form" id="modal-form">
                                     <span role="button" tabIndex="0" className="close" onClick={() => props.handleClose()} onKeyDown={() => props.handleClose()}>&times;</span>
-                                    <Inquiry type={props.type} data={props.data} />
+                                    <Inquiry type={props.type} data={props.data} selection={props.selection} />
                                 </div>
                             </div>
                         </div>
