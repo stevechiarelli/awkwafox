@@ -353,7 +353,7 @@ class Inquiry extends React.Component {
         const addon = this.props.data.filter(item => item.category === this.props.type && item.addon === true);
         const serviceSummary = this.props.data.filter(item => item.category === this.props.type && item.name === this.state.package && item.package === true);
         const addonSummary = this.props.data.filter(item => item.category === this.props.type && item.addon === true && this.state.addons[item.name] !== false);
-        
+
         return (
             <Wrapper>
                 <form id="inquiry-form" name="inquiry" method="POST" onSubmit={this.handleSubmit}>

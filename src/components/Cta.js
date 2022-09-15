@@ -63,7 +63,7 @@ const Cta = (props) => {
                 })}
             </div>
             <ModalWrapper>
-                <Modal category={category} type={props.category} data={data} modal={modal} handleClose={handleClose} />
+                <Modal category={category} type={props.category} data={data} modal={modal} selection={["", "", 0]} handleClose={handleClose} />
             </ModalWrapper>
         </Wrapper>
     );

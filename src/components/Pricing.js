@@ -12,8 +12,9 @@ const Pricing = (props) => {
 
     // GraphQL FAQ Query
     const content = useStaticQuery(query);
-    let services = content.services.nodes;
-    services = services.filter(item => item.category === props.category && item.package === true && !item.name.includes("other"))
+    const services = content.services.nodes;
+
+    const packages = services.filter(item => item.category === props.category && item.package === true && !item.name.includes("other"))
 
     useEffect(() => {
         document.addEventListener('click', handleClickOutside, true);
@@ -39,7 +40,7 @@ const Pricing = (props) => {
     return (
         <Wrapper>
             <div className="container">
-                {services.map(item => {
+                {packages.map(item => {
                     return (                
                         <div key={item.id} className="pricing">
                             <img src={icon} alt="Awkwafox icon" />
@@ -52,7 +53,7 @@ const Pricing = (props) => {
                 })}
             </div>
             <ModalWrapper>
-                <Modal category="inquiry" type="videography" data={data} modal={modal} selection={item} handleClose={handleClose} />
+                <Modal category="inquiry" type={props.category} data={data} modal={modal} selection={item} handleClose={handleClose} />
             </ModalWrapper>
         </Wrapper>
     );
@@ -61,33 +62,24 @@ const Pricing = (props) => {
 const query = graphql`
 {
     services:allStrapiServices(sort: {fields: strapiId}) {
-      nodes {
-        id
-        description
-        category
-        disabledPackageList
-        name
-        price
-        details
-        package
-        addon
-        featured
-      }
+        nodes {
+            id
+            description
+            category
+            disabledPackageList
+            name
+            price
+            details
+            package
+            addon
+            featured
+        }
     }
-  }
+}
 `
 
 const Wrapper = styled.section`
-    padding: 4em 0.5em 1em 0.5em;
-
-    .link {
-        color: var(--text-light);
-        font-size: 1em;
-        font-style: italic;
-        text-decoration: underline;
-        margin: 0 8px;
-        padding: 0;
-    }
+    padding: 4em 0 1em 0;
 
     .pricing {
         text-align: center;
@@ -99,7 +91,7 @@ const Wrapper = styled.section`
         }
 
         ul {
-            margin: 1.5em;
+            margin: 0.5em;
             text-align: left;
             list-style-type: none;
             text-align: center;
@@ -119,7 +111,7 @@ const Wrapper = styled.section`
         .btn-primary {
             color: var(--background6);
             border: 3px solid var(--background6);
-            margin: 0.2em 0.5em 1em 0.5em;
+            margin: 1em 0.5em;
         }
 
         .btn-primary:hover {
@@ -128,25 +120,40 @@ const Wrapper = styled.section`
         }
 
         img {
-            width: 80px;
+            width: 50px;
             margin: -15px auto 0 auto;
         }
     }
 
     @media only screen and (min-width: 768px) { 
-        img {
-            width: 100px;
-        }
-    }
-
-    @media only screen and (min-width: 1200px) {
         .container {
             display: grid;
             grid-template-columns: auto auto auto;
+            grid-gap: 1em;
+        }
+
+        .pricing {
+            ul {
+                margin: 0;
+            }
         }
 
         p {
             margin-top: 1em;
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        padding: 4em 1em 1em 1em;
+
+        .pricing {
+            ul {
+                margin: 1.5em;
+            }
+
+            .btn-primary {
+                margin: 0.2em 0.5em;
+            }
         }
     }
 `
