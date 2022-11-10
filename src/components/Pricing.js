@@ -47,7 +47,7 @@ const Pricing = (props) => {
                             <p>{item.description}</p>
                             <p>{item.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
                             <CsvToUl package={item.details} />
-                            <button className="btn-primary" data-item={[item.name, item.description, item.price]} onClick={handleClick}>select</button>
+                            <button className="btn-primary btn-disabled" data-item={[item.name, item.description, item.price]} onClick={handleClick} disabled={true}>select</button>
                         </div>
                     );
                 })}

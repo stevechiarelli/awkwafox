@@ -92,7 +92,7 @@ button {
 
 .btn-disabled {
     color: #bbb !important;
-    border: 3px solid #bbb;
+    border: 3px solid #bbb !important;
     cursor: initial;
 }
 
