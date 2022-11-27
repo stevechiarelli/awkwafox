@@ -5,8 +5,8 @@ require("dotenv").config({
 module.exports = {
     siteMetadata: {
         siteUrl: "https://www.awkwafox.com",
-        title: "Awkwa Fox",
-        description: "Awkwa Fox is a creative design and video production company based in Fort Myers, Florida specializing in wedding videography. We also offer event live stream and web design services.",
+        title: "Awkwafox",
+        description: "Awkwafox is a creative design and video production company based in Fort Myers, Florida specializing in wedding videography. We also offer event live stream and web design services.",
         author: "Steve Chiarelli"
     },
     flags: {
@@ -21,7 +21,7 @@ module.exports = {
         {
             resolve: `gatsby-source-strapi`,
             options: {
-                apiURL: `https://awkwafox.herokuapp.com`,
+                apiURL: `http://localhost:1337`,
                 queryLimit: 1000, // Defaults to 100
                 collectionTypes: [`faqs`, `projects`, `services`],
                 singleTypes: [`home`, `videography`, `live-stream`, `contact`],

@@ -66,13 +66,11 @@ const query = graphql`
             id
             description
             category
-            disabledPackageList
             name
             price
             details
             package
             addon
-            featured
         }
     }
 }
